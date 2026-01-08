@@ -2,11 +2,10 @@
 
 Before implementing anything, complete these steps.
 
-## Step 0: Set Task Status
+## Step 0: Set Task Status (if project uses task tracking)
 
-- Open `FUTURE_ROADMAP.md`
-- Set task status to **In Progress**
-- If task has non-trivial design, check `docs/DESIGN_REMAINING_ISSUES.md`
+- If project has a roadmap file (e.g., `FUTURE_ROADMAP.md`), set task status to **In Progress**
+- If task has non-trivial design, check design docs (e.g., `docs/DESIGN_REMAINING_ISSUES.md`)
 
 ## Step 1: Read the Code First
 
@@ -32,7 +31,7 @@ Before implementing anything, complete these steps.
 |-------|-------------------|
 | `README.md` vs actual CLI flags | Sync README to match code |
 | `CHANGELOG.md` vs recent commits | Backfill missing entries |
-| `FUTURE_ROADMAP.md` vs code state | Update status (Pending → Done) |
+| Roadmap/task tracker vs code state | Update status (Pending → Done) |
 
 **Rule:** If drift found → Sync docs to match code immediately, then proceed.
 
@@ -48,4 +47,4 @@ Before implementing anything, complete these steps.
 
 ---
 
-**→ Next:** Load `references/implementation.md` to write tests and code.
+**→ Next:** Load `references/design.md` to define behavior via tests BEFORE coding.

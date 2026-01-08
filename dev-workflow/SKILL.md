@@ -1,5 +1,6 @@
 ---
 name: dev-workflow
+version: "1.1.0"
 description: "Engineering workflow for development tasks in existing codebases. Use when: implementing features, fixing bugs, writing tests, refactoring code, preparing commits, creating PRs, reviewing code, or planning development tasks. Covers the full cycle from code exploration to pull request. Not needed for one-off scripts or general code explanations outside project context."
 ---
 
@@ -63,13 +64,13 @@ For tasks spanning multiple phases, load references in sequence.
 
 Types: `feat` | `fix` | `docs` | `test` | `chore` | `refactor`
 
-### Task System (Roadmap-centric)
+### Task System (if project uses task tracking)
 
-- **Read first**: `FUTURE_ROADMAP.md` (Now/Next, ≤1-2 screens)
-- **Implementation details**: `docs/DESIGN_REMAINING_ISSUES.md`
-- **History**: `docs/roadmap/ROADMAP_ARCHIVE.md` (read-only, don't pollute)
+- **Roadmap**: e.g., `FUTURE_ROADMAP.md` — current and upcoming tasks
+- **Design docs**: e.g., `docs/DESIGN_REMAINING_ISSUES.md` — implementation details
+- **Archive**: e.g., `docs/roadmap/ROADMAP_ARCHIVE.md` — completed items
 
-Status flow: `Pending` → `In Progress` → `Done (recent)` → `Archived`
+Status flow: `Pending` → `In Progress` → `Done` → `Archived`
 
 ### Typical Task Flow
 

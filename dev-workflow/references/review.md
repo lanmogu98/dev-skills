@@ -31,8 +31,8 @@ Review items align with Priority Stack from Core Principles.
 - [ ] `README.md` updated if CLI/config changed
 - [ ] Code comments where logic is non-obvious
 
-### 6. Task System
-- [ ] `FUTURE_ROADMAP.md` status updated (should be "Done (recent)")
+### 6. Task Tracking (if applicable)
+- [ ] Task/roadmap status updated (if project uses task tracking)
 - [ ] PR description links to task/issue
 
 ## Feedback Guidelines
@@ -62,3 +62,7 @@ Be specific and actionable:
 
 - >400 lines → Suggest splitting
 - Mixed concerns (feature + refactor) → Suggest separate PRs
+
+---
+
+**→ After review:** Approve or Request Changes. If approved, author merges per `pullrequest.md` strategy.

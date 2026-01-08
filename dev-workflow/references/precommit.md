@@ -34,11 +34,10 @@ pytest tests/ -v  # or project's test command
 | Project Structure | `DEVELOPER_GUIDE.md` (architecture) |
 | Dependencies | `pyproject.toml` + `README.md` (installation) |
 
-## Step 4: UPDATE TASK STATUS
+## Step 4: UPDATE TASK STATUS (if applicable)
 
-- Set task status in `FUTURE_ROADMAP.md` to **Done (recent)**
-- Keep `FUTURE_ROADMAP.md` short (≤1-2 screens)
-- Move "Done (recent)" items to `docs/roadmap/ROADMAP_ARCHIVE.md` during periodic cleanup
+- If project uses a roadmap/task file, set task status to **Done** or **Done (recent)**
+- Keep roadmap files short; archive completed items periodically
 
 ## Step 5: COMMIT
 

@@ -75,10 +75,27 @@ main (protected)
 6. Cleanup: git worktree remove ../project-impl-1
 ```
 
-## Mode Selection (Cursor/IDE)
+## Mode Selection
 
 | Mode | Use When |
 |------|----------|
 | **Local** | Single agent, simple task, fast iteration |
 | **Worktree** | Multi-agent, complex task, need isolation |
-| **Cloud** | Need clean environment, long-running tasks |
+| **Cloud/Remote** | Need clean environment, long-running tasks |
+
+## Integration with Main Workflow
+
+Each agent still follows the standard workflow based on their role:
+
+| Agent Role | Workflow |
+|------------|----------|
+| Planning | `exploration.md` → define scope |
+| Implementation | `exploration.md` → `design.md` → `implementation.md` → `precommit.md` → `pullrequest.md` |
+| Bug fix | `exploration.md` → `bugfix.md` → `precommit.md` → `pullrequest.md` |
+| Review | `review.md` |
+
+**Do NOT skip phases** just because you're one of multiple agents.
+
+---
+
+**→ Next:** Each agent loads the relevant reference based on their assigned role above.

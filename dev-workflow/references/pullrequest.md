@@ -28,7 +28,7 @@ Key implementation decisions or tradeoffs.
 - [ ] Tests pass locally
 - [ ] CHANGELOG.md updated
 - [ ] Docs updated (if user-facing)
-- [ ] FUTURE_ROADMAP.md status updated
+- [ ] Task status updated (if project uses task tracking)
 ```
 
 ## Self-Review Before Requesting Review
@@ -59,4 +59,4 @@ Key implementation decisions or tradeoffs.
 
 ---
 
-**→ Task complete.** Status should already be "Done (recent)" in `FUTURE_ROADMAP.md`.
+**→ Task complete.** If project uses task tracking, status should already be updated.
