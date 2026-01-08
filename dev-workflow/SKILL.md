@@ -45,6 +45,7 @@ Load references based on current task. Use `cat <base_directory>/references/<fil
 |-----------|----------------|
 | Start new task / understand code | `exploration.md` |
 | Design feature / write tests | `design.md` |
+| **Fix a bug** | `bugfix.md` |
 | Write implementation code | `implementation.md` |
 | Prepare commit | `precommit.md` |
 | Create or update PR | `pullrequest.md` |
@@ -72,11 +73,17 @@ Status flow: `Pending` → `In Progress` → `Done (recent)` → `Archived`
 
 ### Typical Task Flow
 
-For a complete task, load references in sequence:
+**For new features:**
 1. `exploration.md` — Understand code, confirm scope, set status to In Progress
 2. `design.md` — **Define behavior via tests BEFORE coding**
 3. `implementation.md` — Write code to make tests pass
 4. `precommit.md` — Run tests, update docs, commit
 5. `pullrequest.md` — Create PR, self-review, respond to feedback
 
-> **Critical:** Do NOT skip step 2. If you find yourself writing implementation code without tests, STOP and go back to `design.md`.
+**For bug fixes:**
+1. `exploration.md` — Understand code, locate bug area
+2. `bugfix.md` — **Reproduce → Write failing test → Fix → Verify**
+3. `precommit.md` — Run tests, update docs/CHANGELOG, commit
+4. `pullrequest.md` — Create PR
+
+> **Critical:** Do NOT skip the design/reproduce step. If you find yourself writing code without tests, STOP.
