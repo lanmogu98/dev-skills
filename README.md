@@ -25,7 +25,8 @@ Comprehensive engineering workflow for LLM agents and human developers.
 **Structure:**
 - `SKILL.md` — Core principles + task router
 - `references/exploration.md` — Code reading, scope confirmation
-- `references/implementation.md` — Testing, coding standards
+- `references/design.md` — **Design via tests (tests = specification)**
+- `references/implementation.md` — Coding standards
 - `references/precommit.md` — Pre-commit checklist
 - `references/pullrequest.md` — PR creation guidelines
 - `references/refactoring.md` — Refactoring-specific guidance

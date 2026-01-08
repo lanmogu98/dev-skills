@@ -7,13 +7,25 @@ description: "Engineering workflow for development tasks in existing codebases. 
 
 Engineering standards for humans and LLM agents working in codebases.
 
+## When to Load This Skill
+
+**Load this skill immediately if the task involves ANY of:**
+- Implementing a feature or enhancement
+- Fixing a bug
+- Writing or modifying tests
+- Refactoring existing code
+- Preparing a commit or PR
+- Reviewing code changes
+
+**Do NOT skip this skill** just because the task seems simple. Even "small" changes benefit from the design-first approach.
+
 ## Core Principles
 
 1. **Code is truth** — Read codebase first; docs may be outdated
-2. **Tests before code** — Write/update tests first, then implement
-3. **Docs are not optional** — Code + Tests + Docs = Complete commit
-4. **Minimal blast radius** — Touch only necessary files; no drive-by refactors
-5. **Explicit over implicit** — Type hints, specific exceptions, no magic defaults
+2. **Design before code** — Define behavior via tests before implementation
+3. **Tests are design** — Writing tests = specifying behavior, not just verification
+4. **Docs are not optional** — Code + Tests + Docs = Complete commit
+5. **Minimal blast radius** — Touch only necessary files; no drive-by refactors
 
 ## Priority Stack (When Rules Conflict)
 
@@ -31,13 +43,14 @@ Load references based on current task. Use `cat <base_directory>/references/<fil
 
 | Task Type | Reference File |
 |-----------|----------------|
-| Start new task / understand code | `references/exploration.md` |
-| Write code or tests | `references/implementation.md` |
-| Prepare commit | `references/precommit.md` |
-| Create or update PR | `references/pullrequest.md` |
-| Refactor (no behavior change) | `references/implementation.md` + `references/refactoring.md` |
-| Review code | `references/review.md` |
-| Multiple agents in parallel | `references/multi-agent.md` |
+| Start new task / understand code | `exploration.md` |
+| Design feature / write tests | `design.md` |
+| Write implementation code | `implementation.md` |
+| Prepare commit | `precommit.md` |
+| Create or update PR | `pullrequest.md` |
+| Refactor (no behavior change) | `design.md` + `refactoring.md` |
+| Review code | `review.md` |
+| Multiple agents in parallel | `multi-agent.md` |
 
 For tasks spanning multiple phases, load references in sequence.
 
@@ -61,6 +74,9 @@ Status flow: `Pending` → `In Progress` → `Done (recent)` → `Archived`
 
 For a complete task, load references in sequence:
 1. `exploration.md` — Understand code, confirm scope, set status to In Progress
-2. `implementation.md` — Write tests first, then code
-3. `precommit.md` — Run tests, update docs, commit
-4. `pullrequest.md` — Create PR, self-review, respond to feedback
+2. `design.md` — **Define behavior via tests BEFORE coding**
+3. `implementation.md` — Write code to make tests pass
+4. `precommit.md` — Run tests, update docs, commit
+5. `pullrequest.md` — Create PR, self-review, respond to feedback
+
+> **Critical:** Do NOT skip step 2. If you find yourself writing implementation code without tests, STOP and go back to `design.md`.

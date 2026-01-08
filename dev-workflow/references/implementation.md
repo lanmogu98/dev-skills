@@ -1,5 +1,7 @@
 # Implementation Phase
 
+> **Prerequisite:** Design phase complete. Tests are written and failing.
+
 ## Code Standards
 
 - Type hints on all function parameters and return values
@@ -7,33 +9,20 @@
 - Keep failure modes explicit; avoid silent `except:` catches
 - No secrets in code or logs — use env vars; prefer `.env` locally (not committed)
 
-## Testing: Write First, Run Often
+## Implementation Workflow
 
-**Default: write tests before code.**
+```
+1. Run your failing tests (confirm they fail)
+2. Write minimal code to make tests pass
+3. Run tests again (confirm they pass)
+4. Refactor if needed (tests still pass)
+```
 
-1. **Write/update tests** — Define expected behavior before implementation
-2. **Implement code** — Make tests pass
-3. **Run tests locally** — Verify before moving to precommit
+**Rule:** If tests don't pass, don't move forward.
 
-### Exceptions (tests after is acceptable)
+## Handling Missing/Flaky Tests
 
-- Doc-only changes (no behavior change)
-- Exploratory debugging to identify root cause
-- Trivial config/typo fixes with no logic change
-- Emergency hotfixes (add tests in immediate follow-up)
-
-### Required Tests by Change Type
-
-| Change Type | Required Tests |
-|-------------|----------------|
-| Logic change (functions, algorithms) | Unit tests: happy path + edge cases |
-| API/IO change (endpoints, file ops) | Integration tests with mocked externals |
-| CLI change | Smoke test for new flags/commands |
-| Refactor (no behavior change) | Existing tests must pass; no new tests required |
-
-### Handling Missing/Flaky Tests
-
-- No tests exist → Add smallest covering test first
+- No tests exist → Go back to design phase, add tests first
 - Tests are flaky → Fix or skip with justification before proceeding
 - Slow tests (>5s) → Mark and run separately; don't block fast feedback
 
