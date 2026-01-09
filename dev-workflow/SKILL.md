@@ -105,6 +105,18 @@ GitHub Issues (external)  →  FUTURE_ROADMAP.md (internal)  →  PR closes issu
 
 Status flow: `Pending` → `In Progress` → `In Review` → `Done` → `Archived`
 
+**Roadmap format:**
+
+```
+| ID | Priority | Item | Status | GH |
+|----|----------|------|--------|-----|
+| 1  | P1       | Fix auth bug | In Progress | #123 |
+| 2  | P2       | Add feature X | Pending | #45 |
+| 3  | P3       | Refactor Y | Pending | — |
+```
+
+Priority: `P0` (critical) → `P1` (high) → `P2` (medium) → `P3` (low). GH: `#123` or `—` if internal.
+
 ### Typical Task Flow
 
 **For new features:**
