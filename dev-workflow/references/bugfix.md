@@ -2,6 +2,21 @@
 
 > **STOP. Do not touch code until you can reproduce the bug.**
 
+## When Fix Attempt Fails (Read This First)
+
+If you're on your **second or third attempt** at fixing this bug, STOP and ask yourself:
+
+| Signal | What It Means | Action |
+|--------|---------------|--------|
+| Test passes but bug persists | You're testing the wrong thing | Go back to Phase 1, get real user data |
+| Fix works but breaks something else | You're patching symptoms | Go back to Phase 3, find actual root cause |
+| You're adding more and more edge cases | Original approach is flawed | Consider architectural change |
+| User says "still broken" | Your mental model is wrong | Ask user for exact DOM/state/logs |
+
+**The Rule:** When a fix fails, don't patch it. Return to Phase 1 and re-examine your assumptions.
+
+> "When a bug takes multiple attempts, the problem is usually your understanding, not the code."
+
 ## Phase 1: Reproduce
 
 Before any code changes:
@@ -12,6 +27,20 @@ Before any code changes:
 - [ ] **Check if already fixed** — Search recent commits, PRs, issues
 
 If you cannot reproduce the bug, **do not proceed**. Ask for more information.
+
+### When to Ask User for More Data
+
+Don't guess. Request concrete artifacts:
+
+| Situation | What to Ask For |
+|-----------|-----------------|
+| UI bug | Screenshot, DOM structure (DevTools Elements tab) |
+| Data issue | Actual input/output vs expected |
+| Intermittent bug | Steps to reproduce, console logs |
+| State issue | Component state dump, Redux/store snapshot |
+| API bug | Request/response payloads, network tab |
+
+**Pro tip:** User-provided data often reveals the real bug faster than code analysis. The DOM structure screenshot in a recent bug fix exposed the actual issue (wrong insertion position) that code reading missed.
 
 ## Phase 2: Write Failing Test
 
@@ -25,6 +54,17 @@ If you cannot reproduce the bug, **do not proceed**. Ask for more information.
 
 **Do not skip this step.** A bug without a test will come back.
 
+### Signs You're Skipping TDD
+
+If any of these are true, STOP and write the test first:
+
+- [ ] You're already thinking about the fix implementation
+- [ ] You opened the source file before writing a test
+- [ ] Your test was written after the fix "just to verify"
+- [ ] The test passes on the first run (did it ever fail?)
+
+**Why this matters:** In a recent multi-round bug fix, the first two attempts failed because tests were written to match the (wrong) implementation, not the actual user expectation. Writing the test first forces you to define "what should happen" before "how to make it happen."
+
 ## Phase 3: Understand Root Cause
 
 Ask yourself:
@@ -35,6 +75,25 @@ Ask yourself:
 | Is this a single bug or pattern? | May need broader fix |
 | When was it introduced? | `git bisect` can help |
 | Is it a regression? | Higher urgency, may need hotfix |
+
+### Check Architectural Assumptions
+
+Sometimes the bug exists because the architecture doesn't support the use case:
+
+| Assumption to Check | Example |
+|---------------------|---------|
+| Data structure fits the problem | "One element → one translation" fails for mixed content |
+| Flow direction is correct | "Append to end" fails when position matters |
+| Abstraction level is right | Processing at wrong granularity (element vs text node) |
+
+**Key question:** Can this bug be fixed within the current architecture, or does the architecture need to change?
+
+| Approach | When to Use |
+|----------|-------------|
+| Fix within architecture | Bug is an edge case the code didn't handle |
+| Change architecture | The design assumption itself is wrong |
+
+> If you're adding increasingly complex workarounds, the architecture probably needs to change.
 
 ## Phase 4: Fix Minimally
 
