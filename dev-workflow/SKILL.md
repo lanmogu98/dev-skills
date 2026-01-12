@@ -1,84 +1,163 @@
 ---
 name: dev-workflow
-description: "REQUIRED workflow for all code changes. MUST load FIRST before planning or implementing features, bugs, refactoring, tests, PRs. Covers full cycle from exploration to pull request. Skip only for: one-off scripts, explanations outside project context."
+description: |
+  Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code. Covers exploration → design → implementation → commit → PR cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build.
 metadata:
-  version: "1.5.0"
+  version: "2.0.0"
 ---
 
 # Dev Workflow
 
-Engineering standards for humans and LLM agents working in codebases.
-
-## Pre-flight Checklist (Do This FIRST)
-
-> **STOP. Complete this checklist BEFORE any planning or coding.**
-
-- [ ] **Create branch**: `git checkout -b feature/<name>` or `fix/<name>` from main
-- [ ] **Set task status**: Mark as "In Progress" (if project uses task tracking)
-- [ ] **Read relevant code**: Code is truth; docs may be outdated
-
-Then load the appropriate reference file based on your task type (see Task Router below).
-
-## Relationship with Plan Mode / Planning Tools
-
-If your IDE/agent has a built-in planning mode:
-
-1. **Load this skill BEFORE entering plan mode**
-2. **Complete the Pre-flight Checklist first**
-3. Use plan mode for technical design, but follow this workflow for process
-4. The `exploration → design → implementation` flow applies regardless of planning tools
-
-> Plan mode helps you think. This workflow ensures you don't skip steps.
-
-## When to Load This Skill
-
-**MUST load this skill if the task involves ANY of:**
-- Implementing a feature or enhancement
-- Fixing a bug
-- Writing or modifying tests
-- Refactoring existing code
-- Preparing a commit or PR
-- Reviewing code changes
-
-**Do NOT skip this skill** just because the task seems simple. Even "small" changes benefit from the design-first approach.
+Engineering standards for code changes. Follow these phases in order.
 
 ## Core Principles
 
-1. **Code is truth** — Read codebase first; docs may be outdated
-2. **Design before code** — Define behavior via tests before implementation
-3. **Tests are design** — Writing tests = specifying behavior, not just verification
-4. **Docs are not optional** — Code + Tests + Docs = Complete commit
-5. **Minimal blast radius** — Touch only necessary files; no drive-by refactors
+1. **Code is truth** — Read code first; docs may be outdated
+2. **Design before code** — Write tests before implementation
+3. **Tests are design** — Tests define behavior, not just verify it
+4. **Minimal blast radius** — Touch only necessary files
 
-## Priority Stack (When Rules Conflict)
+## Priority Stack
 
-1. **Security** — No secrets exposed, no vulnerabilities
-2. **Correctness** — Code does what it's supposed to
-3. **Data Integrity** — No data loss or corruption
-4. **Availability** — System remains operational
-5. **Performance** — Acceptable speed/resource usage
-6. **Documentation** — Docs reflect reality
-7. **Speed of Delivery** — Ship fast (but not at cost of above)
+Security → Correctness → Data Integrity → Availability → Performance → Docs → Speed
 
-## Task Router
+---
 
-Load references based on current task. Use `cat <base_directory>/references/<file>` to load.
+## Phase 1: Exploration
 
-| Task Type | Reference File |
-|-----------|----------------|
-| Start new task / understand code | `exploration.md` |
-| Design feature / write tests | `design.md` |
-| **Fix a bug** | `bugfix.md` |
-| Write implementation code | `implementation.md` |
-| Prepare commit | `precommit.md` |
-| Create or update PR | `pullrequest.md` |
-| Refactor (no behavior change) | `design.md` + `refactoring.md` |
-| Review code | `review.md` |
-| Multiple agents in parallel | `multi-agent.md` |
+> **Do this FIRST before any planning or coding.**
 
-For tasks spanning multiple phases, load references in sequence.
+### Required Steps
 
-## Quick Reference
+1. **Create branch**: `git checkout -b feature/<name>` or `fix/<name>`
+2. **Read relevant code** — Understand patterns, find insertion points
+3. **Check if already exists** — Search for similar implementations
+4. **Verify docs ↔ code sync** — If drift found, fix docs first
+
+### Exploration Order
+
+| Step | What to Find |
+|------|--------------|
+| 1 | Entry points: `main.py`, `index.ts`, `main.go` |
+| 2 | Routes/API handlers |
+| 3 | Config files |
+| 4 | Related modules (follow imports) |
+| 5 | Existing tests |
+
+<details>
+<summary>→ More details: references/exploration.md</summary>
+Full exploration checklist, doc sync table, branch strategy.
+</details>
+
+---
+
+## Phase 2: Design
+
+> **STOP. Do not write implementation code until tests are written.**
+
+### Required Steps
+
+1. **Define behavior**: What does it do? Input → Output?
+2. **Identify test cases**:
+   - Happy path (normal success flow)
+   - Edge cases (empty, max, concurrent)
+   - Error cases (what should fail?)
+3. **Write tests FIRST** — Tests must fail before implementation exists
+
+### Minimum Tests by Change Type
+
+| Change Type | Required Tests |
+|-------------|----------------|
+| New feature | Happy path + edge cases + error handling |
+| Bug fix | Reproduces bug + regression guard |
+| Refactor | Existing tests must pass; add if coverage insufficient |
+
+**Rule**: If you can't write a test, you don't understand the requirement yet.
+
+<details>
+<summary>→ More details: references/design.md</summary>
+Design checklist, test case questions, refactor test requirements.
+</details>
+
+---
+
+## Phase 2-B: Bug Fix (Alternative to Phase 2)
+
+> **STOP. Do not touch code until you can reproduce the bug.**
+
+### Required Steps
+
+1. **Reproduce** — Confirm bug exists; if cannot reproduce, ask for more info
+2. **Write failing test** — The test IS your bug report
+3. **Understand root cause** — Why it fails, not just where
+4. **Fix minimally** — Smallest change that makes test pass
+5. **Verify** — Failing test passes; full suite passes
+
+### When Fix Attempt Fails
+
+| Signal | Action |
+|--------|--------|
+| Test passes but bug persists | You're testing wrong thing → get real user data |
+| Fix works but breaks something | Patching symptoms → find actual root cause |
+| Adding more edge cases | Approach flawed → consider architecture change |
+
+**Rule**: When a fix fails, don't patch it. Re-examine assumptions.
+
+<details>
+<summary>→ More details: references/bugfix.md</summary>
+Multi-round debugging guidance, what data to request, architecture checks.
+</details>
+
+---
+
+## Phase 3: Implementation
+
+> **Prerequisite**: Tests are written and failing.
+
+### Required Steps
+
+1. **Run failing tests** — Confirm they fail for expected reason
+2. **Write minimal code** — Just enough to make tests pass
+3. **Run tests again** — Confirm they pass
+4. **Refactor if needed** — Tests must still pass
+
+### Code Standards
+
+- Type annotations on function signatures
+- Small, testable functions
+- Explicit error handling (no silent `except:`)
+- No secrets in code — use env vars
+
+**Rule**: If tests don't pass, don't move forward.
+
+<details>
+<summary>→ More details: references/implementation.md</summary>
+Handling flaky tests, LLM/API usage, dependency management.
+</details>
+
+---
+
+## Phase 4: Pre-Commit
+
+> **Complete ALL steps before `git commit`.**
+
+### Required Checklist
+
+```
+[ ] All tests pass
+[ ] CHANGELOG.md updated (if user-facing change)
+[ ] README.md updated (if CLI/config changed)
+[ ] No debug code (console.log, print, commented code)
+[ ] No secrets in code
+```
+
+### CHANGELOG Sections
+
+| Change Type | Section |
+|-------------|---------|
+| New feature | `### Added` |
+| Bug fix | `### Fixed` |
+| Breaking change | `### Changed` |
 
 ### Commit Format
 
@@ -86,51 +165,142 @@ For tasks spanning multiple phases, load references in sequence.
 
 Types: `feat` | `fix` | `docs` | `test` | `chore` | `refactor`
 
-### Task System (if project uses task tracking)
-
-**Bug Reporting Flow:**
-
-```
-GitHub Issues (external)  →  FUTURE_ROADMAP.md (internal)  →  PR closes issue
-      ↓                              ↓                              ↓
- Users report bugs           Maintainer triages,            Agent works from
- & request features          adds to roadmap with GH#       roadmap only
+```bash
+git commit -m "feat(auth): add OAuth2 support"
+git commit -m "fix(parser): handle empty input"
 ```
 
-- **GitHub Issues** — Entry point for users (bugs, feature requests)
-- **Roadmap** (`FUTURE_ROADMAP.md`) — Agent's single source of truth; includes `GH` column linking to issues
-- **Design docs** (`docs/DESIGN_REMAINING_ISSUES.md`) — Implementation details for complex tasks
-- **Archive** — Completed items moved after merge
+<details>
+<summary>→ More details: references/precommit.md</summary>
+Full doc sync table, task status updates.
+</details>
 
-**Key rule:** Agents read the roadmap, not GitHub Issues directly. PRs use `Closes #123` to auto-close linked issues.
+---
 
-Status flow: `Pending` → `In Progress` → `In Review` → `Done` → `Archived`
+## Phase 5: Pull Request
 
-**Roadmap format:**
+> **Prerequisite**: Pre-commit checklist complete.
 
+### PR Guidelines
+
+- **One PR = One concern** — Don't mix features, fixes, refactors
+- **Small PRs** — Aim for <400 lines; split large changes
+- **Complete** — Code + Tests + Docs in same PR
+
+### PR Description
+
+```markdown
+## What
+Brief description.
+
+## Why
+Link to issue or explain motivation.
+Closes #123  <!-- if applicable -->
+
+## Testing
+- [ ] Unit tests added/updated
+- [ ] Manual testing (if applicable)
 ```
-| ID | Priority | Item | Status | GH |
-|----|----------|------|--------|-----|
-| 1  | P1       | Fix auth bug | In Progress | #123 |
-| 2  | P2       | Add feature X | Pending | #45 |
-| 3  | P3       | Refactor Y | Pending | — |
+
+### Self-Review Before Submit
+
+1. Read your own diff
+2. Remove debug code
+3. Check for secrets
+4. Verify CI passes
+
+<details>
+<summary>→ More details: references/pullrequest.md</summary>
+Responding to feedback, merge strategies, GitHub issue linking.
+</details>
+
+---
+
+## Code Review (for reviewers)
+
+### Review Checklist
+
+| Priority | Check |
+|----------|-------|
+| 1. Security | No secrets, input validation |
+| 2. Correctness | Logic matches intent, edge cases handled |
+| 3. Tests | Tests exist for changes, CI green |
+| 4. Docs | CHANGELOG/README updated |
+
+### Feedback Severity
+
+| Severity | Action |
+|----------|--------|
+| Security/Logic error | Block merge |
+| Missing tests/docs | Block merge |
+| Style/naming | Comment as nit; don't block |
+
+<details>
+<summary>→ More details: references/review.md</summary>
+Feedback format examples, PR size guidance.
+</details>
+
+---
+
+## Refactoring
+
+> **Refactor = change structure, NOT behavior.**
+
+### Before Refactoring
+
+Ask: "If I break something, will existing tests catch it?"
+
+| Answer | Action |
+|--------|--------|
+| Yes | Proceed |
+| No / Unsure | **Add tests first** |
+
+**Rule**: No test coverage confidence = no permission to refactor.
+
+<details>
+<summary>→ More details: references/refactoring.md</summary>
+State isolation, config handling, graceful termination.
+</details>
+
+---
+
+## Multi-Agent Collaboration
+
+When multiple agents work in parallel:
+
+```bash
+# Each agent uses isolated worktree
+git worktree add ../project-<role> <branch>
 ```
 
-Priority: `P0` (critical) → `P1` (high) → `P2` (medium) → `P3` (low). GH: `#123` or `—` if internal.
+| Role | Workflow |
+|------|----------|
+| Planning | Exploration → define scope |
+| Implementation | Exploration → Design → Implementation → Commit → PR |
+| Bug fix | Exploration → Bug Fix → Commit → PR |
+| Review | Review checklist |
 
-### Typical Task Flow
+**Rule**: Each agent still follows full workflow for their role.
 
-**For new features:**
-1. `exploration.md` — Understand code, confirm scope, set status to In Progress
-2. `design.md` — **Define behavior via tests BEFORE coding**
-3. `implementation.md` — Write code to make tests pass
-4. `precommit.md` — Run tests, update docs, commit
-5. `pullrequest.md` — Create PR, self-review, respond to feedback
+<details>
+<summary>→ More details: references/multi-agent.md</summary>
+Worktree naming, branch strategy, merge flow.
+</details>
 
-**For bug fixes:**
-1. `exploration.md` — Understand code, locate bug area
-2. `bugfix.md` — **Reproduce → Write failing test → Fix → Verify**
-3. `precommit.md` — Run tests, update docs/CHANGELOG, commit
-4. `pullrequest.md` — Create PR
+---
 
-> **Critical:** Do NOT skip the design/reproduce step. If you find yourself writing code without tests, STOP.
+## Quick Reference
+
+### Typical Flows
+
+**Feature**: Exploration → Design → Implementation → Pre-Commit → PR
+
+**Bug Fix**: Exploration → Bug Fix → Pre-Commit → PR
+
+**Refactor**: Exploration → (verify test coverage) → Design → Implementation → Pre-Commit → PR
+
+### Task Status (if project uses tracking)
+
+`Pending` → `In Progress` → `In Review` → `Done`
+
+Roadmap format: `| ID | Priority | Item | Status | GH |`
