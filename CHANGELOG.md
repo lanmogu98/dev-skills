@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-01-12
+
+### Changed
+- **Major restructure**: Embed core steps from all references directly into SKILL.md
+- SKILL.md now self-sufficient: agent can follow workflow without loading references
+- References become optional "deep dive" supplements using `<details>` blocks
+- Description expanded with more trigger keywords for better agent discovery
+- Reduced agent decision overhead: no Task Router lookup required
+
+### Why This Change
+- Problem: Agents weren't loading reference files before starting work
+- Solution: SKILL.md now contains all essential guidance (307 lines, under 500 limit)
+- References remain for detailed context when needed
+
 ## [1.5.0] - 2026-01-12
 
 ### Added
