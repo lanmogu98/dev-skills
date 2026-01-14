@@ -32,6 +32,7 @@ Comprehensive engineering workflow for LLM agents and human developers.
 - `references/pullrequest.md` — PR creation guidelines
 - `references/refactoring.md` — Refactoring-specific guidance
 - `references/review.md` — Code review checklist
+- `references/release.md` — **Release management (versioning, CHANGELOG, distribution)**
 - `references/multi-agent.md` — Worktree isolation for parallel agents
 
 ## License

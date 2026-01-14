@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [2.1.0] - 2026-01-14
+
+### Added
+- `references/release.md`: Release management workflow (SemVer, CHANGELOG flow, build artifacts, migration notes, hotfix process)
+- Phase 6: Release section in SKILL.md with embedded quick reference
+- Release flow added to Quick Reference typical flows
+
+### Why This Change
+- Dev workflow covered exploration → PR, but lacked guidance for the release phase
+- Users need clear versioning strategy, CHANGELOG conventions, and distribution best practices
+- Generalizes Chrome extension advice into language/platform-agnostic guidance
+
 ## [2.0.0] - 2026-01-12
 
 ### Changed

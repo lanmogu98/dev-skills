@@ -3,7 +3,7 @@ name: dev-workflow
 description: |
   Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code. Covers exploration → design → implementation → commit → PR cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build.
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Dev Workflow
@@ -216,6 +216,51 @@ Responding to feedback, merge strategies, GitHub issue linking.
 
 ---
 
+## Phase 6: Release (when publishing)
+
+> **When to use:** After merging PRs, ready to publish a new version.
+
+### Semantic Versioning
+
+`MAJOR.MINOR.PATCH` — e.g., `1.2.3`
+
+| Bump | When |
+|------|------|
+| MAJOR | Breaking changes (config migration, behavior change) |
+| MINOR | New backward-compatible features |
+| PATCH | Bug fixes, performance fixes |
+
+### Release Checklist
+
+```
+[ ] All tests pass
+[ ] Version bumped in all version files (package.json, manifest.json, etc.)
+[ ] CHANGELOG.md: [Unreleased] → [x.y.z] - date
+[ ] No secrets in codebase
+[ ] Migration notes (if breaking changes)
+```
+
+### Quick Release Flow
+
+```bash
+# 1. Bump version + update CHANGELOG
+git commit -m "chore: bump version to x.y.z"
+git push
+
+# 2. Tag
+git tag -a vX.Y.Z -m "Release vX.Y.Z"
+git push origin vX.Y.Z
+
+# 3. Create GitHub Release with CHANGELOG excerpt
+```
+
+<details>
+<summary>→ More details: references/release.md</summary>
+Version file sync, CHANGELOG flow, build artifacts, migration notes, hotfix process.
+</details>
+
+---
+
 ## Code Review (for reviewers)
 
 ### Review Checklist
@@ -298,6 +343,8 @@ Worktree naming, branch strategy, merge flow.
 **Bug Fix**: Exploration → Bug Fix → Pre-Commit → PR
 
 **Refactor**: Exploration → (verify test coverage) → Design → Implementation → Pre-Commit → PR
+
+**Release**: (After PRs merged) → Version bump → CHANGELOG update → Tag → GitHub Release
 
 ### Task Status (if project uses tracking)
 
