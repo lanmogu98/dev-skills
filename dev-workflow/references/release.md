@@ -202,14 +202,14 @@ zip -r extension-v1.2.0.zip \
 For critical bugs in released versions:
 
 ```bash
-# Branch from release tag
-git checkout -b hotfix/critical-bug vX.Y.Z
+# Branch from release tag (e.g., v1.2.3)
+git checkout -b hotfix/critical-bug v1.2.3
 
 # Fix, test, commit
 git commit -m "fix: critical bug description"
 
-# Tag as patch version
-git tag -a vX.Y.(Z+1) -m "Hotfix: critical bug"
+# Tag as next patch version (v1.2.3 → v1.2.4)
+git tag -a v1.2.4 -m "Hotfix: critical bug"
 git push origin hotfix/critical-bug --tags
 
 # Create PR to merge back to main
@@ -223,9 +223,9 @@ Consider automating with:
 
 | Tool | What it does |
 |------|--------------|
-| `semantic-release` | Auto version bump + changelog + release |
-| `standard-version` | Changelog generation from commits |
-| `release-please` | GitHub Action for release PRs |
+| `semantic-release` | Auto version bump + changelog + release (npm) |
+| `release-please` | GitHub Action for release PRs (Google) |
+| `changesets` | Monorepo-friendly versioning + changelog |
 | GitHub Actions | Build artifacts on tag push |
 
 **Note:** Start manual, automate when release frequency justifies it.

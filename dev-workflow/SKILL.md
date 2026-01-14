@@ -1,7 +1,7 @@
 ---
 name: dev-workflow
 description: |
-  Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code. Covers exploration → design → implementation → commit → PR cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build.
+  Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code, releasing versions. Covers exploration → design → implementation → commit → PR → release cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build, release, version, tag, changelog, publish, deploy.
 metadata:
   version: "2.1.0"
 ---
