@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-06
+
+### Added
+- **project-init** skill: Cross-agent project initialization protocol
+  - 5-phase workflow: Ingest → Plan → Scaffold → Document → Review → Handoff
+  - File templates for AGENTS.md, CLAUDE.md, rules files, .gitignore, .env.example
+  - Cross-agent compatibility matrix (Cursor, Claude Code, Codex)
+  - GitHub Actions templates for both Claude Code Action and Codex Action
+  - Multi-dimensional review checklists
+- README updated to describe both skills and their relationship
+
 ## [2.0.0] - 2026-01-12
 
 ### Changed
