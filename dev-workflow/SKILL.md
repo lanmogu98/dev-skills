@@ -3,7 +3,7 @@ name: dev-workflow
 description: |
   Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code. Covers exploration → design → implementation → commit → PR cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build.
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # Dev Workflow
@@ -143,7 +143,7 @@ Handling flaky tests, LLM/API usage, dependency management.
 
 ### Required Checklist
 
-```
+```text
 [ ] All tests pass
 [ ] CHANGELOG.md updated (if user-facing change)
 [ ] README.md updated (if CLI/config changed)
@@ -285,6 +285,25 @@ git worktree add ../project-<role> <branch>
 <details>
 <summary>→ More details: references/multi-agent.md</summary>
 Worktree naming, branch strategy, merge flow.
+</details>
+
+---
+
+## Domain Review (Conditional)
+
+If the project's `AGENTS.md` contains `## Domain Review Protocol`, load `references/domain-review.md` and apply these additional intervention points:
+
+- **Brief-In** before exploration: explain what will be built and list upcoming domain decisions
+- **Checkpoint** during design/implementation: pause at domain-laden decisions for human confirmation
+- **Brief-Out** before commit: summarize embedded assumptions, structural vs tunable decisions
+
+Checkpoints are **blocking** (wait for human). Brief-Out is a **soft gate** (no objection = proceed).
+
+Skip checkpoint if the decision is already explicit in the design doc and confirmed during project-init. In non-interactive contexts, use design doc defaults and list all decisions in the PR description.
+
+<details>
+<summary>→ More details: references/domain-review.md</summary>
+Decision weight matrix, intervention templates, non-interactive fallback rules.
 </details>
 
 ---
