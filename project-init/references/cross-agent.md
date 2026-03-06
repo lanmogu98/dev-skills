@@ -110,7 +110,7 @@ All three agents receive the same user-level instructions from a single file (`g
 
 - `~/.claude/CLAUDE.md` -> `global-instructions.md`
 - `~/.codex/AGENTS.md` -> `global-instructions.md` (same file)
-- Cursor User Rules -> manually synced from the "Approach" section
+- Cursor User Rules -> synced via `scripts/sync-cursor-rules.sh` (writes to `state.vscdb`)
 
 This ensures consistent methodology, environment awareness, and conventions across agents.
 
@@ -127,7 +127,7 @@ This ensures consistent methodology, environment awareness, and conventions acro
 
 1. Reads `AGENTS.md` when instructed by `.cursor/rules/project.mdc` (the project rule should include "Read AGENTS.md for full context"); AGENTS.md is NOT auto-injected into the system prompt
 2. Auto-injects `.cursor/rules/*.mdc` based on glob matches
-3. Has user-level rules in Cursor Settings > Rules for AI (manually synced from `global-instructions.md`)
+3. Has user-level rules in Cursor Settings > Rules for AI (synced from `global-instructions.md` via `sync-cursor-rules.sh` or manual paste)
 4. Supports skills via `~/.claude/skills/` and `~/.cursor/skills/` directories
 
 ### Codex
