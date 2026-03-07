@@ -59,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `bugfix.md` now addresses iterative debugging scenarios (not just single-attempt fixes)
 - Enhanced Phase 1, 2, 3 with practical insights from real bug fix retrospectives
 
-## [1.4.0] - 2025-01-09
+## [1.4.0] - 2026-01-09
 
 ### Added
 - `FUTURE_ROADMAP.md` template with `GH` column for GitHub issue linking
@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Task System section in `SKILL.md` now documents the full bug reporting flow
 - Status flow expanded: added "In Review" state
 
-## [1.3.0] - 2025-01-09
+## [1.3.0] - 2026-01-09
 
 ### Added
 - Pre-flight Checklist: branch creation, task status, code reading — visible immediately
@@ -86,14 +86,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Agent skipping workflow when entering Plan Mode first (now explicitly addressed)
 
-## [1.2.0] - 2025-01-08
+## [1.2.0] - 2026-01-08
 
 ### Changed
 - Make skill language-agnostic: multi-language test commands, generic terminology
 - "Type hints" → "Type annotations" (universal terminology)
 - Remove Python-specific examples (DataFrame, pyproject.toml hardcoding)
 
-## [1.1.0] - 2025-01-08
+## [1.1.0] - 2026-01-08
 
 ### Added
 - `bugfix.md`: Dedicated bug fix workflow (reproduce → test → fix → verify)
@@ -107,7 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make `FUTURE_ROADMAP.md` references conditional ("if project uses task tracking")
 - Update Task Router to include bug fix entry
 
-## [1.0.0] - 2025-01-08
+## [1.0.0] - 2026-01-08
 
 ### Added
 - `design.md`: Separate design phase emphasizing "tests are design"
