@@ -33,7 +33,7 @@ dotfiles/agent-config/skills/ (install dir, gitignored by dotfiles)
 The `skill-creator` skill (installed at `~/.claude/skills/skill-creator/`) defines Anthropic's official format. **Before creating a new skill, check for updates:**
 
 ```bash
-openskills install anthropics/skills --global -y
+~/iCloud/dev-env/dotfiles/agent-config/scripts/manage-skills.sh update skill-creator
 ```
 
 Then read `~/.claude/skills/skill-creator/SKILL.md` for the latest conventions. Key rules from skill-creator:
