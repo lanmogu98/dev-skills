@@ -1,13 +1,14 @@
 # Skills
 
-Personal skill collection for AI coding agents. Compatible with [OpenSkills](https://github.com/numman-ali/openskills) and Claude Code.
+Personal skill collection for AI coding agents. Compatible with Claude Code, Cursor, and Codex.
 
 ## Installation
 
 ```bash
-npm i -g openskills
-openskills install lanmogu98/dev-skills-repo
-openskills sync
+# Via manage-skills.sh (recommended)
+manage-skills.sh link-user
+
+# Or manual symlinks (see skills.manifest.md for details)
 ```
 
 ## Available Skills
@@ -66,8 +67,10 @@ Install Directory (dotfiles, gitignored)
   ├── dev-workflow → ../../../../Personal/.../dev-skills-repo/dev-workflow
   └── project-init → ../../../../Personal/.../dev-skills-repo/project-init
       ↓ symlink (already configured)
-Active (Claude Code / Codex)
-  ~/.claude/skills/ → dotfiles/agent-config/skills/
+Active (Claude Code / Cursor / Codex)
+  ~/.claude/skills/ → dotfiles/agent-config/skills/  (whole dir)
+  ~/.cursor/skills/ → dotfiles/agent-config/skills/  (whole dir)
+  ~/.codex/skills/{name} → dotfiles/agent-config/skills/{name}  (per-skill)
 ```
 
 **How it works:**
