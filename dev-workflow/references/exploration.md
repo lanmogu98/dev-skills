@@ -33,7 +33,7 @@ Before implementing anything, complete these steps.
 | `CHANGELOG.md` vs recent commits | Backfill missing entries |
 | Roadmap/task tracker vs code state | Update status (Pending → Done) |
 
-**Rule:** If drift found → Sync docs to match code immediately, then proceed.
+If drift is found, sync docs to match code before proceeding. Stale docs mislead both humans and AI agents — fixing them now prevents compounding errors downstream.
 
 ## Step 3: Confirm Scope
 
@@ -47,4 +47,4 @@ Before implementing anything, complete these steps.
 
 ---
 
-**→ Next:** Load `references/design.md` to define behavior via tests BEFORE coding.
+**→ Phase complete.** Return to SKILL.md for the next step.

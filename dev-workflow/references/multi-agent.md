@@ -94,8 +94,8 @@ Each agent still follows the standard workflow based on their role:
 | Bug fix | `exploration.md` → `bugfix.md` → `precommit.md` → `pullrequest.md` |
 | Review | `review.md` |
 
-**Do NOT skip phases** just because you're one of multiple agents.
+Each agent follows the full workflow for their role. Cutting corners in multi-agent mode is especially dangerous because no single agent has full context — the workflow compensates for that.
 
 ---
 
-**→ Next:** Each agent loads the relevant reference based on their assigned role above.
+**→ Phase complete.** Return to SKILL.md for the next step.

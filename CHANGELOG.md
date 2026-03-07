@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-03-07
+
+### Changed
+- **Both skills**: Rewrite descriptions for better triggering — narrative "pushy" style per updated skill-creator guidance
+- **Both skills**: Remove non-standard `metadata.version` from SKILL.md frontmatter (versions tracked here only)
+- **dev-workflow**: Soften all prescriptive language (STOP/Rule:/Do NOT) across SKILL.md and 7 reference files — explain the "why" behind each instruction instead of commanding
+- **dev-workflow**: Add scene-specific guidance to all 8 `<details>` blocks (when to load each reference)
+- **dev-workflow**: Add Core Principles reasoning ("because...")
+- **dev-workflow**: Add Phase 2 vs 2-B routing guidance
+- **dev-workflow**: Add Step 0 (task status update) to Phase 1
+- **dev-workflow**: Add decision router to Quick Reference
+- **dev-workflow**: Change reference file `→ Next:` navigation to "Return to SKILL.md" (SKILL.md controls flow)
+- **project-init**: Add existing file detection step to Phase 2 (Scaffold)
+- **project-init**: Add review verification step to Phase 5 (Handoff)
+- **project-init**: Add table of contents to `templates.md` (>300 lines per skill-creator guidance)
+- **repo**: Update AGENTS.md "What We Override" — description optimization now available but not yet adopted
+
 ## [2.1.0] - 2026-03-06
 
 ### Added

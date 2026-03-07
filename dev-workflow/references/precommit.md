@@ -1,6 +1,6 @@
 # Pre-Commit Checklist
 
-> **Complete ALL steps IN ORDER before every `git commit`. No exceptions.**
+> Complete these steps before committing — each catches a different class of mistake that's hard to fix after the fact.
 
 ## Step 1: VERIFY TESTS PASS
 
@@ -57,4 +57,4 @@ git commit -m "docs: update README with new CLI flags"
 
 ---
 
-**→ Next:** Load `references/pullrequest.md` to create PR.
+**→ Phase complete.** Return to SKILL.md for the next step.

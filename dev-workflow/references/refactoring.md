@@ -12,7 +12,7 @@ Before any refactoring, answer this question:
 | Answer | Action |
 |--------|--------|
 | Yes, confident | Proceed to refactor |
-| No / Unsure | **STOP. Add tests first via `design.md`** |
+| No / Unsure | **Add tests first** (see `design.md`) — without them you're flying blind |
 
 ### Must Add Tests If:
 
@@ -20,12 +20,12 @@ Before any refactoring, answer this question:
 - Refactoring involves concurrency, shared state, or resource management
 - Refactoring touches error handling or edge case logic
 
-**Rule:** No confidence in test coverage = no permission to refactor.
+Without confidence in test coverage, refactoring is risky — you could break behavior without knowing. Add tests first, then refactor safely.
 
 ## 1. Test-Driven Refactoring
 
 - Spend more time designing tests (boundary, stress, concurrency) than writing code
-- Do NOT commit implementation until corresponding tests pass
+- Commit implementation only after corresponding tests pass
 - Existing tests must continue to pass — this is your safety net
 
 ## 2. State Isolation
@@ -50,4 +50,4 @@ Before any refactoring, answer this question:
 
 ---
 
-**→ Next:** When refactoring is complete, load `references/precommit.md` to prepare commit.
+**→ Phase complete.** Return to SKILL.md for the next step.

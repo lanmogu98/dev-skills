@@ -53,7 +53,7 @@ Our distribution model differs from skill-creator's assumptions:
 |---|---|---|
 | Eval-driven iteration with subagents + benchmark viewer | Test by using in a real project, then iterate | No formal eval infra; skills are validated through real usage |
 | `scripts/package_skill.py` to distribute `.skill` files | Symlink chain (no packaging) | Zero-sync-friction distribution |
-| Description optimization via `scripts/run_loop.py` | Manual description tuning | Overkill for 2 skills; revisit if catalog grows |
+| Description optimization via `scripts/run_loop.py` | Available but not yet adopted | Will adopt if undertriggering issues observed |
 
 ## Development Rules
 

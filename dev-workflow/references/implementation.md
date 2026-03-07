@@ -28,7 +28,7 @@ Before writing implementation code, confirm:
 4. Refactor if needed (tests still pass)
 ```
 
-**Rule:** If tests don't pass, don't move forward.
+If tests don't pass, stop and investigate. Moving forward with failing tests means you're building on a broken foundation — every subsequent change compounds the problem.
 
 ## Handling Missing/Flaky Tests
 
@@ -61,4 +61,4 @@ Before writing implementation code, confirm:
 
 ---
 
-**→ Next:** When implementation is complete, load `references/precommit.md` to prepare commit.
+**→ Phase complete.** Return to SKILL.md for the next step.

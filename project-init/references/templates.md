@@ -2,6 +2,20 @@
 
 Templates for files generated during Phase 3 (Document). Replace `{{PLACEHOLDERS}}` with project-specific values. The AI agent fills these contextually from the design doc / user description — no templating engine required.
 
+## Contents
+
+- [AGENTS.md](#agentsmd)
+- [CLAUDE.md](#claudemd)
+- [README.md](#readmemd)
+- [.cursor/rules/project.mdc](#cursorrulesmdc)
+- [.claude/rules/project.md](#clauderulesmd)
+- [Module-specific rules](#cursorrulesmodulemdc-example-collectors)
+- [docs/decisions/000-template.md](#docsdecisions000-templatemd)
+- [FUTURE_ROADMAP.md](#future_roadmapmd)
+- [docs/DESIGN_REMAINING_ISSUES.md](#docsdesign_remaining_issuesmd)
+- [.gitignore](#gitignore-universal-base)
+- [.env.example](#envexample)
+
 ---
 
 ## AGENTS.md

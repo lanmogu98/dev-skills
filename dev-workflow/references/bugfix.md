@@ -1,10 +1,10 @@
 # Bug Fix Workflow
 
-> **STOP. Do not touch code until you can reproduce the bug.**
+> Reproduce the bug first. If you can't see it fail, you can't verify your fix actually works — and you risk "fixing" something that wasn't broken while the real bug persists.
 
 ## When Fix Attempt Fails (Read This First)
 
-If you're on your **second or third attempt** at fixing this bug, STOP and ask yourself:
+If you're on your **second or third attempt** at fixing this bug, pause and ask yourself:
 
 | Signal | What It Means | Action |
 |--------|---------------|--------|
@@ -13,7 +13,7 @@ If you're on your **second or third attempt** at fixing this bug, STOP and ask y
 | You're adding more and more edge cases | Original approach is flawed | Consider architectural change |
 | User says "still broken" | Your mental model is wrong | Ask user for exact DOM/state/logs |
 
-**The Rule:** When a fix fails, don't patch it. Return to Phase 1 and re-examine your assumptions.
+When a fix fails, resist the urge to add another patch. Each failed attempt usually means your mental model of the bug is wrong — return to Phase 1 and re-examine your assumptions.
 
 > "When a bug takes multiple attempts, the problem is usually your understanding, not the code."
 
@@ -52,11 +52,11 @@ Don't guess. Request concrete artifacts:
 3. This test becomes your regression guard
 ```
 
-**Do not skip this step.** A bug without a test will come back.
+Skipping this step means the bug has no regression guard — it will come back.
 
 ### Signs You're Skipping TDD
 
-If any of these are true, STOP and write the test first:
+If any of these are true, pause and write the test first:
 
 - [ ] You're already thinking about the fix implementation
 - [ ] You opened the source file before writing a test
@@ -138,4 +138,4 @@ Before committing a bug fix:
 
 ---
 
-**→ Next:** Load `references/precommit.md` to prepare commit.
+**→ Phase complete.** Return to SKILL.md for the next step.

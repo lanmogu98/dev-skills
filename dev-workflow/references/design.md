@@ -1,6 +1,6 @@
 # Design Phase
 
-> **STOP. Do not write implementation code until this phase is complete.**
+> Complete this phase before writing implementation code. Tests define what "correct" means — without them, you're building to an undefined target.
 
 ## Core Insight: Tests Are Design
 
@@ -39,7 +39,7 @@ Before any implementation, complete these steps:
 3. Refactor → tests still pass
 ```
 
-**Do not proceed to implementation until you have at least:**
+Before moving to implementation, make sure you have at least:
 - 1 happy path test
 - 1 edge case test (if applicable)
 - 1 error case test (if applicable)
@@ -63,7 +63,7 @@ Refactoring means **no behavior change**. Test requirements depend on existing c
 | Coverage is insufficient | **Add tests BEFORE refactoring** |
 | Touching concurrency/state/resources | Add stress/boundary tests regardless |
 
-> **Rule:** If you're not confident existing tests catch regressions, you don't have permission to refactor yet.
+> Without confidence that existing tests catch regressions, refactoring is risky — you could break behavior without knowing. Add tests first, then refactor safely.
 
 ## When Design Is Complete
 
@@ -74,4 +74,4 @@ You should be able to answer:
 
 ---
 
-**→ Next:** Load `references/implementation.md` to write code.
+**→ Phase complete.** Return to SKILL.md for the next step.

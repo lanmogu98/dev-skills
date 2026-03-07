@@ -1,9 +1,7 @@
 ---
 name: dev-workflow
 description: |
-  Development workflow for code changes. Load when: implementing features, fixing bugs, writing tests, refactoring, creating PRs, reviewing code. Covers exploration → design → implementation → commit → PR cycle. Keywords: feature, bug, fix, test, refactor, PR, pull request, commit, code review, implement, develop, build.
-metadata:
-  version: "2.1.0"
+  Comprehensive engineering workflow for making code changes in existing codebases. Use this skill whenever the user wants to implement a feature, fix a bug, write or run tests, refactor code, create a pull request, do a code review, or make a commit. Also trigger when the user mentions branch strategy, TDD, test-driven development, pre-commit checks, merge conflicts, or debugging workflow. Covers the full cycle: exploration → design (tests first) → implementation → pre-commit → PR. Includes bug fix workflow, code review checklists, refactoring safety, multi-agent collaboration via worktrees, and optional domain review for projects with real-world consequences. If the user is working on an existing codebase and making changes of any kind, this skill applies.
 ---
 
 # Dev Workflow
@@ -12,10 +10,10 @@ Engineering standards for code changes. Follow these phases in order.
 
 ## Core Principles
 
-1. **Code is truth** — Read code first; docs may be outdated
-2. **Design before code** — Write tests before implementation
-3. **Tests are design** — Tests define behavior, not just verify it
-4. **Minimal blast radius** — Touch only necessary files
+1. **Code is truth** — Read code first. Docs drift over time; the running code is what actually ships.
+2. **Design before code** — Write tests before implementation. Tests force you to define "done" before you start, preventing scope creep and rework.
+3. **Tests are design** — Tests define behavior, not just verify it. A well-written test suite IS the specification.
+4. **Minimal blast radius** — Touch only necessary files. Every changed file is a potential regression; keep the change surface small.
 
 ## Priority Stack
 
@@ -29,6 +27,7 @@ Security → Correctness → Data Integrity → Availability → Performance →
 
 ### Required Steps
 
+0. **Update task status**: If the project uses a roadmap (e.g., `FUTURE_ROADMAP.md`), mark the task as In Progress
 1. **Create branch**: `git checkout -b feature/<name>` or `fix/<name>`
 2. **Read relevant code** — Understand patterns, find insertion points
 3. **Check if already exists** — Search for similar implementations
@@ -45,15 +44,17 @@ Security → Correctness → Data Integrity → Availability → Performance →
 | 5 | Existing tests |
 
 <details>
-<summary>→ More details: references/exploration.md</summary>
-Full exploration checklist, doc sync table, branch strategy.
+<summary>→ Deep dive: references/exploration.md — read when exploring an unfamiliar codebase or verifying doc-code sync</summary>
+Full exploration checklist with examples, doc sync verification table, branch strategy.
 </details>
 
 ---
 
+> **Choose your path**: Adding new functionality or changing behavior → Phase 2 (Design). Fixing a reported bug → Phase 2-B (Bug Fix).
+
 ## Phase 2: Design
 
-> **STOP. Do not write implementation code until tests are written.**
+> Write tests before implementation. Tests define what "correct" means — without them, you're guessing whether your code works. Skipping this step is the #1 cause of rework.
 
 ### Required Steps
 
@@ -72,10 +73,10 @@ Full exploration checklist, doc sync table, branch strategy.
 | Bug fix | Reproduces bug + regression guard |
 | Refactor | Existing tests must pass; add if coverage insufficient |
 
-**Rule**: If you can't write a test, you don't understand the requirement yet.
+If writing a test feels impossible, that usually means the requirement itself isn't clear yet. Clarify before coding — it's cheaper than debugging later.
 
 <details>
-<summary>→ More details: references/design.md</summary>
+<summary>→ Deep dive: references/design.md — read when defining test cases or unsure how to structure tests</summary>
 Design checklist, test case questions, refactor test requirements.
 </details>
 
@@ -83,7 +84,7 @@ Design checklist, test case questions, refactor test requirements.
 
 ## Phase 2-B: Bug Fix (Alternative to Phase 2)
 
-> **STOP. Do not touch code until you can reproduce the bug.**
+> Reproduce the bug first. If you can't see it fail, you can't verify your fix actually works — and you risk "fixing" something that wasn't broken while the real bug persists.
 
 ### Required Steps
 
@@ -101,10 +102,10 @@ Design checklist, test case questions, refactor test requirements.
 | Fix works but breaks something | Patching symptoms → find actual root cause |
 | Adding more edge cases | Approach flawed → consider architecture change |
 
-**Rule**: When a fix fails, don't patch it. Re-examine assumptions.
+When a fix fails, resist the urge to add another patch. Each failed attempt usually means your mental model of the bug is wrong — step back and re-examine assumptions from scratch.
 
 <details>
-<summary>→ More details: references/bugfix.md</summary>
+<summary>→ Deep dive: references/bugfix.md — read when a fix attempt fails or you need a more systematic debug process</summary>
 Multi-round debugging guidance, what data to request, architecture checks.
 </details>
 
@@ -128,10 +129,10 @@ Multi-round debugging guidance, what data to request, architecture checks.
 - Explicit error handling (no silent `except:`)
 - No secrets in code — use env vars
 
-**Rule**: If tests don't pass, don't move forward.
+If tests don't pass, stop and investigate. Moving forward with failing tests means you're building on a broken foundation — every subsequent change compounds the problem.
 
 <details>
-<summary>→ More details: references/implementation.md</summary>
+<summary>→ Deep dive: references/implementation.md — read when handling flaky tests, LLM/API calls, or dependency issues</summary>
 Handling flaky tests, LLM/API usage, dependency management.
 </details>
 
@@ -139,7 +140,7 @@ Handling flaky tests, LLM/API usage, dependency management.
 
 ## Phase 4: Pre-Commit
 
-> **Complete ALL steps before `git commit`.**
+> Complete these steps before committing. Each one catches a different class of mistake — skipping any of them means that class of error ships silently.
 
 ### Required Checklist
 
@@ -171,7 +172,7 @@ git commit -m "fix(parser): handle empty input"
 ```
 
 <details>
-<summary>→ More details: references/precommit.md</summary>
+<summary>→ Deep dive: references/precommit.md — read when unsure which docs need updating or how to mark task status</summary>
 Full doc sync table, task status updates.
 </details>
 
@@ -210,7 +211,7 @@ Closes #123  <!-- if applicable -->
 4. Verify CI passes
 
 <details>
-<summary>→ More details: references/pullrequest.md</summary>
+<summary>→ Deep dive: references/pullrequest.md — read when creating PR descriptions, responding to review feedback, or choosing merge strategy</summary>
 Responding to feedback, merge strategies, GitHub issue linking.
 </details>
 
@@ -236,7 +237,7 @@ Responding to feedback, merge strategies, GitHub issue linking.
 | Style/naming | Comment as nit; don't block |
 
 <details>
-<summary>→ More details: references/review.md</summary>
+<summary>→ Deep dive: references/review.md — read when reviewing someone else's PR</summary>
 Feedback format examples, PR size guidance.
 </details>
 
@@ -255,10 +256,10 @@ Ask: "If I break something, will existing tests catch it?"
 | Yes | Proceed |
 | No / Unsure | **Add tests first** |
 
-**Rule**: No test coverage confidence = no permission to refactor.
+Without confidence that existing tests will catch regressions, refactoring is risky — you could break behavior without knowing. Add tests first, then refactor safely.
 
 <details>
-<summary>→ More details: references/refactoring.md</summary>
+<summary>→ Deep dive: references/refactoring.md — read when refactoring involves state isolation, config handling, or graceful termination</summary>
 State isolation, config handling, graceful termination.
 </details>
 
@@ -280,10 +281,10 @@ git worktree add ../project-<role> <branch>
 | Bug fix | Exploration → Bug Fix → Commit → PR |
 | Review | Review checklist |
 
-**Rule**: Each agent still follows full workflow for their role.
+Each agent follows the full workflow for their role. Cutting corners in multi-agent mode is especially dangerous because no single agent has full context — the workflow compensates for that.
 
 <details>
-<summary>→ More details: references/multi-agent.md</summary>
+<summary>→ Deep dive: references/multi-agent.md — read when setting up worktrees or coordinating parallel agents</summary>
 Worktree naming, branch strategy, merge flow.
 </details>
 
@@ -302,13 +303,21 @@ Checkpoints are **blocking** (wait for human). Brief-Out is a **soft gate** (no 
 Skip checkpoint if the decision is already explicit in the design doc and confirmed during project-init. In non-interactive contexts, use design doc defaults and list all decisions in the PR description.
 
 <details>
-<summary>→ More details: references/domain-review.md</summary>
+<summary>→ Deep dive: references/domain-review.md — read when project AGENTS.md has a Domain Review Protocol section</summary>
 Decision weight matrix, intervention templates, non-interactive fallback rules.
 </details>
 
 ---
 
 ## Quick Reference
+
+### How to Choose
+
+- "I need to add something new" → Feature flow
+- "Something is broken" → Bug Fix flow
+- "The code works but needs restructuring" → Refactor flow
+- "I need to review someone's code" → Code Review section
+- "Multiple agents working together" → Multi-Agent section
 
 ### Typical Flows
 

@@ -1,9 +1,7 @@
 ---
 name: project-init
 description: |
-  Initialize a new project repository for AI-assisted development. Load when: user asks to bootstrap a project, start from a design doc, set up a repo for multi-agent collaboration, or initialize git/GitHub with AI context files. Covers scaffold → documentation → review cycle. Keywords: init, bootstrap, new project, design doc, repo setup, AGENTS.md, CLAUDE.md.
-metadata:
-  version: "1.0.0"
+  One-time project initialization protocol for setting up new repositories optimized for human-AI collaborative development. Use this skill whenever the user wants to start a new project, bootstrap a repo, scaffold a codebase from a design doc, create AGENTS.md or CLAUDE.md context files, or set up a project for use with Cursor, Claude Code, or Codex. Also trigger when the user mentions "new repo", "project setup", "design doc to code", "create project structure", or asks about AI context files or cross-agent compatibility. This skill runs once to create the scaffold, then hands off to dev-workflow for ongoing development.
 ---
 
 # Project Init
@@ -54,6 +52,7 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 
 Read `references/templates.md` for `.gitignore` and `.env.example` templates. Execute these steps in order:
 
+0. **Check existing state**: If the directory already has files, assess what exists before scaffolding. Preserve user work — don't overwrite existing files without asking. If a design doc exists but no scaffold, proceed normally. If a partial scaffold exists, identify gaps and fill them.
 1. **Directory structure** based on language conventions:
    - Python: `src/{package}/` layout with `pyproject.toml`
    - Node: `src/` with `package.json`
@@ -171,6 +170,7 @@ Two perspectives:
 
 > Prepare the project for ongoing development.
 
+0. **Verify review clean**: Confirm Phase 4 review completed with no remaining high/medium issues. If issues remain, resolve them before handoff.
 1. **Initial commit**: Stage all files, commit with `chore: init project scaffold`
 2. **Status table**: Ensure AGENTS.md has a current implementation status table with all modules listed
 3. **Next actions**: First 1-3 action nodes from Phase 1 are listed in FUTURE_ROADMAP.md as Pending
