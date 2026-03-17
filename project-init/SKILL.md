@@ -1,16 +1,19 @@
 ---
 name: project-init
 description: |
-  One-time project initialization protocol for setting up new repositories optimized for human-AI collaborative development. Use this skill whenever the user wants to start a new project, bootstrap a repo, scaffold a codebase from a design doc, create AGENTS.md or CLAUDE.md context files, or set up a project for use with Cursor, Claude Code, or Codex. Also trigger when the user mentions "new repo", "project setup", "design doc to code", "create project structure", or asks about AI context files or cross-agent compatibility. This skill runs once to create the scaffold, then hands off to dev-workflow for ongoing development.
+  One-time project initialization protocol for setting up new repositories or organized project workspaces optimized for human-AI collaborative development. Use this skill whenever the user wants to start a new project, bootstrap a repo, scaffold work from a design doc, create AGENTS.md or CLAUDE.md context files, or set up a project for use with Cursor, Claude Code, or Codex. This applies to software, automation, documentation, configuration, research, and similar git-tracked projects. Also trigger when the user mentions "new repo", "project setup", "design doc to code", "create project structure", or asks about AI context files or cross-agent compatibility. This skill runs once to create the scaffold, then hands off to dev-workflow for ongoing development.
 ---
 
 # Project Init
 
-Set up a new project repository optimized for human-AI collaborative development across Cursor, Claude Code, and Codex.
+Set up a new project repository or organized workspace optimized for human-AI collaborative development across Cursor, Claude Code, and Codex.
 
 ## Scope
 
 This skill covers **project initialization** (one-time) and **ongoing project health** (review methodology, ADR).
+
+- Applies to software repos and non-software repos alike (automation, docs, config, research, operations, etc.)
+- Adapt the scaffold to the project's actual artifacts; do **not** force app-style directories, package files, or test runners onto repos that do not need them
 
 - Runs BEFORE `dev-workflow` — creates the scaffold that `dev-workflow` operates within
 - After init completes, hand off to `dev-workflow` for feature/fix/refactor cycles
@@ -21,9 +24,10 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 > Understand the project before touching files.
 
 1. Read the design document, requirements, or user description
-2. Identify: project name, language/framework, key modules, data sources, deployment model
+2. Identify: project name, project type, primary artifacts, key modules, tooling/runtime, and deployment or operating model
 3. Ask clarifying questions if critical info is missing:
-   - What is the primary language and package manager?
+   - What are the primary artifacts in this project (code, docs, configs, scripts, datasets, templates)?
+   - What is the primary language/runtime and package manager, if applicable?
    - Is there a design doc or spec to follow?
    - Which agents will be used (Cursor / Claude Code / Codex)?
    - Will there be cloud-triggered tasks (GitHub Actions)?
@@ -53,21 +57,23 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 Read `references/templates.md` for `.gitignore` and `.env.example` templates. Execute these steps in order:
 
 0. **Check existing state**: If the directory already has files, assess what exists before scaffolding. Preserve user work — don't overwrite existing files without asking. If a design doc exists but no scaffold, proceed normally. If a partial scaffold exists, identify gaps and fill them.
-1. **Directory structure** based on language conventions:
-   - Python: `src/{package}/` layout with `pyproject.toml`
-   - Node: `src/` with `package.json`
+1. **Directory structure** based on project type and ecosystem conventions:
+   - Python app/lib: `src/{package}/` layout with `pyproject.toml`
+   - Node app/lib: `src/` with `package.json`
+   - Docs / config / ops / research repos: create only the directories that match the real artifacts (`docs/`, `scripts/`, `templates/`, `references/`, domain-specific folders, etc.)
    - Other: follow the ecosystem's standard layout
-2. **Dependency management**:
+2. **Dependency management / tooling**:
    - Python: `pyproject.toml` (PEP 621) with `uv` as package manager; create `.python-version` for version pinning. `uv` manages its own Python installations independently — even if the system uses conda/miniforge/pyenv, `uv` downloads and maintains separate Python binaries at `~/.local/share/uv/python/`. Do NOT create a conda env for uv-managed projects.
    - Node: `package.json` with lockfile
-   - Include dev dependencies (linter, formatter, type checker, test runner)
+   - Non-code-first repos: only add manifests, linters, or checkers that the project will actually use
+   - Include dev dependencies (linter, formatter, type checker, test runner) only when they are part of the real workflow
 3. **Git init + .gitignore**:
    - Language-appropriate ignores
    - Always ignore: `.env`, `*.db`, IDE-specific dirs
    - Use `dir/*` + `!dir/.gitkeep` for runtime dirs (data/, logs/, backup/)
 4. **GitHub repo**: create with `gh repo create` if requested
-5. **Environment template**: `.env.example` with key names only (no real values)
-6. **Entry point skeleton**: CLI with argument parsing, importable package `__init__.py`
+5. **Environment template (if needed)**: `.env.example` with key names only (no real values)
+6. **Entry point or workflow skeleton**: CLI, script, docs index, runbook, or equivalent artifact that anchors the project
 
 ## Phase 3: Document
 
@@ -80,8 +86,9 @@ Generate these files:
 ### 3a. AGENTS.md (universal AI context)
 
 The single source of truth for all AI agents. Must contain:
+
 - Project positioning (1-2 sentences)
-- Tech stack summary
+- Project shape / tech stack summary
 - Current implementation status table
 - Key design conventions and constraints
 - Directory responsibilities
@@ -94,15 +101,17 @@ The single source of truth for all AI agents. Must contain:
 
 A minimal file that imports AGENTS.md using Claude Code's native `@path` syntax:
 
-```
+```markdown
 @AGENTS.md
 ```
 
-This gives Claude Code auto-loaded access to the full AGENTS.md content at session start. Add Claude Code-specific instructions below the import only if needed.
+This gives Claude Code auto-loaded access to the full AGENTS.md content at session start. Keep project facts in `AGENTS.md`; add Claude Code-specific instructions below the import only if needed.
 
-### 3c. Agent-specific rules
+### 3c. Agent-specific rules (only when needed)
 
-Generate path-scoped rules for **both** Cursor and Claude Code:
+Generate path-scoped rules for **both** Cursor and Claude Code only when the project has meaningful subtree-specific constraints that would benefit from scoped auto-injection. For simple repos, `AGENTS.md` alone may be enough.
+
+When scoped rules are needed:
 
 - `.cursor/rules/project.mdc` — project-wide constraints (globs frontmatter)
 - `.cursor/rules/{module}.mdc` — module-specific rules
@@ -126,13 +135,16 @@ See `references/cross-agent.md` for syntax differences between the two systems.
 
 ### 3f. Task management
 
-If the project uses roadmap-centric task management:
-- `FUTURE_ROADMAP.md` — short Now/Next task hub from Phase 1 action nodes
-- `docs/DESIGN_REMAINING_ISSUES.md` — detailed implementation notes
+If the project uses roadmap-centric or hybrid task management:
+
+- `FUTURE_ROADMAP.md` — short Now/Next task hub or active issue queue
+- `docs/DESIGN_REMAINING_ISSUES.md` — detailed implementation notes, issue packets, or closeout notes
+- If the repo already has a long-lived backlog file such as `TASKS.md`, keep it for backlog/history and use `FUTURE_ROADMAP.md` for current multi-agent work
 
 ### 3g. GitHub Actions (if cloud dispatch requested)
 
 Read `references/cloud-dispatch.md` for workflow templates. Generate:
+
 - `.github/workflows/claude.yml` — Claude Code Action for @claude mentions + automation
 - `.github/workflows/codex.yml` — Codex Action for automated tasks
 - `.github/prompts/` — shared prompt files for task definitions

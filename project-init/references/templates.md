@@ -2,13 +2,15 @@
 
 Templates for files generated during Phase 3 (Document). Replace `{{PLACEHOLDERS}}` with project-specific values. The AI agent fills these contextually from the design doc / user description — no templating engine required.
 
+These templates apply to software, automation, docs, config, research, and similar git-tracked projects. Omit or adapt sections that do not apply; do not force app-style structure onto non-code-first repos.
+
 ## Contents
 
 - [AGENTS.md](#agentsmd)
 - [CLAUDE.md](#claudemd)
 - [README.md](#readmemd)
-- [.cursor/rules/project.mdc](#cursorrulesmdc)
-- [.claude/rules/project.md](#clauderulesmd)
+- `.cursor/rules/project.mdc`
+- `.claude/rules/project.md`
 - [Module-specific rules](#cursorrulesmodulemdc-example-collectors)
 - [docs/decisions/000-template.md](#docsdecisions000-templatemd)
 - [FUTURE_ROADMAP.md](#future_roadmapmd)
@@ -27,17 +29,16 @@ Templates for files generated during Phase 3 (Document). Replace `{{PLACEHOLDERS
 
 {{1-2 sentence description of what the project does and who it's for.}}
 
-## Tech Stack
+## Project Shape
 
-- **Language**: {{LANGUAGE}} {{VERSION}}
-- **Python Environment**: {{e.g., "uv manages Python independently (~/.local/share/uv/python/), do not use conda/miniforge"}}
-- **Package Manager**: {{PACKAGE_MANAGER}}
+- **Project Type**: {{software | automation | docs | config | research | other}}
+- **Primary Artifacts**: {{scripts, docs, templates, configs, datasets, etc.}}
+- **Language / Runtime**: {{LANGUAGE_AND_VERSION_IF_APPLICABLE}}
+- **Package Manager**: {{PACKAGE_MANAGER_IF_APPLICABLE}}
 - **Project Layout**: {{LAYOUT_DESCRIPTION}}
-- **Storage**: {{DATABASE}}
-- **Key Libraries**: {{COMMA_SEPARATED_LIST}}
-- **Lint/Format**: {{LINTER}}
-- **Type Check**: {{TYPE_CHECKER}}
-- **Test**: {{TEST_RUNNER}}
+- **Storage**: {{DATABASE_OR_NA}}
+- **Key Tools / Libraries**: {{COMMA_SEPARATED_LIST}}
+- **Verification**: {{tests, lint, manual checklist, or other quality gates}}
 
 ## Current Implementation Status
 
@@ -69,14 +70,14 @@ Templates for files generated during Phase 3 (Document). Replace `{{PLACEHOLDERS
 - {{style rule 1}}
 - {{style rule 2}}
 
-## Entry Commands
+## Entry / Workflow Commands
 
 \`\`\`bash
 {{primary run command}}
 {{secondary run command}}
 \`\`\`
 
-## Development Commands
+## Workflow Commands (optional)
 
 - Add dependency: `{{add dep command}}`
 - Lint: `{{lint command}}`
@@ -116,6 +117,8 @@ Full design: `{{DESIGN_DOC_FILENAME}}`
 
 That's it. Claude Code's `@path` import expands AGENTS.md inline at session start. Add Claude Code-specific instructions below only if there are rules that apply exclusively to Claude Code and not other agents.
 
+Do not move canonical project facts into `CLAUDE.md`; keep them in `AGENTS.md`.
+
 ---
 
 ## README.md
@@ -136,14 +139,13 @@ That's it. Claude Code's `@path` import expands AGENTS.md inline at session star
 git clone {{REPO_URL}}
 cd {{PROJECT_DIR}}
 
-# Install dependencies
+# Install or prepare project tools (if applicable)
 {{INSTALL_COMMAND}}
 
-# Configure
-cp .env.example .env
-# Edit .env with your API keys
+# Configure (if applicable)
+{{CONFIG_COMMANDS}}
 
-# Run
+# Run or perform the main workflow
 {{RUN_COMMAND}}
 \`\`\`
 
@@ -151,16 +153,15 @@ cp .env.example .env
 
 \`\`\`
 {{PROJECT_DIR}}/
-├── {{src_layout}}
-├── tests/
-├── docs/
+├── {{primary_dirs}}
+├── docs/                # if applicable
 │   └── decisions/
-├── scripts/
+├── scripts/             # if applicable
 ├── AGENTS.md
 ├── CLAUDE.md
-├── README.md
 ├── FUTURE_ROADMAP.md
-├── {{DEPENDENCY_FILE}}
+├── README.md
+├── {{DEPENDENCY_FILE_OR_PRIMARY_PROJECT_FILE}}
 └── .gitignore
 \`\`\`
 
@@ -176,6 +177,8 @@ cp .env.example .env
 ## Roadmap
 
 See [FUTURE_ROADMAP.md](FUTURE_ROADMAP.md) for current and next tasks.
+
+If the repo also keeps a long-lived backlog file such as `TASKS.md`, use that for backlog/history and keep `FUTURE_ROADMAP.md` focused on active multi-agent work.
 
 ## License
 
@@ -208,9 +211,9 @@ Read `AGENTS.md` at project root for full context before making any changes.
 
 ## Architecture
 
-- Project root detected by locating `{{DEPENDENCY_FILE}}`
-- Runtime dirs (data/, logs/) resolved from project root
-- Package manager: `{{PACKAGE_MANAGER}}`
+- Project root detected by locating `{{PROJECT_ROOT_MARKER}}`
+- Runtime dirs (data/, logs/) resolved from project root when such dirs exist
+- Package manager / toolchain: `{{PACKAGE_MANAGER_OR_TOOLCHAIN}}`
 
 ## Do NOT
 
@@ -246,9 +249,9 @@ Read `AGENTS.md` at project root for full context before making any changes.
 
 ## Architecture
 
-- Project root detected by locating `{{DEPENDENCY_FILE}}`
-- Runtime dirs (data/, logs/) resolved from project root
-- Package manager: `{{PACKAGE_MANAGER}}`
+- Project root detected by locating `{{PROJECT_ROOT_MARKER}}`
+- Runtime dirs (data/, logs/) resolved from project root when such dirs exist
+- Package manager / toolchain: `{{PACKAGE_MANAGER_OR_TOOLCHAIN}}`
 
 ## Do NOT
 
@@ -329,6 +332,7 @@ paths:
 
 > Short, high-signal index of current and next work.
 > Agents: read this first. Do not read archive unless needed.
+> If the repo also uses `TASKS.md`, keep backlog/history there.
 
 ## Now (In Progress)
 
@@ -345,8 +349,8 @@ paths:
 
 ## Done (recent)
 
-| ID | Item | Completed |
-|----|------|-----------|
+| ID | Item | Completed | Note |
+|----|------|-----------|------|
 
 ---
 
@@ -362,10 +366,34 @@ paths:
 # Design & Implementation Notes
 
 > Detailed implementation paths for roadmap items. When picking an item from FUTURE_ROADMAP.md, open the matching section here.
+> Each section should be usable as an agent assignment packet without additional verbal handoff.
 
 ## {{Milestone_1_Name}}
 
 ### {{Action_Node_ID}}: {{Title}}
+
+**Status**: Pending | In Progress | Done (recent)
+
+**Objective**: {{What this work is responsible for changing and why}}
+
+**Background / evidence**:
+- {{Evidence 1}}
+- {{Evidence 2}}
+
+**Read first**:
+- {{File path 1}}
+- {{File path 2}}
+
+**Editable scope**:
+- {{Allowed file or directory 1}}
+- {{Allowed file or directory 2}}
+
+**Out of scope**:
+- {{Nearby file or concern that should not be absorbed into this task}}
+
+**Done criteria**:
+- {{Completion check 1}}
+- {{Completion check 2}}
 
 **Approach**: {{How to implement this}}
 
@@ -373,8 +401,8 @@ paths:
 - {{Decision 1}}
 - {{Decision 2}}
 
-**Testing notes**:
-- {{What to test}}
+**Verification / closeout notes**:
+- {{What to test or how the issue was closed}}
 
 ---
 

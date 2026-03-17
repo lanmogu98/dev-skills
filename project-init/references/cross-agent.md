@@ -7,9 +7,9 @@ How different AI coding agents discover and consume project context files. Use t
 ## File Generation Matrix
 
 | Generated File | Claude Code | Cursor | Codex | Human |
-|---|---|---|---|---|
-| AGENTS.md | via `@` import in CLAUDE.md | direct read | direct read | — |
-| CLAUDE.md | auto-load at session start | — | — | — |
+| -------------- | ----------- | ------ | ----- | ----- |
+| AGENTS.md | via `@` import in CLAUDE.md | direct read (documented) | direct read | — |
+| CLAUDE.md | auto-load at session start | compatibility may exist, but do not rely on it as Cursor's project contract | — | — |
 | .cursor/rules/*.mdc | — | auto-inject by glob match | — | — |
 | .claude/rules/*.md | auto-inject by path match | — | — | — |
 | README.md | — | — | — | primary audience |
@@ -27,6 +27,10 @@ Claude Code auto-reads `CLAUDE.md` at session start. It does NOT auto-read `AGEN
 ```
 
 Place this as the sole content of `CLAUDE.md`. Claude Code's `@path` import syntax expands the referenced file inline at launch. The result: Claude Code sees the full AGENTS.md content automatically, while other agents read AGENTS.md directly.
+
+### Do not make `CLAUDE.md` the project SSOT
+
+Even if another tool can sometimes read `CLAUDE.md`, keep the canonical project facts in `AGENTS.md`. `CLAUDE.md` should stay a thin Claude-first bridge so Cursor, Codex, and humans all share one stable source of truth.
 
 ### When to add Claude Code-specific content
 
@@ -125,10 +129,12 @@ This ensures consistent methodology, environment awareness, and conventions acro
 
 ### Cursor
 
-1. Reads `AGENTS.md` when instructed by `.cursor/rules/project.mdc` (the project rule should include "Read AGENTS.md for full context"); AGENTS.md is NOT auto-injected into the system prompt
-2. Auto-injects `.cursor/rules/*.mdc` based on glob matches
+1. Uses root and nested `AGENTS.md` files as the documented project-level instruction contract
+2. Auto-injects `.cursor/rules/*.mdc` based on rule config
 3. Has user-level rules in Cursor Settings > Rules for AI (synced from `global-instructions.md` via `sync-cursor-rules.sh` or manual paste)
 4. Supports skills via `~/.claude/skills/` and `~/.cursor/skills/` directories
+5. Use `.cursor/rules/` only for extra scoped guidance or reusable prompts; do not require it just to surface `AGENTS.md`
+6. Treat any `CLAUDE.md` compatibility in Cursor as non-canonical for project design
 
 ### Codex
 
