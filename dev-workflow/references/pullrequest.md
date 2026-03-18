@@ -36,7 +36,7 @@ Key implementation decisions or tradeoffs.
 
 ### Closing GitHub Issues
 
-If the task has a linked GitHub issue (from roadmap's `GH` column):
+If the task has a linked GitHub issue:
 
 | Keyword | Effect |
 |---------|--------|

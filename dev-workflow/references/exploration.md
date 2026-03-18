@@ -4,8 +4,8 @@ Before implementing anything, complete these steps.
 
 ## Step 0: Set Task Status (if project uses task tracking)
 
-- If project has a roadmap file (e.g., `FUTURE_ROADMAP.md`), set task status to **In Progress**
-- If task has non-trivial design, check design docs (e.g., `docs/DESIGN_REMAINING_ISSUES.md`)
+- If project uses GitHub Issues, update the issue status/labels. If it uses `ISSUES.md`, set task status to **In Progress**
+- If task has non-trivial design, check the GitHub Issue body (design-note template), `docs/ISSUE_DETAILS.md`, or `.agents/projects/`
 
 ## Step 1: Read the Code First
 

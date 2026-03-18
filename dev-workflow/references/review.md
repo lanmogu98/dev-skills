@@ -32,7 +32,7 @@ Review items align with Priority Stack from Core Principles.
 - [ ] Code comments where logic is non-obvious
 
 ### 6. Task Tracking (if applicable)
-- [ ] Task/roadmap status updated (if project uses task tracking)
+- [ ] Task status updated — GitHub Issue closed or `ISSUES.md` marked Done (if applicable)
 - [ ] PR description links to task/issue
 
 ## Feedback Guidelines

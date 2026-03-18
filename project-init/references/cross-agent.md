@@ -13,7 +13,8 @@ How different AI coding agents discover and consume project context files. Use t
 | .cursor/rules/*.mdc | — | auto-inject by glob match | — | — |
 | .claude/rules/*.md | auto-inject by path match | — | — | — |
 | README.md | — | — | — | primary audience |
-| FUTURE_ROADMAP.md | reads on demand | reads on demand | reads on demand | primary audience |
+| ROADMAP.md | reads on demand | reads on demand | reads on demand | primary audience |
+| ISSUES.md (non-GitHub) | reads on demand | reads on demand | reads on demand | primary audience |
 | docs/decisions/*.md | reads on demand | reads on demand | reads on demand | primary audience |
 
 ---

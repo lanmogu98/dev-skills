@@ -40,8 +40,8 @@ cargo test              # Rust
 
 ## Step 4: UPDATE TASK STATUS (if applicable)
 
-- If project uses a roadmap/task file, set task status to **Done** or **Done (recent)**
-- Keep roadmap files short; archive completed items periodically
+- If project uses GitHub Issues, close the issue via PR (`Closes #N`). If it uses `ISSUES.md`, set task status to **Done**
+- Keep `ISSUES.md` short; remove completed items periodically
 
 ## Step 5: COMMIT
 

@@ -27,7 +27,7 @@ Security → Correctness → Data Integrity → Availability → Performance →
 
 ### Required Steps
 
-0. **Update task status**: If the project uses a roadmap (e.g., `FUTURE_ROADMAP.md`), mark the task as In Progress
+0. **Update task status**: If the project uses GitHub Issues, update the issue status/labels. If it uses `ISSUES.md`, mark the task as In Progress
 1. **Create branch**: `git checkout -b feature/<name>` or `fix/<name>`
 2. **Read relevant code** — Understand patterns, find insertion points
 3. **Check if already exists** — Search for similar implementations

@@ -83,7 +83,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: ${{ github.event.inputs.task || 'Read FUTURE_ROADMAP.md, pick the first Pending item, implement it, and create a PR.' }}
+          prompt: ${{ github.event.inputs.task || 'Read AGENTS.md for task entry, pick the first high-priority open issue, implement it, and create a PR.' }}
           claude_args: "--max-turns 20 --model claude-sonnet-4-6"
 ```
 
@@ -214,17 +214,16 @@ Provide actionable feedback with specific file and line references.
 ### `.github/prompts/implement-next.md`
 
 ```markdown
-Read FUTURE_ROADMAP.md and find the first item with status "Pending".
-Read AGENTS.md for project conventions and architecture.
-Read docs/DESIGN_REMAINING_ISSUES.md for the matching section if it exists.
+Read AGENTS.md for project conventions, architecture, and task entry.
+Find the first high-priority open issue (GitHub Issues or ISSUES.md).
+If the issue has detailed notes in .agents/projects/ or docs/ISSUE_DETAILS.md, read those too.
 
 Implement the item following these rules:
 1. Create a feature branch: `feat/<item-id>-<short-name>`
 2. Write tests first (see dev-workflow skill conventions)
 3. Implement the minimal code to pass tests
 4. Update AGENTS.md implementation status table
-5. Update FUTURE_ROADMAP.md status to "In Progress"
-6. Commit with conventional commit format
+5. Commit with conventional commit format
 
 Do NOT modify unrelated files. Do NOT skip tests.
 ```

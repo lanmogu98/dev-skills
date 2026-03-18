@@ -54,13 +54,13 @@ main (protected)
 
 | Role | Responsibilities | Worktree Needed? |
 |------|------------------|------------------|
-| Planning | Read code, define scope, update roadmap | Optional |
+| Planning | Read code, define scope, update issues | Optional |
 | Implementation | Write code, tests, docs | Yes |
 | Review | Check PR, request changes | No (read-only) |
 
 ### Avoiding Overlap
 
-- Planning agent sets task scope in `FUTURE_ROADMAP.md` **before** impl starts
+- Planning agent sets task scope in GitHub Issues or `ISSUES.md` **before** impl starts
 - Impl agents work on **disjoint files** when possible
 - Review agent waits for impl to **create PR** before reviewing
 

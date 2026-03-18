@@ -13,8 +13,13 @@ These templates apply to software, automation, docs, config, research, and simil
 - `.claude/rules/project.md`
 - [Module-specific rules](#cursorrulesmodulemdc-example-collectors)
 - [docs/decisions/000-template.md](#docsdecisions000-templatemd)
-- [FUTURE_ROADMAP.md](#future_roadmapmd)
-- [docs/DESIGN_REMAINING_ISSUES.md](#docsdesign_remaining_issuesmd)
+- [ROADMAP.md](#roadmapmd) — strategic direction (all projects)
+- [ISSUES.md](#issuesmd) — local issue tracker (non-GitHub projects)
+- [docs/ISSUE_DETAILS.md](#docsissue_detailsmd) — assignment packets (non-GitHub projects)
+- [.github/ISSUE_TEMPLATE/task.md](#githubissue_templatetaskmd) — GitHub issue templates
+- [.github/ISSUE_TEMPLATE/bug-report.md](#githubissue_templatebug-reportmd)
+- [.github/ISSUE_TEMPLATE/design-note.md](#githubissue_templatedesign-notemd)
+- [.agents/projects/README.md](#agentsprojectsreadmemd) — evolution logs directory
 - [.gitignore](#gitignore-universal-base)
 - [.env.example](#envexample)
 
@@ -90,6 +95,23 @@ Use conventional commits: `<type>: <subject>`
 
 Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 
+## Task Entry
+
+{{Choose one of the two blocks below based on project hosting. Delete the other.}}
+
+{{For GitHub-hosted projects:}}
+- **Direction**: See `ROADMAP.md` for milestones and project phases
+- **Current work**: `gh issue list --label p1` for high-priority items
+- **Pick a task**: `gh issue list --state open --assignee @me` or unassigned p1/p2 issues
+- **Deep context**: Check `.agents/projects/` for evolution logs on complex work
+- **File new issues**: Use the `file-issue` skill or `gh issue create`
+- **Recommended labels**: Priority — `p1` (this week), `p2` (this quarter), `p3` (later). Type — `bug`, `enhancement`, `docs`, `agent-generated`
+
+{{For non-GitHub projects:}}
+- **Direction**: See `ROADMAP.md` for milestones and project phases
+- **Current work**: See `ISSUES.md` for active items
+- **Detailed notes**: See `docs/ISSUE_DETAILS.md` for assignment packets (if exists)
+
 ## Security Constraints
 
 - Never commit: `.env`, `*.db`, API keys, tokens
@@ -159,7 +181,7 @@ cd {{PROJECT_DIR}}
 ├── scripts/             # if applicable
 ├── AGENTS.md
 ├── CLAUDE.md
-├── FUTURE_ROADMAP.md
+├── ROADMAP.md
 ├── README.md
 ├── {{DEPENDENCY_FILE_OR_PRIMARY_PROJECT_FILE}}
 └── .gitignore
@@ -176,9 +198,7 @@ cd {{PROJECT_DIR}}
 
 ## Roadmap
 
-See [FUTURE_ROADMAP.md](FUTURE_ROADMAP.md) for current and next tasks.
-
-If the repo also keeps a long-lived backlog file such as `TASKS.md`, use that for backlog/history and keep `FUTURE_ROADMAP.md` focused on active multi-agent work.
+See [ROADMAP.md](ROADMAP.md) for project direction and milestones.
 
 ## License
 
@@ -325,27 +345,62 @@ paths:
 
 ---
 
-## FUTURE_ROADMAP.md
+## ROADMAP.md
+
+> All projects get this file. It captures strategic direction, NOT individual tasks.
 
 ```markdown
 # Roadmap
 
-> Short, high-signal index of current and next work.
-> Agents: read this first. Do not read archive unless needed.
-> If the repo also uses `TASKS.md`, keep backlog/history there.
+> Strategic direction and milestones for {{PROJECT_NAME}}.
+> For current work items, see {{GitHub Issues | `ISSUES.md`}}.
 
-## Now (In Progress)
+## Vision
 
-| ID | Item | Status | Dependencies |
-|----|------|--------|-------------|
+{{What does "done" look like for this project? 1-2 sentences.}}
 
-## Next (Pending)
+## Current Phase: {{Phase Name}}
 
-| ID | Item | Status | Dependencies |
-|----|------|--------|-------------|
-| {{A1.1}} | {{first action node description}} | Pending | — |
-| {{A1.2}} | {{second action node}} | Pending | A1.1 |
-| {{A1.3}} | {{third action node}} | Pending | — |
+{{What the project is focused on right now. 2-3 sentences.}}
+
+### Milestones
+
+| Milestone | Target | Theme |
+|-----------|--------|-------|
+| {{M1}} | {{timeframe}} | {{what it achieves}} |
+| {{M2}} | {{timeframe}} | {{what it achieves}} |
+
+## Future Phases
+
+### {{Next Phase Name}}
+
+{{Brief description of what comes after the current phase.}}
+
+## Non-Goals (for now)
+
+- {{Thing that is explicitly deferred}}
+- {{Another non-goal}}
+```
+
+---
+
+## ISSUES.md
+
+> Non-GitHub projects only. Lightweight local issue tracker.
+
+```markdown
+# Issues
+
+> Active work items for {{PROJECT_NAME}}.
+> Agents: read `AGENTS.md` first, then this file.
+> For project direction, see `ROADMAP.md`.
+
+## Active
+
+| ID | Priority | Item | Status | Assigned |
+|----|----------|------|--------|----------|
+| {{T-001}} | p1 | {{description}} | Pending | — |
+| {{T-002}} | p2 | {{description}} | Pending | — |
 
 ## Done (recent)
 
@@ -354,27 +409,29 @@ paths:
 
 ---
 
-*Archive: `docs/roadmap/ROADMAP_ARCHIVE.md`*
-*Details: `docs/DESIGN_REMAINING_ISSUES.md`*
+Status flow: `Pending` → `In Progress` → `Done`
+Priority: `p1` (this week) · `p2` (this quarter) · `p3` (later)
+*Details for complex items: `docs/ISSUE_DETAILS.md`*
 ```
 
 ---
 
-## docs/DESIGN_REMAINING_ISSUES.md
+## docs/ISSUE_DETAILS.md
+
+> Non-GitHub projects only. Detailed assignment packets for complex tasks.
+> For GitHub projects, this content lives in the GitHub Issue body (using the design-note template).
 
 ```markdown
-# Design & Implementation Notes
+# Issue Details
 
-> Detailed implementation paths for roadmap items. When picking an item from FUTURE_ROADMAP.md, open the matching section here.
+> Detailed implementation notes for complex issues from `ISSUES.md`.
 > Each section should be usable as an agent assignment packet without additional verbal handoff.
 
-## {{Milestone_1_Name}}
+## {{Issue_ID}}: {{Title}}
 
-### {{Action_Node_ID}}: {{Title}}
+**Status**: Pending | In Progress | Done
 
-**Status**: Pending | In Progress | Done (recent)
-
-**Objective**: {{What this work is responsible for changing and why}}
+**Objective**: {{What this work changes and why}}
 
 **Background / evidence**:
 - {{Evidence 1}}
@@ -406,7 +463,140 @@ paths:
 
 ---
 
-*This file can be long. It is not the default agent entrypoint — agents should read FUTURE_ROADMAP.md first.*
+*This file can be long. Agents should read `ISSUES.md` first for the overview.*
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/task.md
+
+> GitHub-hosted projects only. Standard task template.
+
+```markdown
+---
+name: Task
+about: Something that needs to be done (improvement, refactor, feature)
+title: ''
+labels: ''
+assignees: ''
+---
+
+- [ ] set a priority label (p1, p2, p3)
+- [ ] assign it to someone if applicable
+- [ ] delete this checklist
+
+## Description
+
+(Add enough context that anyone on the team — or an AI agent — could understand what needs to be done. Doesn't need to be long.)
+
+### Definition of Done
+
+(What does it mean for this task to be complete? Be as specific as possible.
+For example: running command X should produce output Y, or test Z passes.)
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/bug-report.md
+
+> GitHub-hosted projects only. Bug report template.
+
+```markdown
+---
+name: Bug Report
+about: Report a bug or regression
+title: ''
+labels: bug
+assignees: ''
+---
+
+**Describe the bug**
+
+(What is broken — concrete symptoms, error messages.)
+
+**To Reproduce**
+
+1. Step one
+2. Step two
+
+**Expected behavior**
+
+(What should happen instead.)
+
+**Additional context**
+
+(Root cause analysis if known, file:line references, environment details.)
+```
+
+---
+
+## .github/ISSUE_TEMPLATE/design-note.md
+
+> GitHub-hosted projects only. Assignment packet for complex work that needs detailed implementation context.
+
+```markdown
+---
+name: Design Note
+about: Complex work requiring detailed implementation context
+title: ''
+labels: ''
+assignees: ''
+---
+
+- [ ] set a priority label (p1, p2, p3)
+- [ ] delete this checklist
+
+## Objective
+
+(What this work changes and why — one paragraph.)
+
+## Background / Evidence
+
+- (Evidence or context 1)
+- (Evidence or context 2)
+
+## Scope
+
+**In scope:**
+- (File or area 1)
+- (File or area 2)
+
+**Out of scope:**
+- (Explicitly excluded concern)
+
+## Approach
+
+(Implementation strategy — can be brief or detailed.)
+
+## Definition of Done
+
+- [ ] (Completion criterion 1)
+- [ ] (Completion criterion 2)
+```
+
+---
+
+## .agents/projects/README.md
+
+> Tracked in git. Created at init, content grows organically during dev-workflow.
+
+```markdown
+# Evolution Logs
+
+This directory contains narrative logs for complex, multi-step work that spans
+multiple issues or sessions — architecture evolution, large refactors, research
+experiments, etc.
+
+Each file tracks ONE topic over time. Create a new file when starting a
+significant multi-issue effort. Format:
+
+\`\`\`
+{topic}.md — e.g., auth-migration.md, perf-optimization.md
+\`\`\`
+
+These are NOT issue bodies — they are living documents that accumulate context,
+decisions, benchmarks, and status over time. Reference related GitHub Issues
+or ISSUES.md entries by ID.
 ```
 
 ---

@@ -31,9 +31,12 @@ This skill covers **project initialization** (one-time) and **ongoing project he
    - Is there a design doc or spec to follow?
    - Which agents will be used (Cursor / Claude Code / Codex)?
    - Will there be cloud-triggered tasks (GitHub Actions)?
-4. If no design doc exists, help the user articulate scope before proceeding
+4. **Determine project hosting**: Is this project on GitHub? Check `git remote -v` for a `github.com` URL, or ask the user. This determines the issue tracking strategy:
+   - **GitHub-hosted** → GitHub Issues as SSOT for task tracking
+   - **Non-GitHub** (local, GitLab, Bitbucket, etc.) → local `ISSUES.md` for task tracking
+5. If no design doc exists, help the user articulate scope before proceeding
 
-**Decision gate**: Do not proceed to Phase 1 until the project's purpose, tech stack, and rough module list are clear.
+**Decision gate**: Do not proceed to Phase 1 until the project's purpose, tech stack, hosting model, and rough module list are clear.
 
 ## Phase 1: Plan
 
@@ -46,7 +49,10 @@ This skill covers **project initialization** (one-time) and **ongoing project he
    - **Dependencies**: which nodes must complete first
    - **Acceptance criteria**: how to verify completion
 3. Create a dependency graph (use mermaid if the agent supports it)
-4. Present the plan to the user for review before proceeding
+4. **Determine issue destination** based on hosting (from Phase 0):
+   - **GitHub-hosted**: action nodes will become GitHub Issues via `gh issue create` in Phase 5
+   - **Non-GitHub**: action nodes will populate `ISSUES.md` in Phase 5
+5. Present the plan to the user for review before proceeding
 
 **Decision gate**: User approves the plan or requests changes.
 
@@ -94,6 +100,10 @@ The single source of truth for all AI agents. Must contain:
 - Directory responsibilities
 - Code style rules
 - Entry point commands
+- **Task entry** — how to find current work (see template in `references/templates.md`):
+  - GitHub-hosted: point to `gh issue list` commands
+  - Non-GitHub: point to `ISSUES.md`
+  - All projects: reference `ROADMAP.md` for strategic direction
 - Security constraints
 - Open questions / decisions pending
 
@@ -126,20 +136,34 @@ See `references/cross-agent.md` for syntax differences between the two systems.
 - Quick start (clone, install deps, run)
 - Directory structure
 - Development commands
-- Roadmap / action nodes summary
+- Roadmap summary (link to `ROADMAP.md`)
 
 ### 3e. ADR system
 
 - `docs/decisions/000-template.md` with Context / Decision / Consequences structure
 - First ADR documenting the tech stack / toolchain choice
 
-### 3f. Task management
+### 3f. Project direction and task management
 
-If the project uses roadmap-centric or hybrid task management:
+Generate based on project hosting (determined in Phase 0). GitHub Issues provides labels, assignees, cross-references, and PR auto-close — so GitHub-hosted projects should use it as the single source of truth for work items. Non-GitHub projects need a local equivalent that agents can read and update without external tooling.
 
-- `FUTURE_ROADMAP.md` — short Now/Next task hub or active issue queue
-- `docs/DESIGN_REMAINING_ISSUES.md` — detailed implementation notes, issue packets, or closeout notes
-- If the repo already has a long-lived backlog file such as `TASKS.md`, keep it for backlog/history and use `FUTURE_ROADMAP.md` for current multi-agent work
+**All projects:**
+
+- `ROADMAP.md` — strategic direction, milestones, vision. This is NOT an issue list — it answers "where is this project going?" and changes infrequently. See template in `references/templates.md`.
+
+**GitHub-hosted projects:**
+
+- `.github/ISSUE_TEMPLATE/task.md` — standard task template (description + Definition of Done)
+- `.github/ISSUE_TEMPLATE/bug-report.md` — bug report template (symptoms + repro steps + expected behavior)
+- `.github/ISSUE_TEMPLATE/design-note.md` — assignment packet template for complex work (objective, scope, approach, done criteria)
+- `.agents/projects/` — directory for evolution logs on complex multi-step work (create with README, content grows organically during dev-workflow). Tracked in git.
+- Add recommended labels to AGENTS.md: `p1`/`p2`/`p3` (priority) + `bug`/`enhancement`/`docs`/`agent-generated` (type)
+- Do NOT generate local issue files — GitHub Issues is the SSOT
+
+**Non-GitHub projects:**
+
+- `ISSUES.md` — lightweight local issue tracker (active items + recent done). See template in `references/templates.md`.
+- `docs/ISSUE_DETAILS.md` (optional) — detailed assignment packets for complex tasks. Generate only if the project has work that needs rich implementation notes beyond what fits in `ISSUES.md`.
 
 ### 3g. GitHub Actions (if cloud dispatch requested)
 
@@ -166,7 +190,7 @@ Read `references/review-checklists.md` for the full framework. Execute up to 3 r
 
 Two perspectives:
 
-**Collaboration quality**: Are docs sufficient for a cold-start agent to understand and contribute? Is AGENTS.md complete enough for Codex to pick up a task from FUTURE_ROADMAP.md?
+**Collaboration quality**: Are docs sufficient for a cold-start agent to understand and contribute? Is AGENTS.md complete enough for Codex to pick up a task from GitHub Issues (or `ISSUES.md`)?
 
 **Functional correctness**: Does the scaffold match the design doc? Are all modules represented? Are constraints captured in rules files?
 
@@ -185,7 +209,9 @@ Two perspectives:
 0. **Verify review clean**: Confirm Phase 4 review completed with no remaining high/medium issues. If issues remain, resolve them before handoff.
 1. **Initial commit**: Stage all files, commit with `chore: init project scaffold`
 2. **Status table**: Ensure AGENTS.md has a current implementation status table with all modules listed
-3. **Next actions**: First 1-3 action nodes from Phase 1 are listed in FUTURE_ROADMAP.md as Pending
+3. **Seed initial work items** from Phase 1 action nodes:
+   - **GitHub-hosted**: file first 1-3 action nodes as GitHub Issues via `gh issue create`, using the appropriate issue template. Add priority labels.
+   - **Non-GitHub**: list first 1-3 action nodes in `ISSUES.md` as Pending
 4. **Announce**: Summarize what was created, what the next development step is, and which skill (`dev-workflow`) takes over
 
 After handoff, the `dev-workflow` skill governs the development cycle (explore -> design -> implement -> commit -> PR).

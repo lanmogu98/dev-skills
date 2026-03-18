@@ -57,7 +57,7 @@ Assess whether the repository structure enables effective long-term collaboratio
 | CLAUDE.md bridge | Does CLAUDE.md exist and contain `@AGENTS.md`? | Medium |
 | Dual rules | Do `.cursor/rules/` and `.claude/rules/` exist with matching content? | Medium |
 | ADR system | Are architectural decisions captured in `docs/decisions/`? | Low |
-| Task hub | Does FUTURE_ROADMAP.md contain actionable next items? | Medium |
+| Task entry | Does AGENTS.md Task Entry section point to the correct issue source (GitHub Issues or ISSUES.md)? | Medium |
 | Redundancy | Is there content duplicated between AGENTS.md, README, and rules files? | Low |
 
 ### Dimension B: Functional Correctness & Architecture

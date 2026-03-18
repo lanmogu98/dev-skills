@@ -21,7 +21,7 @@ When a fix fails, resist the urge to add another patch. Each failed attempt usua
 
 Before any code changes:
 
-- [ ] **Note the GitHub issue** — If bug came from roadmap's `GH` column, note the issue number (e.g., `#123`)
+- [ ] **Note the GitHub issue** — If the bug has a linked GitHub issue, note the issue number (e.g., `#123`)
 - [ ] **Confirm the bug exists** — Run the failing scenario manually or via test
 - [ ] **Identify exact failure** — What happens vs what should happen?
 - [ ] **Check if already fixed** — Search recent commits, PRs, issues
@@ -134,7 +134,7 @@ Before committing a bug fix:
 [ ] GitHub issue noted for PR (if applicable)
 ```
 
-> **Tip:** If this bug has a GitHub issue (from roadmap's `GH` column), include `Closes #123` in your PR description to auto-close it on merge.
+> **Tip:** If this bug has a GitHub issue, include `Closes #123` in your PR description to auto-close it on merge.
 
 ---
 
