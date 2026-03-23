@@ -80,6 +80,10 @@ Read `references/templates.md` for `.gitignore` and `.env.example` templates. Ex
 4. **GitHub repo**: create with `gh repo create` if requested
 5. **Environment template (if needed)**: `.env.example` with key names only (no real values)
 6. **Entry point or workflow skeleton**: CLI, script, docs index, runbook, or equivalent artifact that anchors the project
+7. **Working memory directory**: Create `.memory/MEMORY.md` as the project-level memory index.
+   - **Projects you own**: track `.memory/` in git
+   - **Upstream/open-source projects**: add `.memory/` to `.gitignore`
+   - This directory serves as the cross-agent memory location (Claude Code, Cursor, Codex)
 
 ## Phase 3: Document
 

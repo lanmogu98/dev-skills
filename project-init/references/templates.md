@@ -22,6 +22,7 @@ These templates apply to software, automation, docs, config, research, and simil
 - [.agents/projects/README.md](#agentsprojectsreadmemd) — evolution logs directory
 - [.gitignore](#gitignore-universal-base)
 - [.env.example](#envexample)
+- [.memory/MEMORY.md](#memorymemorymd)
 
 ---
 
@@ -111,6 +112,12 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`
 - **Direction**: See `ROADMAP.md` for milestones and project phases
 - **Current work**: See `ISSUES.md` for active items
 - **Detailed notes**: See `docs/ISSUE_DETAILS.md` for assignment packets (if exists)
+
+## Working Memory
+
+- AI agents store project-level memory in `.memory/` (not the default `~/.claude/projects/` path)
+- `.memory/MEMORY.md` is the index; individual memories are separate files
+- This convention ensures cross-agent availability and survives project path changes
 
 ## Security Constraints
 
@@ -643,6 +650,9 @@ Thumbs.db
 
 # Cursor plans (local to developer)
 .cursor/plans/
+
+# Working memory (uncomment for upstream/open-source projects)
+# .memory/
 ```
 
 ---
@@ -659,4 +669,18 @@ Thumbs.db
 
 # Optional
 {{OPTIONAL_KEY}}=
+```
+
+---
+
+## .memory/MEMORY.md
+
+> Working memory index for AI agents. Created by project-init.
+
+```markdown
+# Memory
+
+> Cross-agent working memory for {{PROJECT_NAME}}.
+> Each memory is a separate file in this directory; this file is the index.
+> Keep this index concise — one line per memory file with a brief description.
 ```
