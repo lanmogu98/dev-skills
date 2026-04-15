@@ -33,6 +33,8 @@ Security → Correctness → Data Integrity → Availability → Performance →
 3. **Check if already exists** — Search for similar implementations
 4. **Verify docs ↔ code sync** — If drift found, fix docs first
 
+> **Scope discipline**: If exploration surfaces a bug or debt item outside the current task's scope, use the `file-issue` skill to capture it rather than expanding scope mid-task. Scope creep is the most common cause of failed reviews.
+
 ### Exploration Order
 
 | Step | What to Find |
@@ -326,9 +328,3 @@ Decision weight matrix, intervention templates, non-interactive fallback rules.
 **Bug Fix**: Exploration → Bug Fix → Pre-Commit → PR
 
 **Refactor**: Exploration → (verify test coverage) → Design → Implementation → Pre-Commit → PR
-
-### Task Status (if project uses tracking)
-
-`Pending` → `In Progress` → `In Review` → `Done`
-
-Roadmap format: `| ID | Priority | Item | Status | GH |`
