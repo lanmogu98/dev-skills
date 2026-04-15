@@ -2,21 +2,24 @@
   "skill_name": "dev-workflow",
   "evals": [
     {
-      "id": "implement-feature-request",
+      "id": 0,
+      "name": "implement-feature-request",
       "prompt": "I want to add a /health endpoint to our FastAPI service that returns 200 OK with `{\"status\": \"ok\"}`. The service is in src/api/main.py. We use pytest. Can you implement this end-to-end with tests first?",
       "expected_output": "Agent follows dev-workflow: explores existing routes, writes a failing pytest test that hits /health, adds the route, confirms test passes, produces a tidy commit-ready diff with no scope creep. Should_trigger: true.",
       "files": [],
       "assertions": []
     },
     {
-      "id": "start-new-project",
+      "id": 1,
+      "name": "start-new-project",
       "prompt": "I'm starting a brand-new Python CLI tool from scratch. Empty directory. I want it set up for use with Claude Code and Cursor with AGENTS.md, a pyproject.toml using uv, and an ISSUES.md tracker. Where do I start?",
       "expected_output": "Agent recognizes this is project-init territory, NOT dev-workflow. dev-workflow should not trigger for empty-directory / scaffold-from-scratch requests. Should_trigger: false — project-init is the correct skill.",
       "files": [],
       "assertions": []
     },
     {
-      "id": "debug-failing-test",
+      "id": 2,
+      "name": "debug-failing-test",
       "prompt": "Our test_auth_token_refresh test started failing on CI this morning after someone merged a refactor to the JWT module. It passes locally for me but fails on CI with a cryptic 'invalid signature' error. Can you help me figure out what's going on and fix it?",
       "expected_output": "Agent follows dev-workflow Phase 2-B (Bug Fix): reproduces the failure, identifies root cause via the commit history, writes a regression test, fixes minimally, verifies. Should_trigger: true.",
       "files": [],

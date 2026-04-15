@@ -2,21 +2,24 @@
   "skill_name": "file-issue",
   "evals": [
     {
-      "id": "capture-discovered-bug",
+      "id": 0,
+      "name": "capture-discovered-bug",
       "prompt": "While reviewing payments/refund.py I noticed it calls the Stripe API inside a database transaction — if the API call hangs, we hold the row lock for the whole timeout window. We shouldn't fix it right now (it's not blocking anything), but please track this as an issue so we don't forget. This is a GitHub-hosted project.",
       "expected_output": "Agent files via `gh issue create` with a scoped imperative title, bug-report template, labels including `agent-generated` and `bug`, body referencing payments/refund.py with the root cause explained. Does not expand scope or attempt a fix. Should_trigger: true.",
       "files": [],
       "assertions": []
     },
     {
-      "id": "fix-a-bug-in-place",
+      "id": 1,
+      "name": "fix-a-bug-in-place",
       "prompt": "The login form is rejecting valid emails that contain a + character (like jane+test@example.com). Can you find and fix this?",
       "expected_output": "Agent treats this as a bug FIX request, not an issue-filing request. dev-workflow is the correct skill. file-issue should not trigger — the user wants the bug fixed, not tracked. Should_trigger: false.",
       "files": [],
       "assertions": []
     },
     {
-      "id": "log-technical-debt-item",
+      "id": 2,
+      "name": "log-technical-debt-item",
       "prompt": "We should track that the legacy sync job in jobs/legacy_sync.py is going to need a rewrite next quarter — it's still using the old v1 API client which gets deprecated in Q3. Log it as a design-note in our local ISSUES.md (we don't use GitHub here).",
       "expected_output": "Agent reads ISSUES.md footer to determine prefix strategy, generates next ID, appends a design-note row to the Active table, optionally seeds a section in docs/ISSUE_DETAILS.md for the deprecation context. No code changes attempted. Should_trigger: true.",
       "files": ["ISSUES.md"],
