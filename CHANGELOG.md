@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-04-15
+
+Recalibrated against anthropics/skills@main skill-creator (PRs #547 + #350 merged). Targets remaining gaps from the v2.2.0 alignment pass plus new skill-creator guidance: "look for repeated work → bundle scripts", descriptive eval names, caution against subjective assertions.
+
+### Added
+- **dev-workflow** + **project-init** + **file-issue**: prior-session CFG-003 completion — three-skill prefix-strategy coordination (project-init Phase 1 prefix choice + priority scale confirm, Phase 5 seeding with chosen prefix; exploration.md "Discovering New Issues" subsection; templates.md prefix variable rendering rules)
+- **dev-workflow**: cross-skill handoff note after Phase 1 Step 4 — when exploration surfaces out-of-scope bugs/debt, use `file-issue` rather than expanding scope
+- **file-issue**: cross-skill return-to-work note after Step 7 — when filed mid-`dev-workflow` session, return to the interrupted phase instead of starting a new workflow
+- **project-init**: "why" reasoning added to Phase 1 intro (decomposition granularity), Phase 2 Step 0 (existing-state check), Phase 3 §3a (AGENTS.md SSOT rationale), Phase 5 Step 3 (issue seeding as cold-start solution)
+- **file-issue**: complete input-to-output example covering both GitHub (`gh issue create` with labels/body) and non-GitHub (`ISSUES.md` row append) destinations
+- **file-issue**: bundled helper script `scripts/append_local_issue.py` — handles deterministic non-GitHub mechanics (parse prefix declaration, scan for max existing ID, append formatted row) previously re-derived inline on every invocation. Multi-prefix *selection* remains LLM judgment per the plan's scope boundary. Runnable with `--dry-run`; exits non-zero with clear messages for undeclared prefixes or missing Active tables.
+- **dev-workflow** / **project-init** / **file-issue**: bootstrap `evals/evals.json` with 3 descriptive test prompts each (9 total) — descriptive kebab-case IDs per latest skill-creator guidance (line 188), assertions left empty pending first eval run to avoid subjective-check bloat (line 203).
+
+### Changed
+- **dev-workflow**: remove Task Status subsection from Quick Reference — redundant with Phase 4 precommit content
+- **repo**: update AGENTS.md "What We Override" table — evals bootstrapped; description optimization now ready to run on demand (PR #547 removed `ANTHROPIC_API_KEY` requirement)
+
+### Not Adopted
+- `compatibility` frontmatter field (PR #350): evaluated per latest skill-creator guidance (line 68). All three skills depend on ambient dev-environment tooling (git, gh) — field is documented as "optional, rarely needed" and doesn't warrant adoption.
+
 ## [2.2.0] - 2026-03-07
 
 ### Changed
