@@ -52,9 +52,9 @@ Our distribution model differs from skill-creator's assumptions:
 
 | skill-creator says | We do instead | Why |
 |---|---|---|
-| Eval-driven iteration with subagents + benchmark viewer | Test by using in a real project, then iterate | No formal eval infra; skills are validated through real usage |
+| Eval-driven iteration with subagents + benchmark viewer | Bootstrap `evals/evals.json` with 3 descriptive test prompts per skill (id + prompt + expected_output only; assertions empty until first iteration). Run real-project validation in parallel. | Gives `run_loop.py` something to consume when we're ready, without the overhead of full assertion authoring upfront. |
 | `scripts/package_skill.py` to distribute `.skill` files | Symlink chain (no packaging) | Zero-sync-friction distribution |
-| Description optimization via `scripts/run_loop.py` | Available but not yet adopted | Will adopt if undertriggering issues observed |
+| Description optimization via `scripts/run_loop.py` | Infrastructure ready (evals bootstrapped); run on demand when undertriggering is observed. PR #547 removed the `ANTHROPIC_API_KEY` requirement so this is now simpler. | Avoid noise from premature optimization; trigger reactively on observed miss patterns. |
 
 ## Development Rules
 

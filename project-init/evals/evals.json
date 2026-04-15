@@ -1,0 +1,26 @@
+{
+  "skill_name": "project-init",
+  "evals": [
+    {
+      "id": "bootstrap-new-repo-for-ai",
+      "prompt": "I just made a new empty directory ~/Projects/log-analyzer and want to set it up as a Python project that I'll work on with both Claude Code and Cursor. I want AGENTS.md, CLAUDE.md, rules files for both tools, and a local ISSUES.md tracker (it's a personal project, not going on GitHub). Walk me through it.",
+      "expected_output": "Agent runs full project-init protocol: Phase 0 ingest, Phase 1 plan with prefix strategy choice, Phase 2 scaffold with uv-based pyproject.toml, Phase 3 generates AGENTS.md + CLAUDE.md + both rules-file sets + ISSUES.md, Phase 4 review, Phase 5 handoff to dev-workflow with 1-3 seeded issues. Should_trigger: true.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": "add-endpoint-to-existing-service",
+      "prompt": "In our existing Flask app (already has AGENTS.md, tests, CI — all set up) I want to add a new /users/{id}/preferences endpoint. How do we do this?",
+      "expected_output": "Agent recognizes the project is already initialized — this is ongoing development, NOT scaffolding. project-init should not trigger; dev-workflow is correct. Should_trigger: false.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": "scaffold-from-design-doc",
+      "prompt": "I have a 3-page design doc in docs/design.md for a data pipeline that ingests CSV files from S3, validates them, and loads into Postgres. The directory is otherwise empty. Can you bootstrap a project around this design — I want it to be AI-collaborative from day 1.",
+      "expected_output": "Agent runs project-init starting from Phase 0 ingest of design.md, decomposes into action nodes in Phase 1, scaffolds Python+uv project structure in Phase 2, generates full documentation hierarchy in Phase 3 referencing the design doc. Should_trigger: true.",
+      "files": ["docs/design.md"],
+      "assertions": []
+    }
+  ]
+}
