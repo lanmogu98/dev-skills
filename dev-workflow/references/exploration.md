@@ -40,6 +40,13 @@ If drift is found, sync docs to match code before proceeding. Stale docs mislead
 - Cross-reference task definition with code reading findings
 - Follow defined scope; avoid speculative edits
 
+### Discovering New Issues
+
+If you identify a bug, missing feature, or technical debt during exploration that is outside the current task's scope:
+
+- Use the **file-issue** skill to capture it immediately rather than losing the context
+- Do not expand the current task's scope — file it as a separate tracked issue and continue
+
 ## Step 4: Branch Strategy
 
 - Main stays green; create feature branches: `feature/<name>` or `fix/<name>`

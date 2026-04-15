@@ -406,8 +406,8 @@ paths:
 
 | ID | Priority | Item | Status | Assigned |
 |----|----------|------|--------|----------|
-| {{T-001}} | p1 | {{description}} | Pending | — |
-| {{T-002}} | p2 | {{description}} | Pending | — |
+| {{PREFIX}}-001 | p1 | {{description}} | Pending | — |
+| {{PREFIX}}-002 | p2 | {{description}} | Pending | — |
 
 ## Done (recent)
 
@@ -417,9 +417,20 @@ paths:
 ---
 
 Status flow: `Pending` → `In Progress` → `Done`
-Priority: `p1` (this week) · `p2` (this quarter) · `p3` (later)
+{{PREFIX_DECLARATION}}
+{{PRIORITY_SCALE}}
 *Details for complex items: `docs/ISSUE_DETAILS.md`*
 ```
+
+**Template variable rendering rules** (used by Phase 5 when populating the footer):
+
+| Variable | Single prefix (default) | Multiple prefixes |
+|----------|------------------------|-------------------|
+| `{{PREFIX}}` | The chosen prefix, e.g., `T` | Use the first prefix for sample rows; Phase 5 assigns each seeded issue its own prefix |
+| `{{PREFIX_DECLARATION}}` | `Prefix: \`T\`` | `Prefixes: \`SEC\` (security) · \`CFG\` (config) · \`AGENT\` (agent infra)` |
+| `{{PRIORITY_SCALE}}` | `Priority: \`p1\` (this week) · \`p2\` (this quarter) · \`p3\` (later)` — or the user's custom scale | Same |
+
+The `Prefix:` (singular) vs `Prefixes:` (plural) keyword signals the mode to downstream consumers (e.g., `file-issue` skill). Parenthetical descriptions after each prefix are optional but recommended for multi-prefix projects.
 
 ---
 
