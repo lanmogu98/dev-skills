@@ -42,6 +42,8 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 
 > Decompose the project into actionable nodes.
 
+**Why decomposition matters here**: The point isn't to produce a Gantt chart — it's to give a cold-start agent (human or AI) enough context to pick up *any* single node and make forward progress without re-reading the entire design doc. Nodes that are too coarse ("build the backend") force every future agent to re-derive the substructure. Nodes that are too fine become noise. Aim for the level where acceptance criteria are obvious from the node description alone.
+
 1. Extract milestones from the design doc or requirements
 2. For each milestone, define action nodes:
    - **ID**: short identifier (e.g., `A1.1`)
@@ -52,7 +54,12 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 4. **Determine issue destination** based on hosting (from Phase 0):
    - **GitHub-hosted**: action nodes will become GitHub Issues via `gh issue create` in Phase 5
    - **Non-GitHub**: action nodes will populate `ISSUES.md` in Phase 5
-5. Present the plan to the user for review before proceeding
+5. **Choose issue prefix strategy** (non-GitHub projects only):
+   - **Single prefix** (default): one prefix for all issues (e.g., `T`). Good for most projects.
+   - **Multiple prefixes**: category-based prefixes (e.g., `SEC`, `CFG`, `AGENT`). Use when the project has distinct workstreams that benefit from visual grouping.
+   - Ask the user which strategy to use. Record the choice for Phase 5 seeding.
+6. **Confirm priority scale** (non-GitHub projects only) — present the default (`p1` this week / `p2` this quarter / `p3` later) and ask if the user wants to customize the time horizons.
+7. Present the plan to the user for review before proceeding
 
 **Decision gate**: User approves the plan or requests changes.
 
@@ -63,6 +70,8 @@ This skill covers **project initialization** (one-time) and **ongoing project he
 Read `references/templates.md` for `.gitignore` and `.env.example` templates. Execute these steps in order:
 
 0. **Check existing state**: If the directory already has files, assess what exists before scaffolding. Preserve user work — don't overwrite existing files without asking. If a design doc exists but no scaffold, proceed normally. If a partial scaffold exists, identify gaps and fill them.
+
+   *Why this step comes first*: The most common failure mode for init skills is silently clobbering a user's in-progress work (a half-written README, a custom `.gitignore`, an existing `AGENTS.md`). Even a partial scaffold often encodes decisions the user has already committed to. Asking first is always cheaper than restoring from git reflog.
 1. **Directory structure** based on project type and ecosystem conventions:
    - Python app/lib: `src/{package}/` layout with `pyproject.toml`
    - Node app/lib: `src/` with `package.json`
@@ -94,6 +103,8 @@ Read `references/templates.md` for full templates. Read `references/cross-agent.
 Generate these files:
 
 ### 3a. AGENTS.md (universal AI context)
+
+**Why AGENTS.md is the SSOT**: Cursor, Claude Code, and Codex each have their own native context-loading mechanism (`.cursorrules`, `CLAUDE.md`, `AGENTS.md`), but duplicating project facts across three files guarantees drift. Instead, keep all durable facts in `AGENTS.md` and have each tool's native file *import* from it. CLAUDE.md uses `@AGENTS.md`; Cursor reads `AGENTS.md` natively; Codex reads `AGENTS.md` natively. One write, three readers.
 
 The single source of truth for all AI agents. Must contain:
 
@@ -215,7 +226,9 @@ Two perspectives:
 2. **Status table**: Ensure AGENTS.md has a current implementation status table with all modules listed
 3. **Seed initial work items** from Phase 1 action nodes:
    - **GitHub-hosted**: file first 1-3 action nodes as GitHub Issues via `gh issue create`, using the appropriate issue template. Add priority labels.
-   - **Non-GitHub**: list first 1-3 action nodes in `ISSUES.md` as Pending
+   - **Non-GitHub**: list first 1-3 action nodes in `ISSUES.md` as Pending, using the prefix strategy chosen in Phase 1. Populate the footer's prefix declaration and priority scale from the user's choices. For multi-prefix projects, assign each seeded issue to the prefix matching its workstream category.
+
+   *Why seeding matters*: An empty tracker is the cold-start problem in miniature — the next agent (or the user themselves, a week later) opens an empty `ISSUES.md` and has to rediscover what work exists. Seeding 1-3 concrete items gives the next session an obvious entry point, and also serves as a worked example of the project's own issue format so future issues stay consistent.
 4. **Announce**: Summarize what was created, what the next development step is, and which skill (`dev-workflow`) takes over
 
 After handoff, the `dev-workflow` skill governs the development cycle (explore -> design -> implement -> commit -> PR).
