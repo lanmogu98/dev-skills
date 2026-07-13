@@ -27,6 +27,15 @@ dotfiles/agent-config/skills/ (install dir, gitignored by dotfiles)
 
 `domain-review` is not a standalone skill — it's a conditional extension inside `dev-workflow/references/domain-review.md`, activated by a project's `AGENTS.md`.
 
+## Task Entry
+
+Work is tracked as **GitHub Issues** — this repo is GitHub-hosted, so there is no local `ISSUES.md`.
+
+- **Current work**: `gh issue list --label p1` (high priority) · `gh issue list --state open` (all)
+- **Pick a task**: unassigned `p1`/`p2` issues, or `gh issue list --assignee @me`
+- **File new issues**: use the `file-issue` skill, or `gh issue create`
+- **Labels**: Priority — `p1` (this week) · `p2` (this quarter) · `p3` (later). Type — `bug` · `documentation` · `enhancement` · `agent-generated` (filed by an AI agent).
+
 ## Skill Format Conventions
 
 ### Normative Reference
