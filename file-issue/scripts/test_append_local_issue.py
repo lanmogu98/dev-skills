@@ -13,13 +13,26 @@ which is what the monotonic Next-ID footer watermark guarantees.
 """
 from __future__ import annotations
 
+import atexit
 import importlib.util
+import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 SCRIPT = Path(__file__).with_name("append_local_issue.py")
+
+# Temp dirs created during the run, swept on exit so the suite leaves nothing
+# behind under $TMPDIR (each test invokes the script as a subprocess against a
+# real file, so an in-scope `with TemporaryDirectory()` would delete it early).
+_TMPDIRS: list[Path] = []
+
+
+@atexit.register
+def _cleanup_tmpdirs() -> None:
+    for d in _TMPDIRS:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 # --- fixtures ---------------------------------------------------------------
@@ -75,6 +88,7 @@ def run_script(issues_path: Path, prefix: str, title: str = "x", priority: str =
 
 def write_tmp(content: str) -> Path:
     d = Path(tempfile.mkdtemp(prefix="issues_test_"))
+    _TMPDIRS.append(d)
     p = d / "ISSUES.md"
     p.write_text(content)
     return p

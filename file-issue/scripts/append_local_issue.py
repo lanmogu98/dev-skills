@@ -196,9 +196,10 @@ def main() -> int:
     counter_line = render_next_id_line(counters)
 
     if args.dry_run:
+        watermark_verb = "update" if counter_idx is not None else "add"
         print(f"would insert at line {insert_idx + 1}:")
         print(row, end="")
-        print(f"would update watermark: {counter_line}", end="")
+        print(f"would {watermark_verb} watermark: {counter_line}", end="")
         return 0
 
     # Apply the footer edit first: the watermark line always sits after the
