@@ -217,6 +217,11 @@ Closes #123  <!-- if applicable -->
 Responding to feedback, merge strategies, GitHub issue linking.
 </details>
 
+<details>
+<summary>→ Deep dive: references/merge-conflicts.md — read when a rebase onto main or a merge reports conflicts</summary>
+Resolving conflicts by intent (not blind ours/theirs), re-testing after resolution, and when repeated conflicts signal branch drift.
+</details>
+
 ---
 
 ## Code Review (for reviewers)

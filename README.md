@@ -35,6 +35,7 @@ Comprehensive engineering workflow for LLM agents and human developers.
 - `references/implementation.md` — Coding standards
 - `references/precommit.md` — Pre-commit checklist
 - `references/pullrequest.md` — PR creation guidelines
+- `references/merge-conflicts.md` — Resolving conflicts at rebase/merge time
 - `references/refactoring.md` — Refactoring-specific guidance
 - `references/review.md` — Code review checklist
 - `references/multi-agent.md` — Worktree isolation for parallel agents

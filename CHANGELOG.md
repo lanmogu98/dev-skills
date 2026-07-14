@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-07-14
+
+Close the gap flagged in issue #10: the `dev-workflow` description advertised a "merge conflicts" trigger with no content behind it.
+
+### Added
+- **dev-workflow**: `references/merge-conflicts.md` — merge-conflict resolution guidance. Covers where conflicts surface in this workflow (rebase-before-PR, parallel worktree landing, long-lived branches), resolving by intent (understand both sides, satisfy both purposes rather than blindly picking ours/theirs), re-running the full test suite after resolving (a clean compile can still be semantically broken), never committing conflict markers, and the repeated-conflict signal that a branch has drifted too far. Linked on demand from the Pull Request phase via a `<details>` pointer, so the "merge conflicts" description trigger now delivers real content.
+
 ## [2.3.1] - 2026-07-14
 
 ### Fixed
