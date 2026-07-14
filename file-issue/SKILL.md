@@ -114,12 +114,14 @@ Add template-appropriate labels (`bug` for bug reports, priority `p1`/`p2`/`p3` 
 
 **Non-GitHub:** Append a new row to the `## Active` table in `ISSUES.md`.
 
-The deterministic mechanics (parse footer prefix declaration → scan for max existing ID → format and insert row) are bundled as a helper script — don't re-derive them inline:
+The deterministic mechanics (parse footer prefix declaration → pick the next never-reused ID → format and insert row) are bundled as a helper script — don't re-derive them inline:
 
 ```bash
 python3 scripts/append_local_issue.py <path/to/ISSUES.md> \
   --prefix <CHOSEN> --title "<short imperative>" --priority p1|p2|p3
 ```
+
+**IDs are never reused.** The next ID is a monotonic high-water mark — the larger of a full-file scan (Active + Done) and the footer `Next-ID:` watermark — which the script advances and writes back on every append. This is what keeps a completed issue's ID retired after it moves to the Done table, and even after Done rows are later pruned. Don't hand-edit IDs to "reclaim" a gap; move completed rows to Done and leave `Next-ID` alone. (Legacy `ISSUES.md` files with no `Next-ID:` line are upgraded automatically on the next write.)
 
 What stays LLM judgment (the script won't do for you):
 

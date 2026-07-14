@@ -226,7 +226,7 @@ Two perspectives:
 2. **Status table**: Ensure AGENTS.md has a current implementation status table with all modules listed
 3. **Seed initial work items** from Phase 1 action nodes:
    - **GitHub-hosted**: file first 1-3 action nodes as GitHub Issues via `gh issue create`, using the appropriate issue template. Add priority labels.
-   - **Non-GitHub**: list first 1-3 action nodes in `ISSUES.md` as Pending, using the prefix strategy chosen in Phase 1. Populate the footer's prefix declaration and priority scale from the user's choices. For multi-prefix projects, assign each seeded issue to the prefix matching its workstream category.
+   - **Non-GitHub**: list first 1-3 action nodes in `ISSUES.md` as Pending, using the prefix strategy chosen in Phase 1. Populate the footer's prefix declaration, `Next-ID:` watermark (one past the highest seeded row per prefix — see `references/templates.md`), and priority scale from the user's choices. For multi-prefix projects, assign each seeded issue to the prefix matching its workstream category.
 
    *Why seeding matters*: An empty tracker is the cold-start problem in miniature — the next agent (or the user themselves, a week later) opens an empty `ISSUES.md` and has to rediscover what work exists. Seeding 1-3 concrete items gives the next session an obvious entry point, and also serves as a worked example of the project's own issue format so future issues stay consistent.
 4. **Announce**: Summarize what was created, what the next development step is, and which skill (`dev-workflow`) takes over

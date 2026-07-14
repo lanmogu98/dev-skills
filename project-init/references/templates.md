@@ -414,10 +414,16 @@ paths:
 | ID | Item | Completed | Note |
 |----|------|-----------|------|
 
+> Completing an issue: move its row here — never renumber or reuse the ID.
+> IDs are allocated once and never handed out again; the `Next-ID` watermark
+> below is the source of truth and only ever increases. Pruning old Done rows
+> to keep this file short is fine — leave `Next-ID` untouched when you do.
+
 ---
 
 Status flow: `Pending` → `In Progress` → `Done`
 {{PREFIX_DECLARATION}}
+{{NEXT_ID_DECLARATION}}
 {{PRIORITY_SCALE}}
 *Details for complex items: `docs/ISSUE_DETAILS.md`*
 ```
@@ -428,9 +434,12 @@ Status flow: `Pending` → `In Progress` → `Done`
 |----------|------------------------|-------------------|
 | `{{PREFIX}}` | The chosen prefix, e.g., `T` | Use the first prefix for sample rows; Phase 5 assigns each seeded issue its own prefix |
 | `{{PREFIX_DECLARATION}}` | `Prefix: \`T\`` | `Prefixes: \`SEC\` (security) · \`CFG\` (config) · \`AGENT\` (agent infra)` |
+| `{{NEXT_ID_DECLARATION}}` | `Next-ID: \`T-003\`` (one past the highest seeded row) | `Next-ID: \`SEC-002\` · \`CFG-001\` · \`AGENT-001\`` (one token per prefix, each one past its highest seed, or `-001` if it has none) |
 | `{{PRIORITY_SCALE}}` | `Priority: \`p1\` (this week) · \`p2\` (this quarter) · \`p3\` (later)` — or the user's custom scale | Same |
 
 The `Prefix:` (singular) vs `Prefixes:` (plural) keyword signals the mode to downstream consumers (e.g., `file-issue` skill). Parenthetical descriptions after each prefix are optional but recommended for multi-prefix projects.
+
+`Next-ID:` is the monotonic ID watermark that enforces the never-reuse contract. Seed it once here; thereafter the `file-issue` skill's `append_local_issue.py` reads it, allocates the next ID, and writes it back incremented — so IDs survive the Active → Done move and any later Done-table pruning. If the line is ever missing, the script falls back to a full-file scan and re-seeds it on the next write.
 
 ---
 

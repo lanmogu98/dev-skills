@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.1] - 2026-07-14
+
+### Fixed
+- **file-issue**: ID reuse in `append_local_issue.py` (#9). The next ID was computed from the max suffix in the **Active** table only; when a completed issue moved to the Done table, the Active max dropped and the freed ID was handed out again. Fix combines a full-file scan (Active + Done) with a persisted monotonic `Next-ID:` footer watermark, so IDs survive both the Active→Done move and later Done-table pruning. Legacy `ISSUES.md` files without the watermark are upgraded in place on the next write. Added `scripts/test_append_local_issue.py` — a standalone assert-based regression suite (no pytest) covering the Done-move, post-cleanup, multi-prefix, and `T`-fallback cases.
+
+### Changed
+- **project-init**: ISSUES.md template gains a `{{NEXT_ID_DECLARATION}}` footer field and an explicit "IDs are never reused" contract in the Active/Done/footer section; Phase 5 seeds the watermark. **file-issue** SKILL.md documents the never-reuse guarantee at the script-call site.
+
 ## [2.3.0] - 2026-04-15
 
 Recalibrated against anthropics/skills@main skill-creator (PRs #547 + #350 merged). Targets remaining gaps from the v2.2.0 alignment pass plus new skill-creator guidance: "look for repeated work → bundle scripts", descriptive eval names, caution against subjective assertions.
