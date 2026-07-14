@@ -3,8 +3,13 @@
 
 Handles the deterministic mechanics the file-issue skill would otherwise
 re-derive on every invocation: parsing the prefix declaration in the
-footer, scanning Active rows for the highest existing ID with a given
-prefix, and appending a correctly-formatted row.
+footer, choosing the next never-before-used ID for a given prefix, and
+appending a correctly-formatted row.
+
+The next ID is a monotonic high-water mark — the larger of a full-file
+scan (Active + Done) and a persisted ``Next-ID`` footer watermark — so a
+completed issue that moves to the Done table, or is later pruned from it,
+never has its ID handed out again (issue #9).
 
 Multi-prefix *selection* (choosing which prefix fits an issue's subject
 area) stays an LLM judgment call — pass the chosen prefix via --prefix.
@@ -33,6 +38,10 @@ PREFIX_MULTI_RE = re.compile(r"^Prefixes:\s*(.+)$", re.MULTILINE)
 PREFIX_TOKEN_RE = re.compile(r"`([A-Za-z][A-Za-z0-9_-]*)`")
 ACTIVE_HEADER_RE = re.compile(r"^##\s+Active\s*$", re.MULTILINE)
 ID_RE = re.compile(r"^\s*\|\s*([A-Za-z][A-Za-z0-9_-]*)-(\d+)\s*\|")
+NEXT_ID_LINE_RE = re.compile(r"^Next-ID:")
+NEXT_ID_TOKEN_RE = re.compile(r"`([A-Za-z][A-Za-z0-9_-]*)-(\d+)`")
+STATUS_FLOW_RE = re.compile(r"^Status flow:")
+PREFIX_DECL_LINE_RE = re.compile(r"^Prefix(?:es)?:")
 
 
 def parse_declared_prefixes(content: str) -> tuple[str, list[str]]:
@@ -80,14 +89,62 @@ def find_active_table_range(lines: list[str]) -> tuple[int, int]:
     return header_idx, insert_idx
 
 
-def max_id_for_prefix(lines: list[str], prefix: str, header_idx: int, end_idx: int) -> int:
-    """Return the max numeric suffix for `prefix` in the Active table, or 0."""
+def max_id_for_prefix(lines: list[str], prefix: str) -> int:
+    """Return the max numeric suffix for `prefix` across the ENTIRE file, or 0.
+
+    Scanning the whole file (Active *and* Done tables) — not just Active — is
+    what prevents ID reuse when a completed issue is moved to the Done table.
+    See issue #9.
+    """
     max_n = 0
-    for line in lines[header_idx:end_idx]:
+    for line in lines:
         m = ID_RE.match(line)
         if m and m.group(1) == prefix:
             max_n = max(max_n, int(m.group(2)))
     return max_n
+
+
+def parse_next_id_counters(lines: list[str]) -> tuple[int | None, dict[str, int]]:
+    """Parse the footer ``Next-ID`` watermark line.
+
+    Returns ``(line_idx, counters)`` where ``line_idx`` is the index of the
+    ``Next-ID`` line (or ``None`` if the file has none yet) and ``counters``
+    maps each prefix to its next-to-allocate number. Insertion order of the
+    tokens is preserved so a rewrite doesn't reshuffle existing entries.
+    """
+    for i, line in enumerate(lines):
+        if NEXT_ID_LINE_RE.match(line):
+            counters: dict[str, int] = {}
+            for pfx, num in NEXT_ID_TOKEN_RE.findall(line):
+                counters[pfx] = int(num)
+            return i, counters
+    return None, {}
+
+
+def render_next_id_line(counters: dict[str, int]) -> str:
+    """Render the footer watermark line from a prefix→next-number map."""
+    tokens = " · ".join(f"`{pfx}-{num:03d}`" for pfx, num in counters.items())
+    return f"Next-ID: {tokens}\n"
+
+
+def find_next_id_insert_index(lines: list[str]) -> int:
+    """Choose where to insert a ``Next-ID`` line in a file that lacks one.
+
+    Prefer just after the prefix declaration; else after the ``Status flow``
+    line; else end of file — keeping the watermark inside the footer block.
+    """
+    prefix_decl = None
+    status_flow = None
+    for i, line in enumerate(lines):
+        if PREFIX_DECL_LINE_RE.match(line):
+            prefix_decl = i
+        elif STATUS_FLOW_RE.match(line):
+            status_flow = i
+    if prefix_decl is not None:
+        return prefix_decl + 1
+    if status_flow is not None:
+        return status_flow + 1
+    return len(lines)
 
 
 def format_row(issue_id: str, priority: str, title: str, status: str, assigned: str) -> str:
@@ -125,19 +182,40 @@ def main() -> int:
 
     lines = content.splitlines(keepends=True)
     header_idx, insert_idx = find_active_table_range(lines)
-    next_n = max_id_for_prefix(lines, args.prefix, header_idx, insert_idx) + 1
+
+    # Next ID is a monotonic high-water mark: the larger of the footer
+    # watermark (survives Done-table cleanup) and a full-file scan (survives a
+    # missing or stale watermark). Neither alone is sufficient — see issue #9.
+    counter_idx, counters = parse_next_id_counters(lines)
+    next_n = max(counters.get(args.prefix, 0), max_id_for_prefix(lines, args.prefix) + 1)
     issue_id = f"{args.prefix}-{next_n:03d}"
     row = format_row(issue_id, args.priority, args.title, args.status, args.assigned)
 
-    new_lines = lines[:insert_idx] + [row] + lines[insert_idx:]
-    new_content = "".join(new_lines)
+    # Advance and persist the watermark for this prefix.
+    counters[args.prefix] = next_n + 1
+    counter_line = render_next_id_line(counters)
 
     if args.dry_run:
         print(f"would insert at line {insert_idx + 1}:")
         print(row, end="")
+        print(f"would update watermark: {counter_line}", end="")
         return 0
 
-    args.issues_md.write_text(new_content)
+    # Apply the footer edit first: the watermark line always sits after the
+    # Active table, so editing it in place leaves insert_idx valid. When the
+    # line is newly inserted at/above insert_idx, correct insert_idx for it.
+    if counter_idx is not None:
+        lines[counter_idx] = counter_line
+    else:
+        ins = find_next_id_insert_index(lines)
+        if ins > 0 and not lines[ins - 1].endswith("\n"):
+            lines[ins - 1] = lines[ins - 1] + "\n"
+        lines.insert(ins, counter_line)
+        if ins <= insert_idx:
+            insert_idx += 1
+
+    lines.insert(insert_idx, row)
+    args.issues_md.write_text("".join(lines))
     print(issue_id)
     return 0
 
