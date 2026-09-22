@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-09-22
+
+Restructured `dev-workflow` from a self-contained five-phase manual into a router plus the material no other installed skill covers. The superpowers plugin now owns TDD, systematic debugging, worktree isolation, completion verification, and branch finishing; the native `/code-review` and `/security-review` commands own review. Keeping duplicate copies of that guidance in SKILL.md spent context on every invocation and risked drifting from the owning skills.
+
+### Changed
+- **dev-workflow**: SKILL.md reduced from 335 to 137 lines. Added a Delegation Map naming, per concern, the owning skill or command and the local reference that serves as fallback. Merged the former Design, Bug Fix, and Implementation phases into one Phase 2 that routes out and keeps only the "what "done" must be defined as" table and the code standards. Collapsed the PR and Multi-Agent sections into Phase 4, which routes to `superpowers:finishing-a-development-branch` and retains the one-PR-one-concern, size, and self-review constraints. Removed the standalone Code Review and Quick Reference sections.
+- **dev-workflow**: Narrowed the description. It previously ended with "If the user is working on an existing codebase and making changes of any kind, this skill applies", which pulled documentation edits, research notes, and proof-only repos into a five-phase code workflow. The description now names the exclusions explicitly.
+- **dev-workflow**: Branch creation is no longer an unconditional Phase 1 step. SKILL.md and `references/exploration.md` now select by repo policy — feature-branch workflow, single-contributor on `main`, or commits gated behind owner approval — and defer to the project's `AGENTS.md`.
+- **dev-workflow**: Pre-commit checks became conditional on the repo actually having the artifact. `CHANGELOG.md` and `README.md` updates apply only where those files exist; `references/precommit.md` states that a project that never kept a changelog should not have one created mid-task.
+- **dev-workflow**: Added a fourth core principle, "Adapt to the repo", stating that skipping a step whose precondition is absent is correct and skipping one for convenience is not.
+
 ## [2.4.0] - 2026-07-14
 
 Close the gap flagged in issue #10: the `dev-workflow` description advertised a "merge conflicts" trigger with no content behind it.

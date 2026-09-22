@@ -21,7 +21,23 @@
       "id": 2,
       "name": "debug-failing-test",
       "prompt": "Our test_auth_token_refresh test started failing on CI this morning after someone merged a refactor to the JWT module. It passes locally for me but fails on CI with a cryptic 'invalid signature' error. Can you help me figure out what's going on and fix it?",
-      "expected_output": "Agent follows dev-workflow Phase 2-B (Bug Fix): reproduces the failure, identifies root cause via the commit history, writes a regression test, fixes minimally, verifies. Should_trigger: true.",
+      "expected_output": "Agent routes the bug to systematic debugging (superpowers:systematic-debugging where installed, otherwise references/bugfix.md): reproduces the failure, identifies root cause via the commit history, writes a regression test, fixes minimally, and confirms the full suite passes. Should_trigger: true.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "docs-only-edit-should-not-trigger",
+      "prompt": "I'm rewriting the architecture section of docs/design.md in my Lean formalization repo to match the new module layout. No Lean sources change. Can you help me restructure it?",
+      "expected_output": "Agent does NOT load dev-workflow. The deliverable is prose, not running code, so the five-phase code workflow does not apply: no branch cut by reflex, no test-first step, no CHANGELOG checklist. Agent edits the document directly. Should_trigger: false.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 4,
+      "name": "respect-repo-branch-policy",
+      "prompt": "Fix the off-by-one in src/pager.py:88. Note our AGENTS.md says this repo is single-contributor and commits go straight to main.",
+      "expected_output": "Agent follows the repo's stated branch policy and works on main rather than cutting feature/<name>. Agent also skips the CHANGELOG step if the repo has no CHANGELOG.md instead of creating one. Should_trigger: true.",
       "files": [],
       "assertions": []
     }

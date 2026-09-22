@@ -22,9 +22,11 @@ The two skills are complementary: `project-init` creates the scaffold (one-time)
 
 ## dev-workflow
 
-Comprehensive engineering workflow for LLM agents and human developers.
+Engineering workflow for LLM agents and human developers working on code.
 
-**Use when:** implementing features, fixing bugs, writing tests, refactoring, preparing commits, creating PRs, or reviewing code.
+**Use when:** implementing features, fixing bugs, refactoring, or preparing commits and PRs in a project whose deliverable is running code. Not for documentation-only edits, research notes, or repos whose artifact is a proof, dataset, or slide deck.
+
+**Delegation:** where a dedicated skill owns a phase — `superpowers:test-driven-development`, `superpowers:systematic-debugging`, `superpowers:using-git-worktrees`, `superpowers:finishing-a-development-branch`, `/code-review` — SKILL.md routes to it. The `references/` files stay as the portable fallback for agents without those plugins installed (Codex, Cursor). What this skill owns outright: doc-to-code drift checks, scope discipline via `file-issue`, conditional pre-commit doc sync, refactoring safety, merge-conflict resolution, and Domain Review.
 
 **Structure:**
 
