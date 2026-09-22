@@ -15,7 +15,7 @@ manage-skills.sh link-user
 
 | Skill | Description |
 |-------|-------------|
-| [dev-workflow](./dev-workflow/) | Engineering workflow for development tasks in existing codebases |
+| [dev-workflow](./dev-workflow/) | Engineering workflow for code changes in existing codebases |
 | [project-init](./project-init/) | Repository initialization protocol for AI-assisted development |
 
 The two skills are complementary: `project-init` creates the scaffold (one-time), then `dev-workflow` operates within it (ongoing).
@@ -26,7 +26,7 @@ Engineering workflow for LLM agents and human developers working on code.
 
 **Use when:** implementing features, fixing bugs, refactoring, or preparing commits and PRs in a project whose deliverable is running code. Not for documentation-only edits, research notes, or repos whose artifact is a proof, dataset, or slide deck.
 
-**Delegation:** where a dedicated skill owns a phase — `superpowers:test-driven-development`, `superpowers:systematic-debugging`, `superpowers:using-git-worktrees`, `superpowers:finishing-a-development-branch`, `/code-review` — SKILL.md routes to it. The `references/` files stay as the portable fallback for agents without those plugins installed (Codex, Cursor). What this skill owns outright: doc-to-code drift checks, scope discipline via `file-issue`, conditional pre-commit doc sync, refactoring safety, merge-conflict resolution, and Domain Review.
+**Delegation:** where a dedicated skill owns a phase — `superpowers:test-driven-development`, `superpowers:systematic-debugging`, `superpowers:using-git-worktrees`, `superpowers:verification-before-completion`, `superpowers:finishing-a-development-branch`, `superpowers:receiving-code-review`, `/code-review` — SKILL.md routes to it. The `references/` files stay as the portable fallback for agents without those plugins installed (Codex, Cursor). What this skill owns outright: doc-to-code drift checks, scope discipline via `file-issue`, conditional pre-commit doc sync, refactoring safety, merge-conflict resolution, and Domain Review.
 
 **Structure:**
 

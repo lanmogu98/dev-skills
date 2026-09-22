@@ -12,7 +12,7 @@ A conflict is two intents colliding on the same lines — not a syntax puzzle to
 | Parallel worktrees landing | Two agents touched overlapping files (see `multi-agent.md`) |
 | Long-lived branch | The longer a branch runs, the further main drifts from it |
 
-This repo rebases to keep history linear (`multi-agent.md`, `pullrequest.md`), so conflicts surface at *your* rebase, one commit at a time — resolve each, then `git rebase --continue`.
+Where the repo rebases to keep history linear (`multi-agent.md`, `pullrequest.md`), conflicts surface at *your* rebase, one commit at a time — resolve each, then `git rebase --continue`. A repo that merges instead surfaces them once, at the merge commit.
 
 ## Resolve for Meaning
 
@@ -27,7 +27,7 @@ This repo rebases to keep history linear (`multi-agent.md`, `pullrequest.md`), s
 
 ## Escalation Signal
 
-If the *same file* conflicts on rebase after rebase, the branch has drifted too far. Rebase more often (`exploration.md`: "rebase regularly onto main to avoid conflicts") or split the work into smaller PRs that land before they diverge.
+If the *same file* conflicts on rebase after rebase, the branch has drifted too far. Rebase more often (`exploration.md`, Step 4: on a feature-branch workflow, rebase onto main regularly) or split the work into smaller PRs that land before they diverge.
 
 ---
 

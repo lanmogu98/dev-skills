@@ -29,7 +29,7 @@
       "id": 3,
       "name": "docs-only-edit-should-not-trigger",
       "prompt": "I'm rewriting the architecture section of docs/design.md in my Lean formalization repo to match the new module layout. No Lean sources change. Can you help me restructure it?",
-      "expected_output": "Agent does NOT load dev-workflow. The deliverable is prose, not running code, so the five-phase code workflow does not apply: no branch cut by reflex, no test-first step, no CHANGELOG checklist. Agent edits the document directly. Should_trigger: false.",
+      "expected_output": "Agent does NOT load dev-workflow. The deliverable is prose, not running code, so the code workflow does not apply: no branch cut by reflex, no test-first step, no CHANGELOG checklist. Agent edits the document directly. Should_trigger: false.",
       "files": [],
       "assertions": []
     },

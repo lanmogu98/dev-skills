@@ -1,7 +1,7 @@
 ---
 name: dev-workflow
 description: |
-  Engineering workflow for changing code in an existing codebase: exploration, test design, implementation, pre-commit, and shipping. Use when implementing a feature, fixing a bug, refactoring, or preparing a commit or PR in a project whose deliverable is running code. Carries the parts no other skill covers: doc-to-code drift checks, scope discipline via file-issue, conditional pre-commit doc sync, and the Domain Review Protocol for projects with real-world consequences. Routes the standard phases to dedicated skills where those are installed, and falls back to its own references where they are not. Do not use for documentation-only edits, research notes, prose, or repos whose artifact is a proof, dataset, or slide deck rather than executable code.
+  Engineering workflow for changing code in an existing codebase: exploration, test design, implementation, pre-commit, and shipping. Use when implementing a feature, fixing a bug, writing or running tests, refactoring, preparing a commit or a PR, reviewing code, or resolving a merge or rebase conflict. Also trigger when the user mentions branch strategy, TDD, test-driven development, pre-commit checks, code review, merge conflicts, or debugging workflow. Carries the parts no other skill covers: doc-to-code drift checks, scope discipline via file-issue, conditional pre-commit doc sync, merge-conflict resolution, reviewer severity policy, and the Domain Review Protocol for projects with real-world consequences. Routes the standard phases to dedicated skills where those are installed, and falls back to its own references where they are not. Do not use for documentation-only edits, research notes, prose, or repos whose artifact is a proof, dataset, or slide deck rather than executable code.
 ---
 
 # Dev Workflow
@@ -11,7 +11,7 @@ Engineering standards for code changes, plus a routing table to the skills that 
 ## Core Principles
 
 1. **Code is truth** — Read code first. Docs drift; the running code is what ships.
-2. **Design before code** — Define "done" before writing it. For executable code that means tests; for other artifacts it means a stated acceptance check.
+2. **Design before code** — Define "done" before writing it. Where a test harness exists that means a failing test; where the code has none and adding one is out of scope, it means a written, checkable acceptance criterion.
 3. **Minimal blast radius** — Touch only necessary files. Every changed file is a potential regression.
 4. **Adapt to the repo** — The phases below describe a repo with tests, a CHANGELOG, and a feature-branch policy. Read what the repo actually has and skip steps whose preconditions are absent.
 
@@ -19,19 +19,21 @@ Priority stack: Security → Correctness → Data Integrity → Availability →
 
 ## Delegation Map
 
-Prefer the owning skill when it is installed. The fallback reference carries the same material in portable form for agents without the plugin (Codex, Cursor).
+Prefer the owning skill when it is installed. **When it is not installed, open the fallback reference in the third column and follow that instead** — those files exist so Codex and Cursor, which do not carry the superpowers plugin, still get the full phase. The Concern column tells you when to read each one.
 
 | Concern | Owning skill or command | Fallback reference |
 |---|---|---|
 | Test-first design | `superpowers:test-driven-development` | `references/design.md` |
 | Debugging a reported bug | `superpowers:systematic-debugging` | `references/bugfix.md` |
-| Isolated workspace for parallel work | `superpowers:using-git-worktrees`, native worktree tools | `references/multi-agent.md` |
-| Claiming work is done | `superpowers:verification-before-completion` | `references/precommit.md` |
+| Worktree setup for parallel work | `superpowers:using-git-worktrees`, native worktree tools | `references/multi-agent.md` |
+| Claiming work is done | `superpowers:verification-before-completion` | Phase 3 below |
 | Merge, push, or open a PR | `superpowers:finishing-a-development-branch` | `references/pullrequest.md` |
 | Reviewing a diff or PR | `/code-review`, `/security-review` | `references/review.md` |
-| Acting on review feedback | `superpowers:receiving-code-review` | `references/review.md` |
+| Acting on review feedback | `superpowers:receiving-code-review` | `references/pullrequest.md` |
 
-This skill owns what the table does not: exploration and doc-to-code sync, scope discipline, conditional pre-commit doc updates, refactoring safety, merge-conflict resolution, and Domain Review.
+This skill owns what the table does not: exploration and doc-to-code sync, scope discipline, conditional pre-commit doc updates, refactoring safety, merge-conflict resolution, the reviewer severity policy in `references/review.md`, and Domain Review. Two fallbacks are wider than the skill they back up — `references/multi-agent.md` also carries agent role boundaries and merge flow, and `references/review.md` carries the block-merge severity table that `/code-review` does not encode — so read them even when the owning skill is installed.
+
+The reference files still use the older phase names (Design, Bug Fix, Implementation, Multi-Agent, Code Review). Phase 2 below covers the first three; the Delegation Map covers the last two.
 
 ## Phase 1: Exploration
 
@@ -61,6 +63,8 @@ Route to `superpowers:test-driven-development` for the full red-green-refactor d
 | Bug fix | A test that reproduces the bug, plus a regression guard |
 | Refactor | Existing tests cover the behavior being restructured; if they do not, add them first |
 | Code with no test harness | A written, checkable acceptance criterion and the command that demonstrates it |
+
+Where the repo has a test harness, TDD's iron law governs and the first three rows apply: no production code before a failing test. The last row applies only where no harness exists and building one is out of scope for this task — it is not a general opt-out.
 
 If writing the test feels impossible, the requirement is not yet clear. Clarify before coding — it is cheaper than debugging later.
 
