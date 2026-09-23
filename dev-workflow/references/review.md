@@ -42,7 +42,7 @@ Review items align with Priority Stack from Core Principles.
 | Security/Data risk | Block merge |
 | Logic error | Block merge |
 | Missing tests | Block merge (for behavioral changes) |
-| Missing docs/changelog | Block merge (for user-facing changes) |
+| Missing docs/changelog | Block merge (for user-facing changes, and only for docs the repo actually keeps) |
 | Style/naming | Comment as nit; don't block |
 | Suggestion/improvement | Comment; author decides |
 

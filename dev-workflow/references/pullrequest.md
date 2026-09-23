@@ -28,7 +28,7 @@ Key implementation decisions or tradeoffs.
 
 ## Checklist
 - [ ] Tests pass locally
-- [ ] CHANGELOG.md updated
+- [ ] CHANGELOG.md updated (if the repo keeps one)
 - [ ] Docs updated (if user-facing)
 - [ ] Task status updated (if project uses task tracking)
 - [ ] GitHub issue linked with `Closes #xxx` (if applicable)

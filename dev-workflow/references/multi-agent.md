@@ -46,7 +46,7 @@ main (protected)
 
 ### Rules
 
-- **Never push directly to main** — Always PR
+- **Follow the repo's branch policy** — Where the project's `AGENTS.md` sets a feature-branch workflow, never push directly to main; always PR. Where it declares a single-contributor repo that commits on `main`, or gates commits behind owner approval, follow that instead (see `exploration.md`, Step 4)
 - **One branch per task** — Don't mix concerns
 - **Rebase before PR** — Keep history clean
 

@@ -16,7 +16,9 @@ cargo test              # Rust
 - ❌ If tests fail → fix before committing
 - ❓ If no tests for your change → go back to implementation phase and add them
 
-## Step 2: UPDATE CHANGELOG
+## Step 2: UPDATE CHANGELOG (if the repo has one)
+
+Skip this step entirely when the repo has no `CHANGELOG.md`. Do not create one for a project that never kept one.
 
 **Per commit rule:**
 - Behavior change (user-facing or operational) → Update `CHANGELOG.md` under `## [Unreleased]`
@@ -31,8 +33,10 @@ cargo test              # Rust
 
 ## Step 3: SYNC DOCUMENTATION
 
-| If you changed... | You MUST update... |
-|-------------------|---------------------|
+Update a file in the right column only if that file exists in the repo.
+
+| If you changed... | Update... |
+|-------------------|-----------|
 | Behavior (user-facing) | `CHANGELOG.md`, `README.md` |
 | CLI / Configuration | `README.md` (usage), `DEVELOPER_GUIDE.md` (config) |
 | Project Structure | `DEVELOPER_GUIDE.md` (architecture) |

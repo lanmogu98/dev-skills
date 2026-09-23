@@ -49,8 +49,13 @@ If you identify a bug, missing feature, or technical debt during exploration tha
 
 ## Step 4: Branch Strategy
 
-- Main stays green; create feature branches: `feature/<name>` or `fix/<name>`
-- Rebase regularly onto main to avoid conflicts
+Check the project's `AGENTS.md` before branching — its policy overrides this default.
+
+| Repo policy | Action |
+|-------------|--------|
+| Feature-branch workflow | Main stays green; cut `feature/<name>` or `fix/<name>` and rebase onto main regularly |
+| Single-contributor, commits on `main` | Work on `main`; no branch needed |
+| Commits gated behind owner approval | Leave edits in the working tree and ask before committing |
 
 ---
 
