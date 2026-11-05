@@ -1,0 +1,55 @@
+{
+  "skill_name": "research-mermaid",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Using the supplied map-contract.md source packet, create a compact Mermaid figure explaining Operators.Map.map_commutes for a research note. Include a caption describing the relationship and its domain, with a source citation. Save diagram.mmd and figure.md locally. Use only the supplied sources.",
+      "expected_output": "The agent reads local constraints and the actual declaration, preserves WellRankedSeq rank ts and all ranks including zero, compares decode rank (map f (encode rank ts)) with ts.map (Tensor.map f), and grounds the caption in map_commutes. It does not turn a simulator run into a universal proof. It supplies Mermaid and a caption, and distinguishes rendering from source inspection and destination verification.",
+      "assertions": [
+        "The diagram and caption compare decode rank (map f (encode rank ts)) with ts.map (Tensor.map f), without asserting a stronger equality.",
+        "The caption preserves the premise WellRankedSeq rank ts.",
+        "The domain permits every natural-number rank, including zero; no positive-rank restriction is invented.",
+        "The figure cites the supplied map_commutes declaration and preserves the function and rank parameters.",
+        "The Mermaid source and caption agree on node meaning and edge direction.",
+        "The delivered SVG and PNG artifacts are valid outputs consistent with the source.",
+        "Light/dark figures are readable without clipping or misleading layout at the supplied display size."
+      ],
+      "files": [
+        "evals/files/map-contract.md"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Using the supplied systems-protocol.md, create a compact Mermaid experiment-protocol figure for a computer-systems paper. Show the baseline/candidate comparison and the controls, measurement stages, and failure accounting. Include a caption, save diagram.mmd and figure.md, and show the local rendered preview. Use only the supplied protocol.",
+      "expected_output": "A controlled systems benchmark diagram with matched workloads and environment, distinct correctness checking/warm-up/timing, and visible failure accounting. The caption preserves five warm-ups, twenty measured invocations, kernel-only timing, and no implied concurrent execution or invented speedup.",
+      "assertions": [
+        "Baseline and candidate share the supplied input values, workload matrix, host, compiler, and thread count.",
+        "The reference correctness check precedes timing; incorrect configurations are reported and not timed.",
+        "Five warm-ups are untimed; twenty invocation timings exclude allocation and input generation.",
+        "Failed and timed-out trials remain reported; missing comparisons are not turned into speedup claims.",
+        "The diagram does not assert concurrent execution, a randomized run order, or any measured results.",
+        "Source, caption, and rendered previews agree on directions, conditions, and line-style meanings.",
+        "Actual previews at the stated document width have readable labels and no overlaps or clipped arrows."
+      ],
+      "files": [
+        "evals/files/systems-protocol.md"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Using the supplied branching-kernel.md, draw a Mermaid control-flow figure for the tiled kernel. Preserve the empty-input case, fast-path guard, safe fallback, reconvergence, valid stores, and tile loop. Use a 720 CSS-pixel documentation preview in light and dark themes. Save diagram.mmd and figure.md with a caption and show the actual previews. Use only the supplied algorithm.",
+      "expected_output": "A readable branching-and-looping kernel figure whose main progression, mutually exclusive paths, merge, and loop exit remain visible at the delivery width. All scientific claims come from the synthetic source, with no added parallelism or barriers.",
+      "assertions": [
+        "The n=0 path returns before loads, computation, or stores.",
+        "The vector path requires both a full tile and alignment; the fallback covers their complement.",
+        "The mutually exclusive paths rejoin at the shared elementwise transform, not an invented parallel barrier.",
+        "Stores affect valid elements only, and iteration returns to selecting the next tile until completion.",
+        "The caption preserves n≥0 and B>0 and declares control-flow arrow semantics.",
+        "Rendered decision labels, loop edge, merges, and exit remain distinguishable without clipping or overlaps in both themes at 720 CSS pixels."
+      ],
+      "files": [
+        "evals/files/branching-kernel.md"
+      ]
+    }
+  ]
+}

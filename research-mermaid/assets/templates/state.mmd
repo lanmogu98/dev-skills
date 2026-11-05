@@ -1,0 +1,11 @@
+%% Illustrative structure; replace relationships only from supplied sources.
+stateDiagram-v2
+    accTitle: Job lifecycle
+    accDescr: A queued job starts running, then succeeds or fails. A failed job may retry. Transition labels are events, not dependencies.
+    direction LR
+    [*] --> Queued
+    Queued --> Running: start
+    Running --> Succeeded: finish
+    Running --> Failed: error
+    Failed --> Queued: retry
+    Succeeded --> [*]

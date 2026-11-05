@@ -1,0 +1,10 @@
+%% Illustrative structure; replace relationships only from supplied sources.
+flowchart TB
+    accTitle: Two equal mathematical paths
+    accDescr: From x, the direct map F and the composed maps E then H reach the same value F(x). This diagram assumes the stated equality under P(x).
+    x["x in domain X"] -->|"E"| encoded["E(x) in representation R"]
+    encoded -->|"H"| value[["F(x) in codomain Y"]]
+    x -->|"F"| value
+    class value result
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px

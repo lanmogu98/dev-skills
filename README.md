@@ -17,8 +17,9 @@ manage-skills.sh link-user
 |-------|-------------|
 | [dev-workflow](./dev-workflow/) | Engineering workflow for code changes in existing codebases |
 | [project-init](./project-init/) | Repository initialization protocol for AI-assisted development |
+| [research-mermaid](./research-mermaid/) | Mermaid diagrams for scientific methods, mathematical relationships, and research systems |
 
-The two skills are complementary: `project-init` creates the scaffold (one-time), then `dev-workflow` operates within it (ongoing).
+`project-init` and `dev-workflow` are complementary: `project-init` creates the scaffold (one-time), then `dev-workflow` operates within it (ongoing).
 
 ## dev-workflow
 
@@ -56,6 +57,14 @@ Cross-agent project initialization protocol. Sets up a new repository optimized 
 - `references/cross-agent.md` — Agent compatibility matrix and context loading reference
 - `references/cloud-dispatch.md` — GitHub Actions workflow templates (Claude Code Action + Codex Action)
 - `references/review-checklists.md` — Multi-dimensional review framework
+
+## research-mermaid
+
+Create, revise, or review Mermaid diagrams for research methods, experiments, mathematical mappings, proof dependencies, and scientific systems. The skill reads the destination repository's constraints and preserves the distinction between proposed relationships, proved results, and empirical evidence.
+
+The entrypoint routes to research semantics, rendering checks, a visual baseline, and seven diagram frameworks as needed. `assets/templates/` contains runnable Mermaid skeletons, including a branching/looping methods variant; `assets/themes/` provides light and dark configurations. `evals/evals.json` contains three artifact-generation tests: a pinned Map theorem, a controlled systems benchmark, and a branching tiled kernel. Their source packets live in `evals/files/`. `evals/trigger-evals.json` separately tests exclusion of quantitative plotting and includes a positive Mermaid control. This adaptation of robust-skills retains its pinned upstream source and MIT notice inside the skill directory.
+
+Local evaluation snapshots, generated diagrams, scores, and reports live in `research-mermaid/evaluation-artifacts/` (Git-ignored). Reusable test cases remain in `research-mermaid/evals/`.
 
 ## Development
 

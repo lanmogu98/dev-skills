@@ -1,0 +1,14 @@
+%% Illustrative structure; replace relationships only from supplied sources.
+flowchart TB
+    accTitle: Proof dependencies
+    accDescr: Assumptions feed two established lemmas that are used by the target theorem. Arrows point from premise or used result to dependent result.
+    assumption["Assumption: P"] --> first["Lemma A
+Established"]
+    assumption --> second["Lemma B
+Established"]
+    first --> theorem[["Theorem T
+Established"]]
+    second --> theorem
+    class theorem result
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px

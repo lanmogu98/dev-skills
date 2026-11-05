@@ -1,0 +1,28 @@
+%% Illustrative systems benchmark; adapt controls and metrics from the protocol.
+flowchart TB
+    accTitle: Controlled computer systems benchmark
+    accDescr: Apply a fixed workload matrix on the same hardware and software to baseline and candidate implementations. Check outputs, warm up, and repeat measurements for each. Report matched-workload latency, variability, and failures. Branches are comparison conditions, not concurrent execution.
+    plan["Fixed workloads and inputs
+Same hardware + software"]
+    baseline("Baseline
+Check outputs; warm up")
+    candidate("Candidate
+Check outputs; warm up")
+    baselineRuns("Repeat measurements
+Record latency + status")
+    candidateRuns("Repeat measurements
+Record latency + status")
+    report[["Compare matched workloads
+Report variability + failures"]]
+    plan --> baseline
+    plan --> candidate
+    baseline -->|"Correct outputs only"| baselineRuns
+    candidate -->|"Correct outputs only"| candidateRuns
+    baselineRuns --> report
+    candidateRuns --> report
+    baseline -. "Correctness failures" .-> report
+    candidate -. "Correctness failures" .-> report
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px
+    class baseline,candidate,baselineRuns,candidateRuns operation
+    class report result

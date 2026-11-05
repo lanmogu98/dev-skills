@@ -1,0 +1,20 @@
+%% Illustrative tiled elementwise kernel. Arrows are control flow.
+flowchart TB
+    accTitle: Tiled kernel with a fast path, a fallback, and iteration
+    accDescr: Empty input returns immediately. Otherwise choose a vector load for a full aligned tile or a safe load for valid elements, merge at the elementwise transform, store only valid elements, and continue until there are no more tiles.
+    input["Input x; length n"] --> empty{"n = 0?"}
+    empty -->|"Yes"| emptyResult[["Return empty output"]]
+    empty -->|"No"| tile("Select next tile")
+    tile --> fast{"Full tile\nand aligned?"}
+    fast -->|"Yes"| vector("Vector load")
+    fast -->|"No"| safe("Load valid elements")
+    vector --> compute("Elementwise transform")
+    safe --> compute
+    compute --> store("Store valid elements")
+    store --> more{"More tiles?"}
+    more -->|"Yes: next tile"| tile
+    more -->|"No"| output[["Return output"]]
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px
+    class tile,vector,safe,compute,store operation
+    class emptyResult,output result

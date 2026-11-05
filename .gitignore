@@ -18,3 +18,6 @@ __pycache__/
 # Temp
 *.tmp
 *.log
+
+# Local skill comparison outputs
+/research-mermaid/evaluation-artifacts/

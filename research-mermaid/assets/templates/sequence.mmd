@@ -1,0 +1,13 @@
+%% Illustrative structure; replace relationships only from supplied sources.
+sequenceDiagram
+    accTitle: Successful request interaction
+    accDescr: A researcher submits a request to a coordinator, which invokes a worker and returns its result. Only the successful path is shown.
+    participant R as Researcher
+    participant C as Coordinator
+    participant W as Worker
+    R->>C: Submit request
+    C->>W: Execute job
+    activate W
+    W-->>C: Return result
+    deactivate W
+    C-->>R: Deliver result

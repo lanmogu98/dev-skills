@@ -1,0 +1,10 @@
+%% Illustrative structure; replace relationships only from supplied sources.
+flowchart LR
+    accTitle: Method pipeline
+    accDescr: Observations are prepared and analyzed to produce an estimate. Arrows show data flow.
+    observations["Observations"] --> prepare("Prepare data")
+    prepare --> analyze("Analyze") --> estimate[["Estimate"]]
+    class prepare,analyze operation
+    class estimate result
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px

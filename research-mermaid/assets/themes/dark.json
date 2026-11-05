@@ -1,0 +1,57 @@
+{
+  "theme": "base",
+  "look": "classic",
+  "fontFamily": "Arial, sans-serif",
+  "themeVariables": {
+    "fontFamily": "Arial, sans-serif",
+    "fontSize": "17px",
+    "primaryColor": "#182333",
+    "primaryTextColor": "#E2E8F0",
+    "primaryBorderColor": "#94A3B8",
+    "secondaryColor": "#1E3048",
+    "tertiaryColor": "#182333",
+    "lineColor": "#CBD5E1",
+    "textColor": "#E2E8F0",
+    "mainBkg": "#182333",
+    "nodeBorder": "#94A3B8",
+    "clusterBkg": "#182333",
+    "clusterBorder": "#475569",
+    "edgeLabelBackground": "#0F172A",
+    "actorBkg": "#182333",
+    "actorBorder": "#94A3B8",
+    "actorTextColor": "#E2E8F0",
+    "actorLineColor": "#94A3B8",
+    "signalColor": "#CBD5E1",
+    "signalTextColor": "#E2E8F0",
+    "labelBoxBkgColor": "#182333",
+    "labelBoxBorderColor": "#94A3B8",
+    "labelTextColor": "#E2E8F0",
+    "loopTextColor": "#E2E8F0",
+    "noteBkgColor": "#1E3048",
+    "noteTextColor": "#E2E8F0",
+    "noteBorderColor": "#94A3B8",
+    "darkMode": true
+  },
+  "flowchart": {
+    "curve": "linear",
+    "nodeSpacing": 36,
+    "rankSpacing": 48,
+    "padding": 16,
+    "htmlLabels": false,
+    "wrappingWidth": 280,
+    "minNodeWidth": 0,
+    "look": "classic",
+    "theme": "base"
+  },
+  "sequence": {
+    "mirrorActors": false,
+    "actorMargin": 48,
+    "messageMargin": 36,
+    "useMaxWidth": true
+  },
+  "state": {
+    "padding": 16
+  },
+  "htmlLabels": false,
+  "themeCSS": ".edgeLabel rect { opacity: 1 !important; }"
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "query": "For my research paper, make a Matplotlib scatter plot from the supplied CSV with temperature on x and measured resistance on y, including the supplied measurement uncertainties. Export a PDF at journal column width. I do not want a pipeline diagram.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a Mermaid methods flowchart for my research note from this protocol: split samples into train and held-out test, fit normalization on training data only, train the model, and evaluate once on the held-out test. Include a caption explaining the data flow.",
+    "should_trigger": true
+  }
+]
