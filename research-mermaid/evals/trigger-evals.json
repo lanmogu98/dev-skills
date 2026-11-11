@@ -26,5 +26,13 @@
   {
     "query": "From this research protocol, make an interactive HTML explanation of the optimization loop using custom SVG and a step slider. Please do not use Mermaid.",
     "should_trigger": false
+  },
+  {
+    "query": "Make a paper figure comparing the complete old and new research systems from this design note. Use the attached CAKE architecture figure as a composition reference; SVG and PNG embedded in our local Markdown are fine, and the editable source format is up to you.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our paper has an iterative rule-discovery method. Draw a fixed SVG figure showing what persists and where each new round reenters. Use image resources so Markdown preview plugins cannot change its layout.",
+    "should_trigger": true
   }
 ]

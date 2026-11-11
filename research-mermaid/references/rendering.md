@@ -2,7 +2,9 @@
 
 ## Select the renderer
 
-Use the repository's renderer and configuration when provided. Otherwise use an available Mermaid CLI or the destination's preview. Locate existing tools before adding dependencies; a syntax explanation alone does not justify installing a toolchain. Use the [official CLI documentation](https://github.com/mermaid-js/mermaid-cli) and [syntax reference](https://mermaid.js.org/intro/syntax-reference.html) for version-sensitive behavior.
+Use the repository's renderer and configuration when provided. Otherwise, for exported composition-sensitive figures, use [Fixed vector figures](fixed-vector.md): explicit SVG geometry plus a checked local librsvg/font profile. Embed the exported resource in Markdown; each host then displays that resource rather than recalculating layout. Keep source, export, and destination display as distinct checks. Locate existing tools before adding dependencies; a syntax explanation alone does not justify installing a toolchain.
+
+For a Mermaid deliverable, use an available Mermaid CLI or the destination's preview. Pin Mermaid/CLI versions, select the layout algorithm explicitly, and retain theme, font, browser, and viewport configuration when a reproducible export is needed. A fixed Mermaid environment stabilizes its result; it does not enforce arbitrary panel alignment or feedback routes. Use the [official CLI documentation](https://github.com/mermaid-js/mermaid-cli) and [syntax reference](https://mermaid.js.org/intro/syntax-reference.html) for version-sensitive behavior.
 
 Keep unpublished research local unless the user authorizes sending it to an external editor. Prefer a local preview for manuscripts and private source material.
 
@@ -17,7 +19,7 @@ mmdc -i diagram.mmd -o diagram.svg
 mmdc -i diagram.mmd -o diagram.png
 ```
 
-Use a temporary output location for validation. Mermaid CLI can also transform Mermaid fences in Markdown into rendered-image references; direct that output to a separate temporary file so validation does not rewrite the authored document. Keep source diagrams as the maintained artifact unless the task requests rendered outputs.
+Use a temporary output location for validation. Mermaid CLI can also transform Mermaid fences in Markdown into rendered-image references; direct that output to a separate temporary file so validation does not rewrite the authored document. Keep source diagrams as maintained artifacts. For an exported SVG figure, keep its editable source, any generator, fonts/profile, and rebuild command; validate the final export. Mermaid source is optional unless requested. After editing source, regenerate the canonical image before reviewing the document.
 
 Apply the delivery-size acceptance checks in [Visual baseline](visual-baseline.md#acceptance-at-the-delivery-size). Inspect the rendered image, not just the process exit status. Check labels, clipping, font/glyph support, arrowheads, crossings, boundary membership, and reading order at the intended display size. Review semantic fidelity against the source: every depicted condition, direction, status, and equality still has to be correct. Rerender after a syntax, layout, or configuration change; unchanged diagrams can reuse current evidence for the same renderer and configuration.
 
@@ -35,7 +37,7 @@ When adapting a reference, compare the final image with its selected visual mech
 
 Temporarily ignore supporting explanations to see whether the main structure is recognizable, then remove color to check whether essential distinctions remain. For a comparison, ask which objects correspond and what changed before reading the detailed caption. If the answer requires reconstructing both graphs, the composition has not yet done its job even if the text is legible. These are diagnostic checks, not reasons to remove necessary qualifiers. Resolve any disagreement among caption, accessible description, and visible relationships.
 
-For documentation, inspect supported light and dark themes, especially when custom styling is used. For publication, follow the venue's dimensions and export requirements: prefer a vector artifact when accepted, check legibility at final column width, and test grayscale when needed. A large preview is not evidence that small printed labels are readable. For dense equations, preserve the requested notation in surrounding math or use the user's chosen mathematical typesetting tool rather than silently switching formats.
+For inline diagrams, inspect supported light and dark themes, especially when custom styling is used. For fixed image resources, inspect the same opaque export in light/dark surroundings; separate themed exports are optional, and each needs its own review. For publication, follow the venue's dimensions and export requirements: prefer a vector artifact when accepted, check legibility at final column width, and test grayscale when needed. A large preview is not evidence that small printed labels are readable. For dense equations, preserve the requested notation in surrounding math or use the user's chosen mathematical typesetting tool rather than silently switching formats.
 
 When publication is authorized, inspect the published diagram or final document. Do not create a public upload or PR just to test rendering.
 
@@ -47,7 +49,7 @@ Distinguish these outcomes in the delivery note:
 | --- | --- |
 | Composition and communication | Actual-image review against the agreed takeaway, comparison unit, and selected reference mechanisms; identify which structure carries the main inference. User-rejected composition is not a visual pass. |
 | Source correspondence | Inspected definition, theorem, protocol, data record, or supplied source supporting the relationships and premises. |
-| Rendering | Renderer/version and successful rendering of the delivered source. |
+| Rendering | Source format, renderer/toolchain and font profile, export dimensions, and the source/config/generator steps that reproduce the delivered artifact. Fixed SVG exports use outlined text; retain editable text in the source. |
 | Visual review | Inspection of the actual output at its intended size and relevant theme. |
 | Destination compatibility | Inspection in the target host or final exported document, when available. |
 

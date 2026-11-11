@@ -4,6 +4,8 @@ Use this baseline when the destination has no established diagram style. It is a
 
 ## Apply the base
 
+The visual roles and acceptance checks below apply to all figures. For fixed SVG implementation, use [Fixed vector figures](fixed-vector.md), its canvas, bundled fonts, and checked exporter. The configuration examples in this section apply specifically to Mermaid.
+
 The [light theme](../assets/themes/light.json) and [dark theme](../assets/themes/dark.json) share typography, spacing, and role conventions. Templates contain diagram structure and may include small layout overrides; themes supply the shared typography and palette. Apply the theme as a companion config when rendering local artifacts:
 
 ```sh

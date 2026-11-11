@@ -1,11 +1,11 @@
 ---
 name: research-mermaid
-description: Use when planning, creating, revising, or reviewing Mermaid diagrams for research papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, architectural contributions, system-mechanism comparisons, iterative feedback, or scientific systems. Also use when a repository's writing guidelines require it. Not for quantitative plots, anatomical illustrations, or an explicitly requested non-Mermaid format.
+description: Use when planning, creating, revising, or reviewing research diagrams for papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, architectural contributions, system comparisons, iterative feedback, or scientific systems. Supports fixed-layout SVG/PNG figures and Mermaid when requested or suitable. Also use when a repository's writing guidelines require research-mermaid. Not for quantitative plots, anatomical illustrations, native Figma editing, or interactive web applications.
 ---
 
 # Research Mermaid
 
-Make the research claim, its conditions, and its evidence readable in the requested diagram. Preserve the user's chosen output format and scope.
+Make the research claim, its conditions, and its evidence readable in the requested diagram. Preserve the user's chosen output format and scope. The historical skill name does not require Mermaid source for exported figures.
 
 ## Establish the claim and destination
 
@@ -13,19 +13,21 @@ Read the destination repository's applicable instructions and follow its writing
 
 Before composing a new figure or changing its main relationship, establish the intended reader takeaway. Reuse an explicit intent from the conversation and briefly state it; do not ask for confirmation again. If the material permits different central claims and the focus is unclear, ask one high-level question: “What should the reader understand first from this figure?” The user supplies the purpose; infer nodes and layout from the sources. Wait for a necessary answer while continuing independent source inspection. A timeout is not confirmation. If the user asks you to use your judgment, state a working assumption and continue. Local syntax or cosmetic repairs retain the existing intent. Revisit intent only when its central relationship changes.
 
-Identify the intended reader and destination renderer. For a paper, identify the requested export format and final figure size. If a missing fact determines a relationship, ask about that fact or mark it unresolved; a plausible narrative is not evidence. Preserve supplied citations and verify new ones before using them.
+Identify the intended reader, destination, and delivery size. Distinguish an editable source from the exported image embedded in a document. If the task permits image resources, use a fixed export pipeline; an inline Mermaid fence delegates layout to each host. For a paper, follow the requested export format and final figure size. If a missing fact determines a relationship, ask about that fact or mark it unresolved; a plausible narrative is not evidence. Preserve supplied citations and verify new ones before using them.
 
 Choose the smallest view that answers the question. A caption should state the relationship and any essential conditions or omitted paths. Link evidence in the surrounding text; a separate evidence inventory is useful only when the task calls for one.
 
 ## Design the composition
 
-For a new figure or a substantial redesign, read [Visual composition](references/visual-composition.md) and the matching section of [Diagram frameworks](references/diagram-frameworks.md) before selecting a template or Mermaid type. Establish the unit the reader must understand, the first-glance relationship, and the visual hierarchy that explains it. When different arrangements would tell different stories, choose the one that best exposes the agreed claim at the destination size; a brief working rationale is enough.
+For a new figure or a substantial redesign, read [Visual composition](references/visual-composition.md) and the matching section of [Diagram frameworks](references/diagram-frameworks.md) before selecting a template or source notation. Establish the unit the reader must understand, the first-glance relationship, and the visual hierarchy that explains it. When different arrangements would tell different stories, choose the one that best exposes the agreed claim at the destination size; a brief working rationale is enough.
 
 If a visual reference is supplied, inspect the image and identify which spatial, symbolic, textual, and color relationships make it work. Preserve those mechanisms when adapting it. For a whole-system comparison, keep the systems identifiable as complete views; merging them into one A/B path changes the question unless the intended comparison is a local substitution. Layout difficulty alone is not a reason to change the figure's job.
 
 Let visual structure carry relationships: assign position, alignment, containment, connections, symbols, text, and color distinct jobs. Text names objects and essential conditions; layout organizes their relationships. Choose implementation resources after this decision, then check the rendered result against both the intended takeaway and the selected reference mechanisms.
 
 ## Choose a representation
+
+Choose the relationship first, then its implementation. For composition-sensitive exported figures, read [Fixed vector figures](references/fixed-vector.md): explicit SVG geometry preserves panel alignment, spatial roles, symbols, and feedback routes, and a checked local exporter produces the canonical SVG/PNG. Use Mermaid for an explicit Mermaid request or when its layout preserves the selected composition; the following table routes those cases. Other source formats are acceptable when the destination or an established project pipeline calls for them.
 
 | Question | Diagram | Guidance to read |
 | --- | --- | --- |
@@ -35,11 +37,11 @@ Let visual structure carry relationships: assign position, alignment, containmen
 | Which states and transitions are allowed? | `stateDiagram-v2` | [Research patterns: scientific systems](references/research-patterns.md#scientific-systems) |
 | How do components, types, or entities relate? | Grouped `flowchart`, `classDiagram`, or `erDiagram` | [Research patterns: scientific systems](references/research-patterns.md#scientific-systems) |
 
-Use other Mermaid types when they fit the question and destination. For a quantitative result plot, use a plotting workflow that preserves numerical values, uncertainty, and axes. A request for a research figure alone does not select Mermaid.
+Use other Mermaid types when they fit the question and destination. For a quantitative result plot, use a plotting workflow that preserves numerical values, uncertainty, and axes. A request for a research figure alone does not select Mermaid or any other source language.
 
 ## Use implementation resources
 
-Read [Visual baseline](references/visual-baseline.md) for styling and delivery-size checks. Copy a `.mmd` example and theme only when they fit the chosen composition; examples do not select the composition or establish visual quality. They cover methods, experiments, mathematical mappings, proof dependencies, architecture, sequence interactions, and state lifecycles. For a local syntax repair, preserve the established intent and style; load composition guidance only if the main layout is affected.
+Read [Visual baseline](references/visual-baseline.md) for shared visual roles and delivery-size checks. Use the [SVG canvas](assets/templates/fixed-layout.svg) and bundled fonts/export profile for fixed figures, or a `.mmd` example and Mermaid theme when that implementation fits. Examples do not select the composition or establish visual quality. They cover methods, experiments, mathematical mappings, proof dependencies, architecture, sequence interactions, and state lifecycles. For a local syntax repair, preserve the established intent and style; load composition guidance only if the main layout is affected.
 
 <details>
 <summary>Load additional guidance for the relationships present</summary>
@@ -52,7 +54,9 @@ Read [Visual baseline](references/visual-baseline.md) for styling and delivery-s
 
 ## Build the diagram
 
-- Use one diagram declaration per fenced `mermaid` block or `.mmd` file. Give nodes stable IDs distinct from display labels and group IDs. Quote flowchart labels with punctuation, avoid reserved identifiers such as `end`, and place `%%` comments on separate lines. Alias sequence participants with complex names; put ER attributes on separate lines.
+Implement the chosen spatial relationships and inspect whether the renderer preserves them. Follow [composition implementation](references/visual-composition.md#carry-the-composition-into-rendering). Keep the editable source and any generator needed to rebuild the exported figure; do not create a parallel `.mmd` merely to satisfy this skill's name.
+
+- For Mermaid, use one diagram declaration per fenced block or `.mmd` file. Give nodes stable IDs distinct from display labels and group IDs. Quote flowchart labels with punctuation, avoid reserved identifiers such as `end`, and place `%%` comments on separate lines. Alias sequence participants with complex names; put ER attributes on separate lines. For SVG, use explicit geometry and stable group IDs; preserve text in the editable source and outline it only in the exported copy.
 - Give arrows consistent meanings and directions. Distinguish data movement, temporal order, dependency, function application, association, and implication with labels or separate views. State dependency direction. Explain meaningful line-style, shape, and color differences in a caption or legend.
 - Preserve conditions that change the claim, including domains, quantifiers, units, sample scope, and observation boundaries when applicable. Distinguish proposed relationships, established results, and empirical observations in words as well as styling. A grouping box or arrow must not imply an unestablished proof, causal effect, or execution order.
 - Keep labels short and use the source's names. Prefer a single reading direction; use named groups for responsibilities, phases, or boundaries. Split when crossings or density obscure the relationship, rather than at an arbitrary node count. Preserve relevant loops and identify partial views.
@@ -63,7 +67,7 @@ Read [Visual baseline](references/visual-baseline.md) for styling and delivery-s
 
 Read [Rendering and review](references/rendering.md) when rendering, repairing syntax, reviewing an artifact, or exporting for publication. Check source fidelity, visual communication of the intended relationship, and rendering separately. Readable labels and a successful render do not establish that the composition works. A parser accepts diagram syntax, not the research claim.
 
-When producing a rendered artifact, show its actual preview in the delivery, at the intended display size; link the source alongside it. Deliver the requested Mermaid source or rendered artifact, a concise caption with relevant source references and premises, and the actual validation result. Name a skipped check specifically. Keep validation notes out of manuscript prose unless they are part of the requested methods. Publishing is a separate action requiring task authorization.
+When producing a rendered artifact, show its actual preview in the delivery, at the intended display size; link the editable source and rebuild command alongside it. In Markdown, embed the canonical image using a relative resource path so hosts display the export instead of laying it out again. Deliver a concise caption with relevant source references and premises, and the actual validation result. Name a skipped check specifically. Keep validation notes out of manuscript prose unless they are part of the requested methods. Publishing is a separate action requiring task authorization.
 
 ## Common mistakes
 

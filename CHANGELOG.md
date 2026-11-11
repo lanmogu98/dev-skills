@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **research-mermaid**: Research figures can use editable SVG sources and a fixed SVG/PNG export pipeline. Composition, reference mechanisms, and source fidelity guide implementation; Mermaid remains supported when requested or suitable. Markdown embeds the exported resource instead of delegating layout to each preview host.
+
+### Added
+
+- **research-mermaid**: Fixed-vector guidance, a blank SVG canvas, licensed Source Sans 3 fonts, and an exporter that checks the tool/font profile, uses isolated Fontconfig lookup, and outlines text in delivery SVGs. Actual-image evaluation cases cover CAKE's three structures and transfers to other research material.
+
 ## [2.5.0] - 2026-09-22
 
 Restructured `dev-workflow` from a self-contained five-phase manual into a router plus the material no other installed skill covers. The superpowers plugin now owns TDD, systematic debugging, worktree isolation, completion verification, and branch finishing; the native `/code-review` and `/security-review` commands own review. Keeping duplicate copies of that guidance in SKILL.md spent context on every invocation and risked drifting from the owning skills.

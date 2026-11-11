@@ -1,0 +1,8 @@
+{
+  "toolchain": "rsvg-convert version 2.61.4\n\nlibraries used:\n  cairo 1.18.4\n  pango 1.57.0\n  harfbuzz 14.1.0\n  fontconfig 2.17.1",
+  "font_backend": "fontconfig",
+  "fonts_sha256": {
+    "SourceSans3-Regular.otf": "08df266400933d3178d081a45f94a08814c3e55b4b7dd2e0ff69cb1329f13ab6",
+    "SourceSans3-Semibold.otf": "36f1cd2c344aa3109e64429bce41a41e4b2b923beb2db19b8dbf9bb56f05a4f9"
+  }
+}

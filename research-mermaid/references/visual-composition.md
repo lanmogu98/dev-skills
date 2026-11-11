@@ -6,7 +6,7 @@ Read this before selecting a template for a new figure or a substantial redesign
 
 Start with the agreed reader takeaway and the verified relationships. Identify the unit the reader must understand: a whole system, a transformation, a repeating process, a correspondence, or interacting responsibilities. Establish its abstraction level and which distinctions carry the contribution. This keeps local details from displacing the question the figure was meant to answer.
 
-Choose the global arrangement before the Mermaid declaration or asset. When materially different compositions are plausible, consider a small number and choose the one that makes the intended inference easiest at the destination size. Judge them by how directly they expose the main relationship, preserve necessary context, distinguish information roles, and limit mental matching or edge tracing. A brief working rationale is enough; do not turn this into a user questionnaire or a mandatory report.
+Choose the global arrangement before the source notation or asset. When materially different compositions are plausible, consider a small number and choose the one that makes the intended inference easiest at the destination size. Judge them by how directly they expose the main relationship, preserve necessary context, distinguish information roles, and limit mental matching or edge tracing. A brief working rationale is enough; do not turn this into a user questionnaire or a mandatory report.
 
 Specify what should be visible at three levels:
 
@@ -55,6 +55,16 @@ Source: Ye et al., [CAKE: Compiler–Agent Co-Design for Frontier Kernel Evoluti
 | Figure 4: evidence-driven compiler evolution | Context and dynamic feedback occupy the left region; two named work regions organize the right. A broad support relation differs from the internal operational arrows. A design-principle constraint sits above its check, and the final artifact has a distinct role. | Separate information roles through regions, containment, and local attachment. Use region-level support only when it preserves the claim's required detail. The two IR/compiler work regions are not a new universal diagram category. |
 
 For Figure 1, blue follows kernel evolution while orange follows compiler-harness evolution; it does not classify every operation versus every output. Candidate stacking indicates a collection, harness containment indicates composition, and the environment boundary separates evaluation context. These devices share the explanation with the words. A transfer that preserves only the terms while flattening those relationships has lost the point of the reference.
+
+## Carry the composition into rendering
+
+Turn the selected composition into a few explicit spatial requirements before coding: for example, coordinated comparison panels and environment bands; an uninterrupted forward chain with its return in a separate margin; or supporting information beside a dominant work region with a local constraint attached to its target. These requirements explain what the implementation must preserve, rather than fixing coordinates for every future figure.
+
+Check whether the chosen renderer actually realizes them. Mermaid directions and subgraphs express layout intent, not fixed placement: cross-region connections and feedback labels can reshape the whole graph. A semantically correct source may render as a ribbon, reorder comparison panels, or scatter the main progression. Shrinking the export or shortening labels is not a sufficient remedy when the global relationships remain wrong.
+
+For exported composition-sensitive figures, use [explicit SVG geometry and the checked exporter](fixed-vector.md). Preserve the editable source and any generator. Other project renderers can be appropriate if they implement the required spatial relationships and keep reproducible build inputs. An automatic layout engine's name or an explicit direction is not such a guarantee.
+
+Use a native Mermaid view when requested or when it preserves the intended structure. If a destination requires a single native Mermaid block, respect that constraint and report the specific unresolved layout limitation rather than silently switching formats. Otherwise, the authoring source need not be Mermaid. Inspect the actual exported artifact for correspondence, feedback routing, hierarchy, clipping, and legibility; preserve every important connection and label through implementation.
 
 ## Review the composition before polishing
 
