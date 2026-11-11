@@ -19,5 +19,5 @@ __pycache__/
 *.tmp
 *.log
 
-# Local skill comparison outputs
-/research-mermaid/evaluation-artifacts/
+# Local skill design or test outputs
+/draft
