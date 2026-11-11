@@ -18,7 +18,7 @@ Choose by the reader's question, not by a preferred Mermaid keyword. These are i
 
 **Example caption:** Observations pass through preparation and analysis to produce an estimate. Arrows denote data flow; the statistical method is specified in the accompanying text.
 
-**Check:** an action is named as an action; the primary output is obvious; a loop has its real exit condition. **Failure pattern:** nine serial boxes shrink into a ribbon, with paragraphs inside each box. Move repeated qualifiers to the caption and split at a meaningful stage, preserving the connecting artifact.
+**Check:** an action is named as an action; the primary output is obvious; an executable loop has its source-defined exit condition; a continuing evolution overview shows the trigger and scope of the next round. **Failure pattern:** nine serial boxes shrink into a ribbon, with paragraphs inside each box. Move repeated qualifiers to the caption and split at a meaningful stage, preserving the connecting artifact.
 
 ### Branching and iterative computation
 
@@ -27,6 +27,14 @@ Use [methods-branching.mmd](../assets/templates/methods-branching.mmd) when the 
 **Example caption:** For `n ≥ 0` and tile capacity `B > 0`, an empty input returns immediately. A full, aligned tile uses the vector path; every other tile loads only valid elements using a safe fallback. The mutually exclusive paths rejoin at the elementwise transform. Stores touch only valid indices, and the loop processes all tiles before returning. Solid arrows are control flow, not data dependencies; the merge is not a synchronization barrier between parallel operations.
 
 **Check:** each decision has complete, named alternatives; paths rejoin at the operation they actually share; the loop goes back to the next-tile selection and has an exit; the empty-input path bypasses all memory operations. Do not remove guards, fallback paths, or synchronization needed by the algorithm to achieve a cleaner layout. A successful straight-line example does not establish readability for a branch-heavy kernel: render the actual branches and loops at the target width. If edges become tangled, split an overview from a named body-detail view while preserving entry, exit, and loop semantics.
+
+### Feedback revision example
+
+Use [iteration-feedback.mmd](../assets/templates/iteration-feedback.mmd) when feedback changes an object carried into the next round. Read [iteration semantics](research-patterns.md#iteration-and-feedback) before adapting it; the branching example above instead emphasizes guarded execution paths.
+
+**Example facts and caption:** A synthetic sensor-calibration procedure starts with a calibration setting and an empty trial log. Each trial measures the same fixed reference using the current setting. The measured residual and setting are appended to the retained log. Stop when the residual meets the prescribed tolerance or the trial budget is exhausted; otherwise use that history to revise the setting and measure again. Stopping at the budget does not establish accuracy. Solid arrows show trial progression and feedback; the dotted reference arrow supplies fixed measurement input.
+
+**Adapt:** replace the setting, feedback payload, retained history, and stopping rule from the task's sources. Preserve the distinction between initialization, retained information, and the next-round entry. **Misreading to avoid:** returning to initialization would erase history; ending a trial does not always mean success.
 
 ## Systems experiment
 
@@ -56,9 +64,29 @@ Use [methods-branching.mmd](../assets/templates/methods-branching.mmd) when the 
 
 **Structure:** responsibility groups containing components and artifacts; labeled connections between responsibilities. Use a vertical arrangement in a narrow document column or a horizontal arrangement on a wide canvas, without imposing a total execution order.
 
-**Example caption:** Production emits an artifact; validation consumes that artifact and a specification to produce a validation report. Boundaries indicate responsibility. A report is not itself evidence of universal correctness.
+**Example caption:** Production emits an artifact; validation checks it against a specification and produces a validation report. Solid arrows carry artifacts; the dotted “constrains” arrow attaches the specification to the checker, not to the processing sequence. Boundaries indicate responsibility. A report is not itself evidence of universal correctness.
 
 **Check:** node kinds and interface payloads are identifiable; group membership agrees with sources; input/output identities are preserved. **Failure pattern:** every component is placed in a serial chain, implying an execution order absent from the design. Use separate sequence views when ordering is the question.
+
+**Adapt:** replace the producer, artifact, checker, and specification with sourced roles. Keep the constraint attached to the component it governs. A side input is not automatically an earlier execution stage; the report alone does not prove the specification holds.
+
+### Explain contributions through architectural change
+
+Explain a common task, the existing mechanism's limitation, the structural change, and how that change enables the claimed capability. Locate the limitation in an interface, missing information, or responsibility boundary. Show the mechanism's objects and interface payloads, not just “baseline” and “ours” labels. A capability annotation explains a consequence; do not make it a fictitious execution step.
+
+Choose a composition that exposes the change:
+
+- **Corresponding views:** compare structures with recognizable counterparts at comparable abstraction levels.
+- **Shared structure with an emphasized change:** use when most roles stay the same and a small interface or responsibility changes.
+- **Overview with local detail:** use when the contribution is concentrated in one subsystem; identify the expanded interface in both views.
+
+Allow enough space for the differentiating mechanism. For a reusable paradigm, distinguish stable roles and relations from the current implementation's names. State the scope of limitations: omitting baseline components cannot establish impossibility, and a mechanism comparison does not demonstrate a measured speedup.
+
+Use [architecture-change.mmd](../assets/templates/architecture-change.mmd) as one example of corresponding views, not a new diagram family.
+
+**Example facts and caption:** In this synthetic comparison, both systems dispatch a request to a handler. The fixed dispatcher has its handler mapping built into its code; adding a handler requires changing that dispatcher. The registry-based dispatcher instead resolves a handler from a registration table; adding a registration changes that table while the dispatch code remains fixed. Solid arrows show request routing; the dotted arrow supplies the registered mapping. The emphasized registration table marks the extracted extension point; its label and separate node preserve this distinction without color. The comparison concerns extension points, not measured performance or a claim that all fixed dispatchers are inextensible.
+
+**Adapt:** change both sides' common task, corresponding roles, interface payloads, and sourced limitation together. Retain the mechanism-to-capability explanation in the caption or a subordinate annotation. **Misreading to avoid:** the registry is a mapping consulted during dispatch, not a stage that processes the request before the dispatcher.
 
 ## Sequence interaction
 

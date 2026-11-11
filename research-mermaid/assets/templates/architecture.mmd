@@ -1,15 +1,21 @@
+---
+config:
+  flowchart:
+    rankSpacing: 24
+    padding: 12
+---
 %% Illustrative structure; replace relationships only from supplied sources.
 flowchart LR
     accTitle: Research system responsibilities
-    accDescr: A producer emits an artifact. A checker consumes the artifact and specification, then emits a validation report. Groups show responsibility, not execution order.
+    accDescr: A producer emits an artifact for a checker. A specification constrains that checker through a dotted side input. The checker emits a validation report. Groups show responsibility.
     subgraph production["Production"]
         producer("Producer") --> artifact["Artifact"]
     end
     subgraph validation["Validation"]
-        checker("Checker") --> report[["Validation report"]]
+        checker("Checker") --> report[["Validation\nreport"]]
     end
     artifact --> checker
-    specification["Specification"] --> checker
+    specification["Specification"] -. constrains .-> checker
     class producer,checker operation
     class report result
     classDef operation stroke:#3B82F6,stroke-width:2px

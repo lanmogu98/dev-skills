@@ -50,6 +50,68 @@
       "files": [
         "evals/files/branching-kernel.md"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Using architecture-change.md, create a Mermaid research figure explaining how explicit dependencies enable selective recomputation compared with the supplied fixed pipeline. Include a source-grounded caption. Save diagram.mmd and figure.md and render light/dark previews at 720 CSS pixels. Use only the supplied source.",
+      "expected_output": "Corresponding mechanisms with visible change-impact resolution, retained unaffected results, and index updates; qualified capability, no invented measured gains.",
+      "assertions": [
+        "Both architectures maintain results after a source-data change; the supplied baseline reruns all stages unconditionally, while the proposed system selects affected results, possibly all results.",
+        "The dependency index informs affected-result selection; the scheduler recomputes affected results in dependency order.",
+        "Unaffected cached results are retained and combined with recomputed results; recomputation updates the index for later events.",
+        "The caption preserves complete dependency recording and change detection assumptions; no speedup or universal baseline limitation is invented.",
+        "The changed mechanism and capability are identifiable at 720 CSS pixels in both themes; source, caption, and accessible description agree."
+      ],
+      "files": [
+        "evals/files/architecture-change.md"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Using iterative-repair.md, create a Mermaid figure explaining how counterexamples guide candidate repair across rounds. Preserve what remains fixed, what accumulates, and the meaning of every termination outcome. Save diagram.mmd and figure.md with a caption and render light/dark previews at 720 CSS pixels.",
+      "expected_output": "Fixed specification and domain, retained counterexamples, candidate revision and recheck, and distinct verified/unknown/repair-exhausted outcomes without invented total termination.",
+      "assertions": [
+        "Initialization occurs once; the fixed specification and allowed domain constrain checking and repair.",
+        "Verified, counterexample, and unknown are distinct checker outcomes; unknown is inconclusive.",
+        "Each counterexample is added to the retained set; repair uses the current candidate, specification, and entire accumulated set.",
+        "A revised candidate returns to checking, not initialization; repair exhaustion is not proof of impossibility and known-example satisfaction is not verification.",
+        "The diagram and caption preserve the per-round search budget without inventing overall termination; labels and return paths remain readable at 720 CSS pixels."
+      ],
+      "files": [
+        "evals/files/iterative-repair.md"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Using feedback-loops.md, draw a Mermaid mechanism figure explaining how design optimization and predictor calibration affect one another. Preserve their actual information exchanges and triggers. Save diagram.mmd and figure.md with a caption and render light/dark previews at 720 CSS pixels.",
+      "expected_output": "Two distinct updated objects linked by archived observations and revised estimates; direct measurement feedback, fixed feasibility constraint, event-driven calibration, no invented nested schedule or convergence.",
+      "assertions": [
+        "The proposer uses predictor estimates and prior measured performance under the fixed feasibility specification.",
+        "Evaluation archives design/measurement pairs and feeds measured performance back to subsequent proposals.",
+        "Prediction error compares archived predictions with measurements; it is not equated with measured performance.",
+        "Unacceptable prediction error triggers archive-based calibration; the updated predictor informs future design proposals.",
+        "No fixed calibration frequency, strict loop nesting, terminal condition, barrier, measured improvement, or convergence claim is invented.",
+        "The two mutable objects and cross-loop payloads are identifiable without relying on color alone at the delivery width."
+      ],
+      "files": [
+        "evals/files/feedback-loops.md"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Using context-and-constraints.md, create a Mermaid assay-methods figure explaining the specimen path and how supporting information affects it. Preserve all supplied dependencies and feedback. Save diagram.mmd and figure.md with a caption and render light/dark previews at 720 CSS pixels.",
+      "expected_output": "Visible specimen progression, SOP constraint, literature-informed model selection, calibration input, and drift-triggered recalibration without serializing context or inventing reprocessing.",
+      "assertions": [
+        "The specimen path retains preparation, acquisition, concentration estimation, and reporting in the supplied order.",
+        "The SOP constrains preparation; literature informs model selection and the selected model enters estimation.",
+        "Known-reference measurements fit calibration coefficients before the batch; coefficients enter estimation.",
+        "Quality-control acquisition supplies observed drift, with unacceptable drift triggering recalibration for subsequent estimates.",
+        "No retroactive correction, batch reprocessing, automatic rejection, randomization, or measured result is invented.",
+        "Background, constraints, processed inputs, and feedback are distinguishable without losing their specific targets; source and caption agree with the visible paths."
+      ],
+      "files": [
+        "evals/files/context-and-constraints.md"
+      ]
     }
   ]
 }

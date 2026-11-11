@@ -14,7 +14,7 @@ manage-skills.sh link-user
 ## Available Skills
 
 | Skill | Description |
-|-------|-------------|
+| --- | --- |
 | [dev-workflow](./dev-workflow/) | Engineering workflow for code changes in existing codebases |
 | [project-init](./project-init/) | Repository initialization protocol for AI-assisted development |
 | [research-mermaid](./research-mermaid/) | Mermaid diagrams for scientific methods, mathematical relationships, and research systems |
@@ -60,11 +60,13 @@ Cross-agent project initialization protocol. Sets up a new repository optimized 
 
 ## research-mermaid
 
-Create, revise, or review Mermaid diagrams for research methods, experiments, mathematical mappings, proof dependencies, and scientific systems. The skill reads the destination repository's constraints and preserves the distinction between proposed relationships, proved results, and empirical evidence.
+Create, revise, or review Mermaid diagrams for research methods, experiments, mathematical mappings, proof dependencies, and scientific systems, including architectural contributions and iterative feedback. It first establishes the reader takeaway from the conversation, asking one high-level question only when the focus is unclear. The skill reads the destination repository's constraints and preserves the distinction between proposed relationships, proved results, and empirical evidence.
 
-The entrypoint routes to research semantics, rendering checks, a visual baseline, and seven diagram frameworks as needed. `assets/templates/` contains runnable Mermaid skeletons, including a branching/looping methods variant; `assets/themes/` provides light and dark configurations. `evals/evals.json` contains three artifact-generation tests: a pinned Map theorem, a controlled systems benchmark, and a branching tiled kernel. Their source packets live in `evals/files/`. `evals/trigger-evals.json` separately tests exclusion of quantitative plotting and includes a positive Mermaid control. This adaptation of robust-skills retains its pinned upstream source and MIT notice inside the skill directory.
+The entrypoint routes to research semantics, rendering checks, a visual baseline, and seven diagram frameworks as needed. Architectural change, iteration, and supporting-information roles extend those frameworks rather than adding new families. `assets/templates/` contains ten runnable Mermaid examples, including branching methods, architecture change, and retained feedback across iterations; `assets/themes/` provides light and dark configurations.
 
-Local evaluation snapshots, generated diagrams, scores, and reports live in `research-mermaid/evaluation-artifacts/` (Git-ignored). Reusable test cases remain in `research-mermaid/evals/`.
+`evals/evals.json` contains seven artifact-generation tasks: the original Map theorem, controlled systems benchmark, and branching tiled kernel, plus selective recomputation, counterexample-guided repair, interacting feedback loops, and a protocol with contextual and constraint inputs. Their source packets live in `evals/files/`. `evals/trigger-evals.json` contains positive Mermaid cases and adjacent exclusions for quantitative plotting, prose-only explanation, and explicitly requested other formats. These are evaluation inputs, not a claim that all runs or user reviews have passed. This adaptation of robust-skills retains its pinned upstream source and MIT notice inside the skill directory.
+
+Local plans, baseline snapshots, generated diagrams, checks, and user feedback live in `draft/research-mermaid/`; evaluation outputs go under `draft/research-mermaid/evaluation-artifacts/` (Git-ignored). Reusable test cases remain in `research-mermaid/evals/`.
 
 ## Development
 

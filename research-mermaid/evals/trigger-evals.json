@@ -6,5 +6,25 @@
   {
     "query": "Create a Mermaid methods flowchart for my research note from this protocol: split samples into train and held-out test, fit normalization on training data only, train the model, and evaluate once on the held-out test. Include a caption explaining the data flow.",
     "should_trigger": true
+  },
+  {
+    "query": "Use Mermaid for a figure in our systems paper showing how moving dependency information into an explicit index enables selective recomputation. Compare the mechanisms from the supplied design note and preserve the conditions of that capability.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our repository writing guidelines use research-mermaid. Please diagram how measured candidate performance feeds design search and separately triggers predictor calibration, using the attached method description. I want readers to understand what changes in each loop.",
+    "should_trigger": true
+  },
+  {
+    "query": "Explain CAKE’s architectural contribution and why its feedback loops matter, based on the attached paper. I only need a prose explanation, no diagram creation or diagram review.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create an editable Figma architecture comparison for our research slides using the supplied system description. I need native Figma shapes and connectors, not Mermaid.",
+    "should_trigger": false
+  },
+  {
+    "query": "From this research protocol, make an interactive HTML explanation of the optimization loop using custom SVG and a step slider. Please do not use Mermaid.",
+    "should_trigger": false
   }
 ]

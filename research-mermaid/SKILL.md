@@ -1,6 +1,6 @@
 ---
 name: research-mermaid
-description: Use when creating, revising, or reviewing Mermaid diagrams for research papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, or scientific systems. Also use when a repository's writing guidelines require it. Not for quantitative plots, anatomical illustrations, or an explicitly requested non-Mermaid format.
+description: Use when creating, revising, or reviewing Mermaid diagrams for research papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, architectural contributions, system-mechanism comparisons, iterative feedback, or scientific systems. Also use when a repository's writing guidelines require it. Not for quantitative plots, anatomical illustrations, or an explicitly requested non-Mermaid format.
 ---
 
 # Research Mermaid
@@ -11,7 +11,9 @@ Make the research claim, its conditions, and its evidence readable in the reques
 
 Read the destination repository's applicable instructions and follow its writing-guideline links. Use its authoritative definitions, design decisions, implementation, or experiment records for the relationships being shown. Project conventions specialize this workflow; do not import another project's paths, status vocabulary, or approval process. Merely reading a document containing a diagram does not call for redrawing it.
 
-Identify the question the figure answers, the intended reader, and the destination renderer. For a paper, identify the requested export format and final figure size. If a missing fact determines a relationship, ask about that fact or mark it unresolved; a plausible narrative is not evidence. Preserve supplied citations and verify new ones before using them.
+Before composing a new figure or changing its main relationship, establish the intended reader takeaway. Reuse an explicit intent from the conversation and briefly state it; do not ask for confirmation again. If the material permits different central claims and the focus is unclear, ask one high-level question: “What should the reader understand first from this figure?” The user supplies the purpose; infer nodes and layout from the sources. Wait for a necessary answer while continuing independent source inspection. A timeout is not confirmation. If the user asks you to use your judgment, state a working assumption and continue. Local syntax or cosmetic repairs retain the existing intent. Revisit intent only when its central relationship changes.
+
+Identify the intended reader and destination renderer. For a paper, identify the requested export format and final figure size. If a missing fact determines a relationship, ask about that fact or mark it unresolved; a plausible narrative is not evidence. Preserve supplied citations and verify new ones before using them.
 
 Choose the smallest view that answers the question. A caption should state the relationship and any essential conditions or omitted paths. Link evidence in the surrounding text; a separate evidence inventory is useful only when the task calls for one.
 
@@ -30,6 +32,17 @@ Use other Mermaid types when they fit the question and destination. For a quanti
 ## Choose a visual framework
 
 Before composing a new diagram or substantially repairing its layout, read [Visual baseline](references/visual-baseline.md) and the matching section of [Diagram frameworks](references/diagram-frameworks.md). Copy only the selected `.mmd` template and applicable theme from `assets/`. For a local syntax repair, preserve the established style and load these guides only if layout is affected. Templates cover methods, experiments, mathematical mappings, proof dependencies, architecture, sequence interactions, and state lifecycles; they are examples to adapt from sources, not required content.
+
+Let visual structure carry relationships. From the agreed takeaway and verified facts, choose the relation and composition, then assign position, alignment, containment, connections, symbols, text, and color distinct jobs. Text names objects and essential conditions; layout organizes their relationships. Check the rendered result against that takeaway.
+
+<details>
+<summary>Load additional guidance for the relationships present</summary>
+
+- To explain a system contribution, read [Architectural change](references/diagram-frameworks.md#explain-contributions-through-architectural-change).
+- For repetition, repair, optimization, or evolution in any framework, read [Iteration and feedback](references/research-patterns.md#iteration-and-feedback).
+- For background material, constraints, or auxiliary inputs, read [Information roles](references/visual-baseline.md#main-path-and-supporting-information).
+
+</details>
 
 ## Build the diagram
 

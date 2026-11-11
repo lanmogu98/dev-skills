@@ -26,6 +26,23 @@ If drawing a causal model, say whether arrows are assumptions, intervention stru
 
 For computer-systems experiments, record the workload and input matrix, baseline and candidate, hardware/software controls, correctness oracle, timing boundary, warm-up policy, trial repetitions, and failure/timeout handling when the protocol supplies them. Match configurations before comparing results. A benchmark observation supports only the exercised conditions; it is not a correctness theorem or a universal performance claim. Use the [systems experiment framework](diagram-frameworks.md#systems-experiment) for this comparison design; keep training/validation/test splits for experiments that actually use them.
 
+## Iteration and feedback
+
+Identify what changes, the operation in a round, the feedback source, what persists across rounds, the reentry point, and the condition for another round or completion. These are semantic questions, not six required node types. Distinguish one-time initialization from the repeated body; a return arrow alone does not explain how one round affects the next.
+
+| Process | Relationship to preserve |
+| --- | --- |
+| Repeated processing | New inputs enter the same operation; do not imply that the operation learns or changes. |
+| Repair and retry | A failure or counterexample changes a candidate before reevaluation; identify retained failures when supplied. |
+| Feedback optimization | An evaluation changes a parameter, candidate, or selection; distinguish the current trial from retained history or best-so-far state. |
+| Mechanism evolution | The generator, evaluator, or execution environment itself changes; show how that revision affects subsequent candidate work. |
+
+Make fixed inputs and mutable objects distinguishable through naming, grouping, or labeled dependencies. Place feedback at the operation it informs, not automatically at the original input. Preserve the source's exit condition for an executable algorithm. A continuing evolution overview may instead specify the next-round trigger and repeated scope; do not invent convergence, a fixed budget, or a terminal node.
+
+For multiple loops, name each updated object and the payload that connects one loop to the other. Two loops are coupled only when their outputs affect each other's operation; label one-way influence as such. Shared evaluation alone does not establish mutual updates, strict nesting, synchronization, or different timescales. Show concrete interfaces rather than an unexplained double-headed arrow.
+
+Use the [feedback revision example](diagram-frameworks.md#feedback-revision-example) for state carried across rounds, and the branching methods template for control-flow guards. Neither layout is mandatory for other iteration semantics.
+
 ## Scientific systems
 
 For pipelines and dependency views, identify whether a box is a component, artifact, stage, or boundary. Groups express membership unless ordering is explicit. Keep data flow, control flow, and dependency direction legible. Preserve input order, output identity, selector/control paths, and observation boundaries when they affect the described result.

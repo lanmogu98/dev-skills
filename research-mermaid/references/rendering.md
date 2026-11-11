@@ -21,6 +21,18 @@ Use a temporary output location for validation. Mermaid CLI can also transform M
 
 Apply the delivery-size acceptance checks in [Visual baseline](visual-baseline.md#acceptance-at-the-delivery-size). Inspect the rendered image, not just the process exit status. Check labels, clipping, font/glyph support, arrowheads, crossings, boundary membership, and reading order at the intended display size. Review semantic fidelity against the source: every depicted condition, direction, status, and equality still has to be correct. Rerender after a syntax, layout, or configuration change; unchanged diagrams can reuse current evidence for the same renderer and configuration.
 
+Check communication against the agreed reader takeaway, applying only the relevant questions:
+
+| Content | Check in the actual preview |
+| --- | --- |
+| Architecture contribution | Can the reader locate the common task, changed mechanism, and its path to the claimed capability? |
+| Iteration | What changes, what persists, and where does the next round enter? Does stopping mean success or merely termination? |
+| Multiple loops | Are cross-loop effects attached to concrete artifacts or interfaces without invented nesting or timing? |
+| Context and constraints | Are auxiliary roles distinguishable from execution stages, with their important targets preserved? |
+| Visual encoding | Do grouping, alignment, shapes, line styles, color, and text emphasis retain consistent meanings? |
+
+Temporarily ignore supporting explanations to see whether the main structure is recognizable, then remove color to check whether essential distinctions remain. These are diagnostic checks, not reasons to remove necessary qualifiers. Resolve any disagreement among caption, accessible description, and visible relationships.
+
 For documentation, inspect supported light and dark themes, especially when custom styling is used. For publication, follow the venue's dimensions and export requirements: prefer a vector artifact when accepted, check legibility at final column width, and test grayscale when needed. A large preview is not evidence that small printed labels are readable. For dense equations, preserve the requested notation in surrounding math or use the user's chosen mathematical typesetting tool rather than silently switching formats.
 
 When publication is authorized, inspect the published diagram or final document. Do not create a public upload or PR just to test rendering.

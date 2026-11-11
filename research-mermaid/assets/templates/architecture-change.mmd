@@ -1,0 +1,17 @@
+%% Synthetic dispatch architectures; example facts and caption are in diagram-frameworks.md.
+flowchart TB
+    accTitle: Moving a handler mapping out of dispatch code
+    accDescr: Both systems route requests to handlers. The fixed dispatcher embeds the mapping in code. The registry-based dispatcher consults a separate registration table, allowing the mapping to change without editing dispatch code.
+    subgraph fixedSystem["Fixed dispatch"]
+        fixedRequest["Request"] --> fixedDispatch("`**Dispatch**
+Mapping in code`")
+        fixedDispatch -->|route| fixedHandler["Handler"]
+    end
+    subgraph extensibleSystem["Registered dispatch"]
+        extensibleRequest["Request"] --> extensibleDispatch("`**Dispatch**
+Mapping lookup`")
+        registry["Handler registrations"] -. mapping .-> extensibleDispatch
+        extensibleDispatch -->|route| extensibleHandler["Handler"]
+    end
+    class registry changed
+    classDef changed stroke:#0D9488,stroke-width:3px

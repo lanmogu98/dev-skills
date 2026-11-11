@@ -1,0 +1,15 @@
+%% Synthetic sensor calibration; example facts and caption are in diagram-frameworks.md.
+flowchart TB
+    accTitle: Calibration revised using retained trial history
+    accDescr: Initialize the setting and an empty trial log once. Measure a fixed reference, retain the setting and residual, then stop at tolerance or budget. Otherwise revise the setting using the log and return to measurement without resetting history.
+    initialize("Initialize setting\nand empty log") --> measure("Measure with\ncurrent setting")
+    reference["Fixed reference"] -. input .-> measure
+    measure -->|setting and residual| retain("Append to trial log\nKeep previous trials")
+    retain --> stop{"Tolerance met\nor budget exhausted?"}
+    stop -->|yes| result[["Setting and trial log\nRecord stop reason"]]
+    stop -->|no| revise("Revise setting\nusing retained log")
+    revise -->|updated setting| measure
+    class initialize,measure,retain,revise operation
+    class result result
+    classDef operation stroke:#3B82F6,stroke-width:2px
+    classDef result stroke:#0D9488,stroke-width:2px
