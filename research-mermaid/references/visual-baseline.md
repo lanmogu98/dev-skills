@@ -68,7 +68,7 @@ Assign each visual variable a job before choosing decoration:
 | Weight and text hierarchy | Primary name versus a short explanation or necessary qualifier. |
 | Color | Tracking a consistent role, path, or mechanism across the view. |
 
-The operation/result palette above is a default. When color instead tracks responsibilities or paths, switch the encoding consistently across the figure and explain it; the same blue should not mean both “operation” and “baseline.” Use words, shape, or position to preserve important distinctions without color. For two-level labels, emphasize the short primary name and keep the supporting line subordinate; use destination-supported text syntax and verify the render. Simple figures need no additional styling.
+Select visual encoding to support the composition and reference mechanisms first. The operation/result palette above is a fallback when no task-specific role encoding is needed. When color instead tracks responsibilities or paths, switch the encoding consistently across the figure and explain it; the same blue should not mean both “operation” and “baseline.” Use words, shape, or position to preserve important distinctions without color. For two-level labels, emphasize the short primary name and keep the supporting line subordinate; use destination-supported text syntax and verify the render. Simple figures need no additional styling.
 
 Use words and shapes alongside color. State theorem status in text; do not infer it from the result style. Sequence and state diagrams retain their native conventions instead of reusing flowchart role classes. For a monochrome destination, remove the flowchart border colors while retaining labels, shapes, and line patterns; switching themes alone does not override explicit `classDef` colors.
 
@@ -80,10 +80,10 @@ Containment or a single relation to a work region may summarize broad support wh
 
 ## Compose before styling
 
-1. Reuse the agreed reader takeaway as the composition goal. Choose a framework from [Diagram frameworks](diagram-frameworks.md), then remove example nodes unsupported by the task.
+1. Follow the [composition decision](visual-composition.md): first-glance relationship, comparison unit, hierarchy, and any selected reference mechanisms. Use [Diagram frameworks](diagram-frameworks.md) and example assets to implement that decision; remove example content unsupported by the task.
 2. Separate short identifiers/actions from conditions and full definitions. Usually a node needs one or two short lines; use the caption for the domain, assumptions, and full formula when those do not distinguish paths. Keep path-changing conditions beside their node or edge. Use a short main label for the object or action and a subordinate line only for an essential distinction.
 3. Arrange the main relationship to fit the destination. A short serial method can run left to right. Experimental partitions need explicit labels under a shared allocation. A single phase node can carry a partition label; use a group for several related operations. Fitting and selection dependencies can stagger phases, so do not promise exact alignment from automatic layout. Mathematical paths should make their common endpoints easy to find. Do not rotate a long chain and call the layout solved.
-4. Try changing direction, grouping, or decomposing the view before reducing text size. Use subgraphs for meaningful boundaries, not as empty positioning containers. External links can cause Mermaid to ignore a subgraph's direction. ELK is an optional alternative when supported by the host; rerender and compare rather than assuming it improves the graph.
+4. Try changing direction, grouping, or decomposing the view before reducing text size, while preserving the figure's intended comparison unit and main relationship. Use subgraphs for meaningful boundaries, not as empty positioning containers. External links can cause Mermaid to ignore a subgraph's direction. ELK is an optional alternative when supported by the host; rerender and compare rather than assuming it improves the graph.
 
 ## Acceptance at the delivery size
 

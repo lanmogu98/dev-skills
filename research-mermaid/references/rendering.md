@@ -25,11 +25,13 @@ Check communication against the agreed reader takeaway, applying only the releva
 
 | Content | Check in the actual preview |
 | --- | --- |
-| Architecture contribution | Can the reader identify the common task, match the roles being compared, and locate the structural change and its path to the claimed capability? For paired views, inspect corresponding positions, scale, and reading direction; equal frames or side-by-side placement alone are insufficient. For a shared skeleton, distinguish alternatives and design changes from simultaneous execution. |
+| Architecture contribution | Is the chosen comparison unit still visible? Can the reader recognize the complete systems when that is the question, match recurring roles, and locate the changed mechanism and resulting capability? Check coordinated hierarchy and purposeful space allocation, not just equal frames. |
 | Iteration | What changes, what persists, and where does the next round enter? Does stopping mean success or merely termination? |
 | Multiple loops | Are cross-loop effects attached to concrete artifacts or interfaces without invented nesting or timing? |
 | Context and constraints | Are auxiliary roles distinguishable from execution stages, with their important targets preserved? |
 | Visual encoding | Do grouping, alignment, shapes, line styles, color, and text emphasis retain consistent meanings? |
+
+When adapting a reference, compare the final image with its selected visual mechanisms: hierarchy, correspondence, enclosure, route structure, and emphasis. Reusing labels or colors alone is insufficient. If feedback says the composition fails, mark that communication check unresolved even when earlier syntax, size, or source checks passed.
 
 Temporarily ignore supporting explanations to see whether the main structure is recognizable, then remove color to check whether essential distinctions remain. For a comparison, ask which objects correspond and what changed before reading the detailed caption. If the answer requires reconstructing both graphs, the composition has not yet done its job even if the text is legible. These are diagnostic checks, not reasons to remove necessary qualifiers. Resolve any disagreement among caption, accessible description, and visible relationships.
 
@@ -43,6 +45,7 @@ Distinguish these outcomes in the delivery note:
 
 | Check | Evidence |
 | --- | --- |
+| Composition and communication | Actual-image review against the agreed takeaway, comparison unit, and selected reference mechanisms; identify which structure carries the main inference. User-rejected composition is not a visual pass. |
 | Source correspondence | Inspected definition, theorem, protocol, data record, or supplied source supporting the relationships and premises. |
 | Rendering | Renderer/version and successful rendering of the delivered source. |
 | Visual review | Inspection of the actual output at its intended size and relevant theme. |

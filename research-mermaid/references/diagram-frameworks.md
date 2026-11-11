@@ -1,6 +1,6 @@
 # Diagram frameworks
 
-Choose by the reader's question, not by a preferred Mermaid keyword. These are illustrative structural templates, not facts about a project. Use the [visual baseline](visual-baseline.md) and the destination's constraints. The examples below specify captions and failure patterns for each runnable `.mmd` template.
+Choose by the reader's question and the [composition decision](visual-composition.md), not by a preferred Mermaid keyword. These are illustrative structural templates, not facts about a project. Use the [visual baseline](visual-baseline.md) and the destination's constraints. The examples below specify captions and failure patterns for each runnable `.mmd` template.
 
 | Question | Framework | Source |
 | --- | --- | --- |
@@ -76,17 +76,17 @@ Explain a common task, the existing mechanism's limitation, the structural chang
 
 Choose a composition that exposes the change:
 
-- **Corresponding views:** establish a common comparison axis, such as the same task and corresponding responsibilities. Align matching inputs, operations, and outputs on shared rows or columns; keep their scale, reading direction, and encoding consistent. Label the alternatives and make the changed interface or boundary visible. Proximity alone does not establish correspondence.
-- **Shared structure with an emphasized change:** use when most roles stay the same and a small interface or responsibility changes.
+- **Corresponding system views:** use when the reader needs to compare complete architectures or paradigms. Establish the common task and recurring responsibilities; coordinate titles, panel hierarchy, recognizable role symbols, environment regions, and scale. Align useful anchors rather than forcing every internal node into the same coordinates. Label the systems and expose the structural delta. Proximity alone does not establish correspondence.
+- **Shared structure with an emphasized change:** use when the intended comparison concerns a local substitution and one common mechanism can represent both cases without concealing their different responsibilities or feedback paths.
 - **Overview with local detail:** use when the contribution is concentrated in one subsystem; identify the expanded interface in both views.
 
 Treat equal outer frames as a supporting cue, not the comparison itself. Their dimensions should be comparable when area carries no meaning, but equal boxes with unrelated internal arrangements still make the reader reconstruct the mapping. Deliberate asymmetry can emphasize a changed subsystem when the common anchors remain clear. Do not add fictional components or execution edges to force symmetry.
 
-If automatic layout destroys the correspondence, revise the composition instead of accepting it because it renders. A shared skeleton with explicitly labeled alternatives often suits a localized change better than two independently laid-out systems. In that view, distinguish design-change arrows from runtime paths and say whether the alternatives replace one another; do not imply that both mechanisms operate together.
+If automatic layout destroys the selected comparison, revise grouping, routing, scale allocation, or implementation while retaining the comparison unit. See the [CAKE visual reasoning](visual-composition.md#cake-worked-visual-reasoning) for how complete system views can use unequal widths deliberately. Do not silently replace a whole-system comparison with a mixed A/B execution path to avoid layout work.
 
 Allow enough space for the differentiating mechanism. For a reusable paradigm, distinguish stable roles and relations from the current implementation's names. State the scope of limitations: omitting baseline components cannot establish impossibility, and a mechanism comparison does not demonstrate a measured speedup.
 
-Use [architecture-change.mmd](../assets/templates/architecture-change.mmd) as an example of a shared skeleton with an explicit architectural transformation, not a new diagram family.
+For a **local mapping-extraction question**, [architecture-change.mmd](../assets/templates/architecture-change.mmd) illustrates a shared skeleton. It is not the starting layout for a whole-system comparison such as CAKE Figure 1. Select it only after establishing that this local view answers the reader's question.
 
 **Example facts and caption:** Both synthetic designs route a request to a handler; the shared path shows this invariant task. In alternative A, the handler map is inside the dispatcher-code boundary, so extension edits that code. In alternative B, a separate registry supplies the map, so extension changes registrations while dispatch code remains fixed. The thick “Design change: extract mapping” arrow denotes an architectural transformation, not a runtime transfer. Thin solid arrows carry requests; dotted A/B arrows supply the mapping in the respective alternative, not simultaneously. The enclosure expresses code membership, and the labeled A/B map nodes preserve the distinction without color. This explains an extension point, not measured performance or a limitation of every fixed dispatcher.
 

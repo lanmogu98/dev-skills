@@ -41,7 +41,7 @@ Make fixed inputs and mutable objects distinguishable through naming, grouping, 
 
 For multiple loops, name each updated object and the payload that connects one loop to the other. Two loops are coupled only when their outputs affect each other's operation; label one-way influence as such. Shared evaluation alone does not establish mutual updates, strict nesting, synchronization, or different timescales. Show concrete interfaces rather than an unexplained double-headed arrow.
 
-Use the [feedback revision example](diagram-frameworks.md#feedback-revision-example) for state carried across rounds, and the branching methods template for control-flow guards. Neither layout is mandatory for other iteration semantics.
+Choose the spatial scope and information hierarchy using [Visual composition](visual-composition.md#iteration-and-supporting-information); semantic completeness alone does not make the loop easy to follow. Use the [feedback revision example](diagram-frameworks.md#feedback-revision-example) for state carried across rounds, and the branching methods template for control-flow guards. Neither layout is mandatory for other iteration semantics.
 
 ## Scientific systems
 
