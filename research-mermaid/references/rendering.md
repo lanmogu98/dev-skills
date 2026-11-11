@@ -25,13 +25,13 @@ Check communication against the agreed reader takeaway, applying only the releva
 
 | Content | Check in the actual preview |
 | --- | --- |
-| Architecture contribution | Can the reader locate the common task, changed mechanism, and its path to the claimed capability? |
+| Architecture contribution | Can the reader identify the common task, match the roles being compared, and locate the structural change and its path to the claimed capability? For paired views, inspect corresponding positions, scale, and reading direction; equal frames or side-by-side placement alone are insufficient. For a shared skeleton, distinguish alternatives and design changes from simultaneous execution. |
 | Iteration | What changes, what persists, and where does the next round enter? Does stopping mean success or merely termination? |
 | Multiple loops | Are cross-loop effects attached to concrete artifacts or interfaces without invented nesting or timing? |
 | Context and constraints | Are auxiliary roles distinguishable from execution stages, with their important targets preserved? |
 | Visual encoding | Do grouping, alignment, shapes, line styles, color, and text emphasis retain consistent meanings? |
 
-Temporarily ignore supporting explanations to see whether the main structure is recognizable, then remove color to check whether essential distinctions remain. These are diagnostic checks, not reasons to remove necessary qualifiers. Resolve any disagreement among caption, accessible description, and visible relationships.
+Temporarily ignore supporting explanations to see whether the main structure is recognizable, then remove color to check whether essential distinctions remain. For a comparison, ask which objects correspond and what changed before reading the detailed caption. If the answer requires reconstructing both graphs, the composition has not yet done its job even if the text is legible. These are diagnostic checks, not reasons to remove necessary qualifiers. Resolve any disagreement among caption, accessible description, and visible relationships.
 
 For documentation, inspect supported light and dark themes, especially when custom styling is used. For publication, follow the venue's dimensions and export requirements: prefer a vector artifact when accepted, check legibility at final column width, and test grayscale when needed. A large preview is not evidence that small printed labels are readable. For dense equations, preserve the requested notation in surrounding math or use the user's chosen mathematical typesetting tool rather than silently switching formats.
 

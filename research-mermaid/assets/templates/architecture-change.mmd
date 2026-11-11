@@ -1,17 +1,17 @@
-%% Synthetic dispatch architectures; example facts and caption are in diagram-frameworks.md.
 flowchart TB
-    accTitle: Moving a handler mapping out of dispatch code
-    accDescr: Both systems route requests to handlers. The fixed dispatcher embeds the mapping in code. The registry-based dispatcher consults a separate registration table, allowing the mapping to change without editing dispatch code.
-    subgraph fixedSystem["Fixed dispatch"]
-        fixedRequest["Request"] --> fixedDispatch("`**Dispatch**
-Mapping in code`")
-        fixedDispatch -->|route| fixedHandler["Handler"]
+    accTitle: Extract the handler mapping while keeping request routing
+    accDescr: A common request-to-dispatch-to-handler path compares two alternative mapping locations. A is embedded within dispatcher code. B is an external registry. A thick arrow denotes the architectural extraction, not runtime execution. Thin arrows carry requests; dotted arrows supply the mapping in the respective alternative.
+    request["Request"] --> dispatch
+    subgraph code["Dispatcher code"]
+        embedded["A · Embedded map
+Extend by editing code"]
+        dispatch("Route request")
+        embedded -. "A: mapping" .-> dispatch
     end
-    subgraph extensibleSystem["Registered dispatch"]
-        extensibleRequest["Request"] --> extensibleDispatch("`**Dispatch**
-Mapping lookup`")
-        registry["Handler registrations"] -. mapping .-> extensibleDispatch
-        extensibleDispatch -->|route| extensibleHandler["Handler"]
-    end
-    class registry changed
-    classDef changed stroke:#0D9488,stroke-width:3px
+    registry["B · External registry
+Extend by registration"] -. "B: mapping" .-> dispatch
+    embedded ==>|"Design change:
+extract mapping"| registry
+    dispatch --> handler["Handler"]
+    class embedded,registry changed
+    classDef changed stroke:#0D9488,stroke-width:2px

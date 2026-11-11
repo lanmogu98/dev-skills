@@ -54,13 +54,13 @@
     {
       "id": 4,
       "prompt": "Using architecture-change.md, create a Mermaid research figure explaining how explicit dependencies enable selective recomputation compared with the supplied fixed pipeline. Include a source-grounded caption. Save diagram.mmd and figure.md and render light/dark previews at 720 CSS pixels. Use only the supplied source.",
-      "expected_output": "Corresponding mechanisms with visible change-impact resolution, retained unaffected results, and index updates; qualified capability, no invented measured gains.",
+      "expected_output": "Common task and identifiable corresponding mechanisms, using aligned views or a shared skeleton, with visible change-impact resolution, retained unaffected results, and index updates; qualified capability, no invented measured gains.",
       "assertions": [
         "Both architectures maintain results after a source-data change; the supplied baseline reruns all stages unconditionally, while the proposed system selects affected results, possibly all results.",
         "The dependency index informs affected-result selection; the scheduler recomputes affected results in dependency order.",
         "Unaffected cached results are retained and combined with recomputed results; recomputation updates the index for later events.",
         "The caption preserves complete dependency recording and change detection assumptions; no speedup or universal baseline limitation is invented.",
-        "The changed mechanism and capability are identifiable at 720 CSS pixels in both themes; source, caption, and accessible description agree."
+        "At 720 CSS pixels in both themes, the reader can identify corresponding roles through shared visual anchors or a common skeleton and locate the changed mechanism; side-by-side placement and legible text alone do not satisfy this check. Any alternative mechanisms or design-change arrows are distinguished from simultaneous runtime execution. Source, caption, and accessible description agree."
       ],
       "files": [
         "evals/files/architecture-change.md"

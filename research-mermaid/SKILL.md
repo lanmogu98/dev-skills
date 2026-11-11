@@ -66,6 +66,7 @@ When producing a rendered artifact, show its actual preview in the delivery, at 
 | A successful replay points to a universal correctness claim. | Show the tested configuration as evidence and cite a theorem separately for any universal claim. |
 | Two arrows meet, but the caption never says what is equal. | State the composed-path equality, its domain, and its premises. |
 | A methods pipeline contains an assumed randomization or analysis step. | Return to the protocol; identify missing information rather than filling in a conventional procedure. |
+| Two architectures sit side by side, but their corresponding roles are hard to find. | Establish shared visual anchors and an explicit change, or factor out a common skeleton. Equal outer boxes alone do not solve the comparison. |
 | A grouped architecture reads like a serial execution trace. | Label membership and show ordering only where it is established. |
 | A local preview is reported as verified on GitHub or in a paper. | Report the renderer actually used and inspect the destination when available. |
 

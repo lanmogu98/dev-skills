@@ -76,15 +76,19 @@ Explain a common task, the existing mechanism's limitation, the structural chang
 
 Choose a composition that exposes the change:
 
-- **Corresponding views:** compare structures with recognizable counterparts at comparable abstraction levels.
+- **Corresponding views:** establish a common comparison axis, such as the same task and corresponding responsibilities. Align matching inputs, operations, and outputs on shared rows or columns; keep their scale, reading direction, and encoding consistent. Label the alternatives and make the changed interface or boundary visible. Proximity alone does not establish correspondence.
 - **Shared structure with an emphasized change:** use when most roles stay the same and a small interface or responsibility changes.
 - **Overview with local detail:** use when the contribution is concentrated in one subsystem; identify the expanded interface in both views.
 
+Treat equal outer frames as a supporting cue, not the comparison itself. Their dimensions should be comparable when area carries no meaning, but equal boxes with unrelated internal arrangements still make the reader reconstruct the mapping. Deliberate asymmetry can emphasize a changed subsystem when the common anchors remain clear. Do not add fictional components or execution edges to force symmetry.
+
+If automatic layout destroys the correspondence, revise the composition instead of accepting it because it renders. A shared skeleton with explicitly labeled alternatives often suits a localized change better than two independently laid-out systems. In that view, distinguish design-change arrows from runtime paths and say whether the alternatives replace one another; do not imply that both mechanisms operate together.
+
 Allow enough space for the differentiating mechanism. For a reusable paradigm, distinguish stable roles and relations from the current implementation's names. State the scope of limitations: omitting baseline components cannot establish impossibility, and a mechanism comparison does not demonstrate a measured speedup.
 
-Use [architecture-change.mmd](../assets/templates/architecture-change.mmd) as one example of corresponding views, not a new diagram family.
+Use [architecture-change.mmd](../assets/templates/architecture-change.mmd) as an example of a shared skeleton with an explicit architectural transformation, not a new diagram family.
 
-**Example facts and caption:** In this synthetic comparison, both systems dispatch a request to a handler. The fixed dispatcher has its handler mapping built into its code; adding a handler requires changing that dispatcher. The registry-based dispatcher instead resolves a handler from a registration table; adding a registration changes that table while the dispatch code remains fixed. Solid arrows show request routing; the dotted arrow supplies the registered mapping. The emphasized registration table marks the extracted extension point; its label and separate node preserve this distinction without color. The comparison concerns extension points, not measured performance or a claim that all fixed dispatchers are inextensible.
+**Example facts and caption:** Both synthetic designs route a request to a handler; the shared path shows this invariant task. In alternative A, the handler map is inside the dispatcher-code boundary, so extension edits that code. In alternative B, a separate registry supplies the map, so extension changes registrations while dispatch code remains fixed. The thick “Design change: extract mapping” arrow denotes an architectural transformation, not a runtime transfer. Thin solid arrows carry requests; dotted A/B arrows supply the mapping in the respective alternative, not simultaneously. The enclosure expresses code membership, and the labeled A/B map nodes preserve the distinction without color. This explains an extension point, not measured performance or a limitation of every fixed dispatcher.
 
 **Adapt:** change both sides' common task, corresponding roles, interface payloads, and sourced limitation together. Retain the mechanism-to-capability explanation in the caption or a subordinate annotation. **Misreading to avoid:** the registry is a mapping consulted during dispatch, not a stage that processes the request before the dispatcher.
 
