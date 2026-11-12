@@ -17,7 +17,7 @@ manage-skills.sh link-user
 | --- | --- |
 | [dev-workflow](./dev-workflow/) | Engineering workflow for code changes in existing codebases |
 | [project-init](./project-init/) | Repository initialization protocol for AI-assisted development |
-| [research-mermaid](./research-mermaid/) | Research diagrams with controlled SVG/PNG export or Mermaid output |
+| [research-diagrams](./research-diagrams/) | Research diagrams with controlled SVG/PNG export or Mermaid output |
 
 `project-init` and `dev-workflow` are complementary: `project-init` creates the scaffold (one-time), then `dev-workflow` operates within it (ongoing).
 
@@ -58,9 +58,9 @@ Cross-agent project initialization protocol. Sets up a new repository optimized 
 - `references/cloud-dispatch.md` — GitHub Actions workflow templates (Claude Code Action + Codex Action)
 - `references/review-checklists.md` — Multi-dimensional review framework
 
-## research-mermaid
+## research-diagrams
 
-Create, revise, or review research diagrams for methods, experiments, mathematical mappings, proof dependencies, and scientific systems, including architectural contributions and iterative feedback. The historical name does not require Mermaid source: composition-sensitive figures can use explicit SVG geometry and export canonical SVG/PNG resources for Markdown embedding. It first establishes the reader takeaway from the conversation, asking one high-level question only when the focus is unclear. The skill reads the destination repository's constraints and preserves the distinction between proposed relationships, proved results, and empirical evidence.
+Create, revise, or review research diagrams for methods, experiments, mathematical mappings, proof dependencies, and scientific systems, including architectural contributions and iterative feedback. Composition-sensitive figures can use explicit SVG geometry and export canonical SVG/PNG resources for Markdown embedding. It first establishes the reader takeaway from the conversation, asking one high-level question only when the focus is unclear. The skill reads the destination repository's constraints and preserves the distinction between proposed relationships, proved results, and empirical evidence.
 
 The entrypoint establishes the composition before choosing source notation or templates. `references/visual-composition.md` explains how to adapt visual references, including CAKE Figures 1, 2, and 4, while preserving the intended comparison or process. For new fixed figures, `references/geometry-api.md` describes a small shared Python object model: a project generator supplies content, regions and spatial relationships, while shared code derives dimensions/ports and emits SVG. Measured checks locate text/route occupancy, containment, alignment, endpoint and display-size errors before final export; diagnostics and debug previews feed back into the generator. These checks do not select or validate the research claim or overall composition.
 
@@ -68,7 +68,7 @@ The entrypoint establishes the composition before choosing source notation or te
 
 `evals/evals.json` contains seven artifact-generation tasks: the original Map theorem, controlled systems benchmark, and branching tiled kernel, plus selective recomputation, counterexample-guided repair, interacting feedback loops, and a protocol with contextual and constraint inputs. Their source packets live in `evals/files/`. `evals/composition-evals.json` adds three planning-only checks for architecture comparison, iteration, and information roles; these diagnose the skill's decisions and do not establish visual success. `evals/visual-evals.json` requires six actual rendered outputs: CAKE's three reference structures and three transfers to other research material. Validate communication in the final images separately from planning, parsing, and text-size checks. `evals/trigger-evals.json` contains positive Mermaid and fixed-vector cases and adjacent exclusions for quantitative plotting, prose-only explanation, native Figma editing, and interactive web applications. These are evaluation inputs, not a claim that all runs or user reviews have passed. This adaptation of robust-skills retains its pinned upstream source and MIT notice inside the skill directory.
 
-Local plans, baseline snapshots, generated diagrams, checks, and user feedback live in `draft/research-mermaid/`; evaluation outputs go under `draft/research-mermaid/evaluation-artifacts/` (Git-ignored). Reusable test cases remain in `research-mermaid/evals/`.
+Existing local plans, baseline snapshots, generated diagrams, checks, and user feedback retain their historical paths in `draft/research-mermaid/`; evaluation outputs go under `draft/research-mermaid/evaluation-artifacts/` (Git-ignored). Reusable test cases remain in `research-diagrams/evals/`.
 
 ## Development
 

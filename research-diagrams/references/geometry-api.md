@@ -13,7 +13,7 @@ Then allocate regions and route lanes and instantiate their objects. Use `align`
 Copy the [thin example](../assets/templates/build_figure.py) to the destination project and adapt its composition. Run it with the installed skill's absolute path:
 
 ```sh
-python3 figures/build_figure.py --skill /path/to/research-mermaid \
+python3 figures/build_figure.py --skill /path/to/research-diagrams \
   --output figures/method
 ```
 

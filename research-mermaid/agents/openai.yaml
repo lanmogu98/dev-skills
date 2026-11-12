@@ -1,4 +1,0 @@
-interface:
-  display_name: "Research Mermaid"
-  short_description: "Research diagrams with controlled SVG or Mermaid output"
-  default_prompt: "Use $research-mermaid to create or review this research diagram using the project's sources and writing constraints."

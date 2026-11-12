@@ -1,9 +1,9 @@
 {
-  "skill_name": "research-mermaid",
+  "skill_name": "research-diagrams",
   "evals": [
     {
       "id": 1,
-      "prompt": "Use research-mermaid to plan a research figure from the supplied CAKE packet and original figure images. The reader should understand how the complete paradigm changes from kernel-only evolution with a fixed environment to kernel/compiler-harness co-evolution. Refer to Figure 1's visual expression. Give a concise composition decision: what appears first, how the comparison is established, which spatial/symbol/text/color choices carry the mechanism, and why this layout fits better than a plausible alternative. Do not draw, render, or edit diagram assets.",
+      "prompt": "Use research-diagrams to plan a research figure from the supplied CAKE packet and original figure images. The reader should understand how the complete paradigm changes from kernel-only evolution with a fixed environment to kernel/compiler-harness co-evolution. Refer to Figure 1's visual expression. Give a concise composition decision: what appears first, how the comparison is established, which spatial/symbol/text/color choices carry the mechanism, and why this layout fits better than a plausible alternative. Do not draw, render, or edit diagram assets.",
       "expected_output": "A composition for complete existing/proposed system views, grounded in Figure 1's actual visual mechanisms: coordinated panel hierarchy and common environment/task anchors, recurring role symbols, deliberate space for the added evolution mechanism and central shared harness. It does not default to two unrelated boxes, insist on equal widths or identical internal coordinates, or merge complete architectures into an A/B execution path to avoid layout work.",
       "assertions": [
         "The decision retains identifiable complete existing and proposed system views and explains the paradigm-level change.",
@@ -16,7 +16,7 @@
     },
     {
       "id": 2,
-      "prompt": "Use research-mermaid to plan a figure for this synthetic rule-library process, borrowing the visual reasoning of CAKE Figure 2 from the supplied packet and image. An initial archive of error cases starts a rule library once. Each round identifies a recurring error, revises a cleaning rule, and validates the revised library against the retained archive. A new case family or a newly exposed gap starts another round of error identification; rules and archive persist. No global convergence or terminal condition is supplied. Explain the composition and the first-glance versus supporting information. Do not draw, render, or edit diagrams.",
+      "prompt": "Use research-diagrams to plan a figure for this synthetic rule-library process, borrowing the visual reasoning of CAKE Figure 2 from the supplied packet and image. An initial archive of error cases starts a rule library once. Each round identifies a recurring error, revises a cleaning rule, and validates the revised library against the retained archive. A new case family or a newly exposed gap starts another round of error identification; rules and archive persist. No global convergence or terminal condition is supplied. Explain the composition and the first-glance versus supporting information. Do not draw, render, or edit diagrams.",
       "expected_output": "A composition transferring the separation of one-time entry, repeated work, and a return route to the correct body entry. It makes persistent rule-library/archive state and next-round triggers clear without resetting initialization, inventing a terminating diamond, or copying CAKE-specific IR names and colors as requirements.",
       "assertions": [
         "The initial archive/library entry is spatially distinguished from the repeated identify/revise/validate body.",
@@ -29,7 +29,7 @@
     },
     {
       "id": 3,
-      "prompt": "Use research-mermaid to plan a figure for the supplied assay protocol in context-and-constraints.md. Borrow CAKE Figure 4's way of separating information roles, using its supplied image and source packet as a visual reference. Explain a composition that makes the specimen path primary while preserving literature/model selection, the SOP, and calibration/drift relationships. State why a plausible single serial chain or a literal copy of CAKE's two IR/compiler regions would fail. Do not draw, render, or edit diagram assets.",
+      "prompt": "Use research-diagrams to plan a figure for the supplied assay protocol in context-and-constraints.md. Borrow CAKE Figure 4's way of separating information roles, using its supplied image and source packet as a visual reference. Explain a composition that makes the specimen path primary while preserving literature/model selection, the SOP, and calibration/drift relationships. State why a plausible single serial chain or a literal copy of CAKE's two IR/compiler regions would fail. Do not draw, render, or edit diagram assets.",
       "expected_output": "A transferred information hierarchy: visible specimen progression, contextual literature apart from specimen processing, SOP attached to preparation, model and coefficients attached to estimation, and drift routed to recalibration. Broad grouping does not erase required target-specific dependencies. It adapts the reference instead of imposing its IR-specific region count or flattening inputs into a chain.",
       "assertions": [
         "Specimen preparation, acquisition, estimation, and reporting remain the primary progression.",

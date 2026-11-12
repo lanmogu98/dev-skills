@@ -24,7 +24,7 @@ dotfiles/agent-config/skills/ (install dir, gitignored by dotfiles)
 | `dev-workflow/` | Feature/fix/refactor/PR cycle | Ongoing development workflow |
 | `project-init/` | Repo initialization for AI-assisted dev | One-time scaffold, then hand off to dev-workflow |
 | `file-issue/` | File GitHub/local issues from conversation | Utility (project-agnostic) |
-| `research-mermaid/` | Research diagrams with explicit claims, evidence, and rendering checks | Shared workflow; reads each project's writing constraints |
+| `research-diagrams/` | Research diagrams with explicit claims, evidence, and rendering checks | Shared workflow; reads each project's writing constraints |
 
 `domain-review` is not a standalone skill — it's a conditional extension inside `dev-workflow/references/domain-review.md`, activated by a project's `AGENTS.md`.
 

@@ -25,7 +25,7 @@ Locate [`rsvg-convert`](https://github.com/GNOME/librsvg/blob/main/rsvg-convert.
 Run from the destination project, resolving the script from this skill's installed path:
 
 ```sh
-python3 /path/to/research-mermaid/scripts/render_svg.py render \
+python3 /path/to/research-diagrams/scripts/render_svg.py render \
   figures/architecture.source.svg --output figures/architecture --width 720
 ```
 
@@ -36,7 +36,7 @@ For a managed source, `render` first runs geometry checks in a fresh process wit
 To diagnose an older unmanaged source explicitly:
 
 ```sh
-python3 /path/to/research-mermaid/scripts/render_svg.py check \
+python3 /path/to/research-diagrams/scripts/render_svg.py check \
   figures/architecture.source.svg --output figures/architecture-check --width 720
 ```
 
@@ -45,9 +45,9 @@ This measures identified text and supported routes, but lacks ownership, alignme
 If the environment differs, the command reports profile drift instead of quietly changing output. Establish a project profile explicitly, retain the previous profile with its outputs, rerender, and inspect before adopting it:
 
 ```sh
-python3 /path/to/research-mermaid/scripts/render_svg.py lock \
+python3 /path/to/research-diagrams/scripts/render_svg.py lock \
   --profile figures/render-profile.json
-python3 /path/to/research-mermaid/scripts/render_svg.py render \
+python3 /path/to/research-diagrams/scripts/render_svg.py render \
   figures/architecture.source.svg --output figures/architecture \
   --profile figures/render-profile.json --width 720
 ```

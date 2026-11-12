@@ -1,11 +1,11 @@
 ---
-name: research-mermaid
-description: Use when planning, creating, revising, or reviewing research diagrams for papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, architectural contributions, system comparisons, iterative feedback, or scientific systems. Supports fixed-layout SVG/PNG figures and Mermaid when requested or suitable. Also use when a repository's writing guidelines require research-mermaid. Not for quantitative plots, anatomical illustrations, native Figma editing, or interactive web applications.
+name: research-diagrams
+description: Use when planning, creating, revising, or reviewing research diagrams for papers, technical notes, methods, experiment pipelines, mathematical mappings, proof dependencies, architectural contributions, system comparisons, iterative feedback, or scientific systems. Supports fixed-layout SVG/PNG figures and Mermaid when requested or suitable. Also use when a repository's writing guidelines require research-diagrams. Not for quantitative plots, anatomical illustrations, native Figma editing, or interactive web applications.
 ---
 
-# Research Mermaid
+# Research Diagrams
 
-Make the research claim, its conditions, and its evidence readable in the requested diagram. Preserve the user's chosen output format and scope. The historical skill name does not require Mermaid source for exported figures.
+Make the research claim, its conditions, and its evidence readable in the requested diagram. Preserve the user's chosen output format and scope.
 
 ## Establish the claim and destination
 
@@ -54,7 +54,7 @@ Read [Visual baseline](references/visual-baseline.md) for shared visual roles an
 
 ## Build the diagram
 
-Implement the chosen spatial relationships and inspect whether the renderer preserves them. Follow [composition implementation](references/visual-composition.md#carry-the-composition-into-rendering). Keep the editable source and any generator needed to rebuild the exported figure; do not create a parallel `.mmd` merely to satisfy this skill's name.
+Implement the chosen spatial relationships and inspect whether the renderer preserves them. Follow [composition implementation](references/visual-composition.md#carry-the-composition-into-rendering). Keep the editable source and any generator needed to rebuild the exported figure; a parallel `.mmd` is unnecessary unless requested.
 
 - For a new fixed SVG, express the selected regions, correspondence, containment, ports and route lanes through the shared figure model. Declare only the alignments and shared sizes that serve this composition. Build a candidate, read the measured diagnostics and inspect its debug preview when checks fail, then revise the project generator and rebuild. Reuse geometry helpers instead of rewriting SVG primitives or maintaining a second table of obstacle coordinates. Do not bypass a failure by removing checks or relabeling accidental overlaps as intended containment.
 - For Mermaid, use one diagram declaration per fenced block or `.mmd` file. Give nodes stable IDs distinct from display labels and group IDs. Quote flowchart labels with punctuation, avoid reserved identifiers such as `end`, and place `%%` comments on separate lines. Alias sequence participants with complex names; put ER attributes on separate lines. For SVG, use explicit geometry and stable group IDs; preserve text in the editable source and outline it only in the exported copy.
