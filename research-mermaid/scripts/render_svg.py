@@ -2,12 +2,14 @@
 """Export a self-contained SVG through a checked librsvg/font profile."""
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 import os
 from pathlib import Path
 import struct
 import subprocess
+import sys
 import tempfile
 import xml.etree.ElementTree as ET
 from xml.sax.saxutils import escape
@@ -36,6 +38,50 @@ def profile(font_dir: Path) -> dict:
     return {"toolchain": version, "font_backend": "fontconfig", "fonts_sha256": fonts}
 
 
+@contextmanager
+def font_environment(font_dir: Path):
+    with tempfile.TemporaryDirectory(prefix="research-figure-") as temp:
+        config = Path(temp) / "fonts.conf"
+        config.write_text(
+            "<?xml version='1.0'?><!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>"
+            f"<fontconfig><dir>{escape(str(font_dir.resolve()))}</dir>"
+            f"<cachedir>{escape(temp)}/cache</cachedir></fontconfig>"
+        )
+        yield dict(os.environ, FONTCONFIG_FILE=str(config), FONTCONFIG_PATH=temp,
+                   PANGOCAIRO_BACKEND="fontconfig")
+
+
+def check_geometry(args, current, env):
+    debug = Path(f"{args.output}.debug.svg")
+    process = subprocess.run(
+        [sys.executable, str(Path(__file__).with_name("svg_geometry.py")), str(args.source.resolve()),
+         "--width", str(args.width), "--debug", str(debug)],
+        env=env, capture_output=True, text=True,
+    )
+    if process.returncode:
+        raise RuntimeError("Geometry measurement failed:\n" + process.stderr.strip())
+    result = json.loads(process.stdout)
+    version = result["coverage"]["librsvg_geometry_version"]
+    if not current["toolchain"].splitlines()[0].endswith(" " + version):
+        result["errors"].append({"kind": "measurement_version", "objects": [],
+                                 "message": "Geometry library and export tool versions differ"})
+        result["status"] = "fail"
+    result.update(source={"path": str(args.source.resolve()), "sha256": digest(args.source)}, profile=current)
+    report = Path(f"{args.output}.check.json")
+    report.write_text(json.dumps(result, indent=2) + "\n")
+    if result["errors"]:
+        if debug.exists():
+            subprocess.run(["rsvg-convert", "--format=png", f"--width={args.width}",
+                            "--dpi-x=96", "--dpi-y=96", "--accept-language=en",
+                            "--keep-aspect-ratio", "--output", f"{args.output}.debug.png", str(debug)],
+                           check=True, env=env)
+        print(json.dumps({"geometry": "fail", "report": str(report),
+                          "errors": [{"kind": e["kind"], "objects": e["objects"]} for e in result["errors"]]}))
+        raise SystemExit(2)
+    return {"status": result["status"], "report": str(report), "sha256": digest(report),
+            "coverage": result["coverage"]}
+
+
 def render(args: argparse.Namespace, current: dict) -> None:
     expected = json.loads(args.profile.read_text())
     if current != expected:
@@ -56,18 +102,18 @@ def render(args: argparse.Namespace, current: dict) -> None:
     if "@import" in source.read_text() or "@font-face" in source.read_text():
         raise ValueError("Use the profile's font directory, without imported CSS/fonts")
     outputs = {ext: Path(f"{args.output}.{ext}").resolve() for ext in ("svg", "png")}
-    if source in outputs.values():
+    written_paths = {Path(f"{args.output}.{ext}").resolve() for ext in
+                     ("svg", "png", "check.json", "debug.svg", "debug.png", "render.json")}
+    if source in written_paths:
         raise ValueError("Output must not replace the editable source SVG")
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="research-figure-") as temp:
-        config = Path(temp) / "fonts.conf"
-        config.write_text(
-            "<?xml version='1.0'?><!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>"
-            f"<fontconfig><dir>{escape(str(args.font_dir.resolve()))}</dir>"
-            f"<cachedir>{escape(temp)}/cache</cachedir></fontconfig>"
-        )
-        env = dict(os.environ, FONTCONFIG_FILE=str(config), FONTCONFIG_PATH=temp,
-                   PANGOCAIRO_BACKEND="fontconfig")
+    geometry = {"status": "not_checked", "reason": "Unmanaged SVG; use check for partial text/route diagnostics"}
+    with font_environment(args.font_dir) as env:
+        if args.command == "check" or root.find(f"{{{SVG}}}metadata[@id='research-geometry']") is not None:
+            geometry = check_geometry(args, current, env)
+        if args.command == "check":
+            print(json.dumps(geometry))
+            return
         commands = [
             ["rsvg-convert", "--format=svg", f"--width={args.width}",
              "--dpi-x=96", "--dpi-y=96", "--accept-language=en",
@@ -95,6 +141,7 @@ def render(args: argparse.Namespace, current: dict) -> None:
         "display_width_css_px": args.width,
         "png_dimensions": [png_width, png_height],
         "svg_text_outlined": True,
+        "geometry_check": geometry,
         "commands": commands,
         "outputs_sha256": {ext: digest(path) for ext, path in outputs.items()},
     }
@@ -106,16 +153,16 @@ def render(args: argparse.Namespace, current: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("lock", "render"):
+    for name in ("lock", "render", "check"):
         command = commands.add_parser(name)
         command.add_argument("--font-dir", type=Path, default=ROOT / "assets/fonts")
         command.add_argument("--profile", type=Path, default=ROOT / "assets/rendering/svg-profile.json")
-        if name == "render":
+        if name in {"render", "check"}:
             command.add_argument("source", type=Path)
             command.add_argument("--output", type=Path, required=True, help="Output path without extension")
             command.add_argument("--width", type=int, default=720)
     args = parser.parse_args()
-    if args.command == "render" and args.width <= 0:
+    if args.command in {"render", "check"} and args.width <= 0:
         parser.error("--width must be positive")
     current = profile(args.font_dir)
     if args.command == "lock":

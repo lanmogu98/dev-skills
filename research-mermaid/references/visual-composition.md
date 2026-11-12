@@ -44,6 +44,8 @@ For multiple loops, group their own work and show the interfaces through which t
 
 For context, constraints, and outputs, give supporting information a different spatial role from the processed object. Context may support a work region; a specific constraint should remain near its governed operation; feedback should reach the revision it informs. Preserve important links even when summarizing broad support with a region-level relation. See [information roles](visual-baseline.md#main-path-and-supporting-information).
 
+Allocate space by explanatory importance. Attaching support near its target can help, but forcing every support block into a separate band can stretch the main path into long empty corridors. When this happens, reconsider the region arrangement and route lanes together while preserving the specific support targets; increased height is not itself a clearer hierarchy.
+
 ## CAKE: worked visual reasoning
 
 Source: Ye et al., [CAKE: Compiler–Agent Co-Design for Frontier Kernel Evolution](https://arxiv.org/abs/2608.12629v1), Figures 1, 2, and 4 on pp. 2, 3, and 6. The following are observations of those figures and the transferable design reasoning, not a required house style.
@@ -58,11 +60,11 @@ For Figure 1, blue follows kernel evolution while orange follows compiler-harnes
 
 ## Carry the composition into rendering
 
-Turn the selected composition into a few explicit spatial requirements before coding: for example, coordinated comparison panels and environment bands; an uninterrupted forward chain with its return in a separate margin; or supporting information beside a dominant work region with a local constraint attached to its target. These requirements explain what the implementation must preserve, rather than fixing coordinates for every future figure.
+Turn the selected composition into a few explicit spatial requirements before coding: for example, coordinated comparison panels and environment bands; an uninterrupted forward chain with its return in a separate margin; or supporting information beside a dominant work region with a local constraint attached to its target. These requirements explain what the implementation must preserve, rather than fixing coordinates for every future figure. For new fixed SVGs, carry the selected relationships into the [shared geometry model](geometry-api.md): regions, parent membership, alignments, shared dimensions, ports and route corridors. Keep the reasoning brief; do not require a second coordinate inventory or a user-supplied layout specification.
 
 Check whether the chosen renderer actually realizes them. Mermaid directions and subgraphs express layout intent, not fixed placement: cross-region connections and feedback labels can reshape the whole graph. A semantically correct source may render as a ribbon, reorder comparison panels, or scatter the main progression. Shrinking the export or shortening labels is not a sufficient remedy when the global relationships remain wrong.
 
-For exported composition-sensitive figures, use [explicit SVG geometry and the checked exporter](fixed-vector.md). Preserve the editable source and any generator. Other project renderers can be appropriate if they implement the required spatial relationships and keep reproducible build inputs. An automatic layout engine's name or an explicit direction is not such a guarantee.
+For exported composition-sensitive figures, use [explicit SVG geometry and the checked exporter](fixed-vector.md). Shared construction derives related coordinates; measured diagnostics locate fit, clearance and declared-constraint errors. Revise the project generator and rerun those checks after changes. Preserve the editable source and any generator. Other project renderers can be appropriate if they implement the required spatial relationships and keep reproducible build inputs. An automatic layout engine's name or an explicit direction is not such a guarantee.
 
 Use a native Mermaid view when requested or when it preserves the intended structure. If a destination requires a single native Mermaid block, respect that constraint and report the specific unresolved layout limitation rather than silently switching formats. Otherwise, the authoring source need not be Mermaid. Inspect the actual exported artifact for correspondence, feedback routing, hierarchy, clipping, and legibility; preserve every important connection and label through implementation.
 

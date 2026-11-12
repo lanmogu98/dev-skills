@@ -23,6 +23,8 @@ Use a temporary output location for validation. Mermaid CLI can also transform M
 
 Apply the delivery-size acceptance checks in [Visual baseline](visual-baseline.md#acceptance-at-the-delivery-size). Inspect the rendered image, not just the process exit status. Check labels, clipping, font/glyph support, arrowheads, crossings, boundary membership, and reading order at the intended display size. Review semantic fidelity against the source: every depicted condition, direction, status, and equality still has to be correct. Rerender after a syntax, layout, or configuration change; unchanged diagrams can reuse current evidence for the same renderer and configuration.
 
+For a new fixed SVG, use [Geometry authoring](geometry-api.md) and retain its measured `.check.json`. A failed check identifies objects/constraints and produces a debug preview; repair the layout model and regenerate. Verify that the final report's source hash matches the current candidate and that the export record references that report. A successful unmanaged export has no managed geometry guarantee; explicit checks on older sources report partial coverage. Geometry checks reserve occupancy space, while actual-image review establishes the composition's communication.
+
 Check communication against the agreed reader takeaway, applying only the relevant questions:
 
 | Content | Check in the actual preview |
@@ -49,6 +51,7 @@ Distinguish these outcomes in the delivery note:
 | --- | --- |
 | Composition and communication | Actual-image review against the agreed takeaway, comparison unit, and selected reference mechanisms; identify which structure carries the main inference. User-rejected composition is not a visual pass. |
 | Source correspondence | Inspected definition, theorem, protocol, data record, or supplied source supporting the relationships and premises. |
+| Geometry | Measured report, source hash, declared constraints, target display width and supported coverage. Distinguish managed pass, partial diagnostics, failure and skipped checking. |
 | Rendering | Source format, renderer/toolchain and font profile, export dimensions, and the source/config/generator steps that reproduce the delivered artifact. Fixed SVG exports use outlined text; retain editable text in the source. |
 | Visual review | Inspection of the actual output at its intended size and relevant theme. |
 | Destination compatibility | Inspection in the target host or final exported document, when available. |

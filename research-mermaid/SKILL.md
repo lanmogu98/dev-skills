@@ -27,7 +27,7 @@ Let visual structure carry relationships: assign position, alignment, containmen
 
 ## Choose a representation
 
-Choose the relationship first, then its implementation. For composition-sensitive exported figures, read [Fixed vector figures](references/fixed-vector.md): explicit SVG geometry preserves panel alignment, spatial roles, symbols, and feedback routes, and a checked local exporter produces the canonical SVG/PNG. Use Mermaid for an explicit Mermaid request or when its layout preserves the selected composition; the following table routes those cases. Other source formats are acceptable when the destination or an established project pipeline calls for them.
+Choose the relationship first, then its implementation. For composition-sensitive exported figures, read [Fixed vector figures](references/fixed-vector.md): a shared Python object model implements explicit SVG geometry and checks the declared spatial relationships before fixed SVG/PNG export. Use Mermaid for an explicit Mermaid request or when its layout preserves the selected composition; the following table routes those cases. Other source formats are acceptable when the destination or an established project pipeline calls for them.
 
 | Question | Diagram | Guidance to read |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ Use other Mermaid types when they fit the question and destination. For a quanti
 
 ## Use implementation resources
 
-Read [Visual baseline](references/visual-baseline.md) for shared visual roles and delivery-size checks. Use the [SVG canvas](assets/templates/fixed-layout.svg) and bundled fonts/export profile for fixed figures, or a `.mmd` example and Mermaid theme when that implementation fits. Examples do not select the composition or establish visual quality. They cover methods, experiments, mathematical mappings, proof dependencies, architecture, sequence interactions, and state lifecycles. For a local syntax repair, preserve the established intent and style; load composition guidance only if the main layout is affected.
+Read [Visual baseline](references/visual-baseline.md) for shared visual roles and delivery-size checks. For new fixed figures, use [Geometry authoring](references/geometry-api.md) and its [thin generator example](assets/templates/build_figure.py); keep figure-specific content and composition in the destination project. Use a `.mmd` example and Mermaid theme when that implementation fits. Examples do not select the composition or establish visual quality. For a local syntax repair, preserve the established intent and style; load composition guidance only if the main layout is affected.
 
 <details>
 <summary>Load additional guidance for the relationships present</summary>
@@ -56,6 +56,7 @@ Read [Visual baseline](references/visual-baseline.md) for shared visual roles an
 
 Implement the chosen spatial relationships and inspect whether the renderer preserves them. Follow [composition implementation](references/visual-composition.md#carry-the-composition-into-rendering). Keep the editable source and any generator needed to rebuild the exported figure; do not create a parallel `.mmd` merely to satisfy this skill's name.
 
+- For a new fixed SVG, express the selected regions, correspondence, containment, ports and route lanes through the shared figure model. Declare only the alignments and shared sizes that serve this composition. Build a candidate, read the measured diagnostics and inspect its debug preview when checks fail, then revise the project generator and rebuild. Reuse geometry helpers instead of rewriting SVG primitives or maintaining a second table of obstacle coordinates. Do not bypass a failure by removing checks or relabeling accidental overlaps as intended containment.
 - For Mermaid, use one diagram declaration per fenced block or `.mmd` file. Give nodes stable IDs distinct from display labels and group IDs. Quote flowchart labels with punctuation, avoid reserved identifiers such as `end`, and place `%%` comments on separate lines. Alias sequence participants with complex names; put ER attributes on separate lines. For SVG, use explicit geometry and stable group IDs; preserve text in the editable source and outline it only in the exported copy.
 - Give arrows consistent meanings and directions. Distinguish data movement, temporal order, dependency, function application, association, and implication with labels or separate views. State dependency direction. Explain meaningful line-style, shape, and color differences in a caption or legend.
 - Preserve conditions that change the claim, including domains, quantifiers, units, sample scope, and observation boundaries when applicable. Distinguish proposed relationships, established results, and empirical observations in words as well as styling. A grouping box or arrow must not imply an unestablished proof, causal effect, or execution order.
@@ -66,6 +67,8 @@ Implement the chosen spatial relationships and inspect whether the renderer pres
 ## Validate and deliver
 
 Read [Rendering and review](references/rendering.md) when rendering, repairing syntax, reviewing an artifact, or exporting for publication. Check source fidelity, visual communication of the intended relationship, and rendering separately. Readable labels and a successful render do not establish that the composition works. A parser accepts diagram syntax, not the research claim.
+
+For managed SVGs, export checks measured text occupancy, node/route clearance, containment, declared alignment, ports and display-size fonts. Retain the generated `.check.json` with its source hash and coverage. An unmanaged SVG has only partial diagnostics when explicitly checked; unsupported geometry is not a full pass. Passing geometry does not establish a good comparison, iteration scope, or research claim; inspect the actual image against the agreed takeaway and reference mechanisms.
 
 When producing a rendered artifact, show its actual preview in the delivery, at the intended display size; link the editable source and rebuild command alongside it. In Markdown, embed the canonical image using a relative resource path so hosts display the export instead of laying it out again. Deliver a concise caption with relevant source references and premises, and the actual validation result. Name a skipped check specifically. Keep validation notes out of manuscript prose unless they are part of the requested methods. Publishing is a separate action requiring task authorization.
 

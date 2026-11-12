@@ -1,6 +1,6 @@
 # Fixed vector figures
 
-Use this path when the deliverable permits image resources and the composition depends on explicit alignment, regions, symbols, or feedback routing. The editable SVG specifies geometry; `rsvg-convert` renders it without a graph-layout step. A checked tool/font profile produces an outlined SVG and a PNG. Neither the authoring format nor the renderer selects a good composition for you.
+Use this path when the deliverable permits image resources and the composition depends on explicit alignment, regions, symbols, or feedback routing. The shared Python model builds an editable SVG and exposes its spatial requirements to measured checks; `rsvg-convert` renders it without a graph-layout step. A checked tool/font profile produces an outlined SVG and a PNG. Neither the authoring format nor the renderer selects a good composition for you.
 
 ## Implement the spatial argument
 
@@ -14,7 +14,9 @@ Allocate a canvas, regions, and routing lanes before placing individual nodes. U
 - Assign ports and route corridors deliberately. A feedback edge should reach its actual revision target; a support relation should reach the governed region or operation. Put labels beside clear route segments with opaque backgrounds where needed. Do not let a route pass through another node, imply an unintended junction, or obscure another label.
 - Emphasize short primary labels with weight 600 and use weight 400 for subordinate explanations. Use explicit line breaks and positioning; check every label after rendering. Keep each color's role consistent with the selected reference mechanism.
 
-The [blank SVG canvas](../assets/templates/fixed-layout.svg) provides text styles and an arrow marker, not a preferred arrangement. Write SVG directly for a small figure, or retain a compact generator when shared dimensions, repeated glyphs, or themes would otherwise be duplicated. Keep figures' technical content and coordinates in their project; the shared exporter should not contain CAKE-specific layout rules.
+For new fixed figures, follow [Geometry authoring](geometry-api.md). Keep a small project generator that describes this figure's objects and spatial relationships; reuse the skill's construction, font measurement and diagnostics. The [generator example](../assets/templates/build_figure.py) demonstrates the API, not a preferred arrangement. A parent supplies local coordinates, shared alignments/sizes are derived, and ports update when their objects move. The agent still chooses the overall arrangement and route corridors. A frame moving correctly does not imply its new route is clear: rebuild and check after changes.
+
+The [blank SVG canvas](../assets/templates/fixed-layout.svg) remains useful for an existing or explicitly hand-authored SVG. It does not carry the model's constraints. Preserve an established project pipeline or requested format; describe partial geometry coverage honestly rather than claiming every SVG has the same guarantees.
 
 ## Use one export profile
 
@@ -28,6 +30,17 @@ python3 /path/to/research-mermaid/scripts/render_svg.py render \
 ```
 
 This writes `architecture.svg`, `architecture.png`, and `architecture.render.json`. The editable `.source.svg` remains text-editable; the exported SVG outlines text so display does not depend on host fonts. Title/description metadata is retained. Keep useful alternative text in the Markdown image reference as well. The PNG is rendered from the exported SVG, giving both resources the same geometry.
+
+For a managed source, `render` first runs geometry checks in a fresh process with the same font environment and matching librsvg version. It writes `architecture.check.json`; an error returns nonzero and emits a diagnostic `.debug.svg`/`.debug.png` instead of a new final export. Read the object IDs, measured bounds and violated relationships, inspect the debug image, and revise the generator. Previous exports can still exist after a failed rebuild; their source hashes do not verify the new candidate.
+
+To diagnose an older unmanaged source explicitly:
+
+```sh
+python3 /path/to/research-mermaid/scripts/render_svg.py check \
+  figures/architecture.source.svg --output figures/architecture-check --width 720
+```
+
+This measures identified text and supported routes, but lacks ownership, alignment and port declarations. A clean partial check is not a managed geometry pass. See [Geometry authoring](geometry-api.md) for the supported subset and remaining visual review.
 
 If the environment differs, the command reports profile drift instead of quietly changing output. Establish a project profile explicitly, retain the previous profile with its outputs, rerender, and inspect before adopting it:
 

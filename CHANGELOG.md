@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **research-mermaid**: New fixed figures use a shared geometry model and measured feedback loop, with per-figure generators retaining content and composition. Managed exports reject geometry errors; partial checks on older SVGs remain distinct from full coverage and actual-image review.
 - **research-mermaid**: Research figures can use editable SVG sources and a fixed SVG/PNG export pipeline. Composition, reference mechanisms, and source fidelity guide implementation; Mermaid remains supported when requested or suitable. Markdown embeds the exported resource instead of delegating layout to each preview host.
 
 ### Added
 
+- **research-mermaid**: Shared Python construction and geometry measurement, dynamic ports, declared alignment/size relationships, source-bound diagnostics and debug previews, plus a thin generator example. Checks cover supported text/orthogonal-route occupancy, containment and target-size readability.
 - **research-mermaid**: Fixed-vector guidance, a blank SVG canvas, licensed Source Sans 3 fonts, and an exporter that checks the tool/font profile, uses isolated Fontconfig lookup, and outlines text in delivery SVGs. Actual-image evaluation cases cover CAKE's three structures and transfers to other research material.
 
 ## [2.5.0] - 2026-09-22
